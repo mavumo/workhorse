@@ -13,18 +13,62 @@
 
  
 
+<meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content=
+  "black">
+  <meta name="theme-color" content="#35b8be">
+  <meta name="apple-mobile-web-app-title" content="Loudpack®">
+
+ <script type="module">
+   import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+   const el = document.createElement('pwa-update');
+   document.body.appendChild(el);
+</script>
+ 
  
 
 
 
 
 
+ 
+  <link rel="manifest" href=
+  "/manifest.json">
+
+<script>
+
+//paste this code under the head tag or in a separate js file.
+	// Wait for window load
+	$(window).load(function() {
+		// Animate loader off screen
+		$(".se-pre-con").fadeOut("slow");;
+	});
+</script>
+
+<style>
+
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url(https://app.loudpack.co.za/wait.gif) center no-repeat #fff;
+}
+</style>
+
+
+<div class="se-pre-con"></div>
+
   <!-- Start the login flow just by including this script tag! -->
   <script async="async" src="https://auth.magic.link/pnp/login"
-    data-magic-publishable-api-key="pk_live_0F7BDC05542623EA"
-    data-terms-of-service-uri="/pages/terms"
-  data-privacy-policy-uri="/pages/privacy" 
-    data-redirect-uri="https://za.jobbr.africa/">
+    data-magic-publishable-api-key="pk_live_C921EB80593A947F"
+    data-terms-of-service-uri="/terms"
+  data-privacy-policy-uri="/privacy" 
+    data-redirect-uri="https://jobbr.africa/home">
   </script>
 
 
@@ -34,11 +78,11 @@
 
 <body>
 
-
+<div class="se-pre-con"></div>
 
    
   
 
 
-
+</div>
 </body>
