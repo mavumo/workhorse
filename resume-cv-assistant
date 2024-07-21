@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume/CV Assistant by JOBBR</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="https://jobbr.africa/1_20240720_230358_0000.svg" alt="JOBBR Logo">
+            </div>
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <h1>Get Your Dream Job with a Perfect Resume</h1>
+            <p>Professional resume writing services to help you stand out.</p>
+            <a href="#contact" class="cta-button">Get Started</a>
+        </div>
+    </header>
+
+    <section id="services" class="services">
+        <h2>Our Services</h2>
+        <div class="service-item">
+            <h3>Resume Writing</h3>
+            <p>Expertly crafted resumes to showcase your skills and experience.</p>
+        </div>
+        <div class="service-item">
+            <h3>Cover Letter Writing</h3>
+            <p>Personalized cover letters to complement your resume.</p>
+        </div>
+        <div class="service-item">
+            <h3>LinkedIn Profile Optimization</h3>
+            <p>Enhance your professional presence on LinkedIn.</p>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonial-item">
+            <p>"Resume/CV Assistant transformed my resume and helped me land my dream job!"</p>
+            <span>- Jane Doe</span>
+        </div>
+        <div class="testimonial-item">
+            <p>"The cover letter they wrote for me was fantastic. Highly recommend!"</p>
+            <span>- John Smith</span>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form action="#">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Resume/CV Assistant - Powered by JOBBr. All rights reserved.</p>
+    </footer>
+</body>
+</html>
