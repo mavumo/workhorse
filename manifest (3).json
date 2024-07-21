@@ -1,0 +1,29 @@
+{
+  "background_color": "#ffffff",
+  "description": "Discover new career paths and connect with employers in Africa through our job search and career management platform for professionals in various industries...",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "JOBBR",
+  "orientation": "natural",
+  "scope": "/",
+  "short_name": "JOBBR",
+  "start_url": "/login",
+  "theme_color": "#1321ff",
+  "icons": [
+    {
+      "src": "https://jobbr.africa/JOBBR logo_20240424_072112_0000.png",
+      "type": "image/png",
+      "sizes": "500x500"
+    }
+  ],
+  "lang": "en",
+  "display_override": [
+    "standalone",
+    "window-controls-overlay"
+  ],
+  "categories": [
+    "business",
+    "education",
+    "productivity"
+  ]
+}
