@@ -30,8 +30,60 @@
 
   <link rel="manifest" href=
   "/manifest.json">
-  
 
+
+  
+<!-- smart stories script -->
+<script>
+    function getCookieSmartStories(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+        }
+        return "";
+    }
+    
+    var smart_stories_order_variants = [];
+    var checkout_id = "YOUR_CHECKOUT_ID"; //change to fit checkout id
+    var line_items = "YOUR_LINE_ITEMS_ARRAY"; //change to your line items array
+    for (var i = 0; i < line_items.length; i++) {
+        var line = line_items[i];
+        var smart_stories_variant = {
+            product_id: line.id, //change with your product id attribute
+            product_price: line.price //change with your price attribute
+        };
+        smart_stories_order_variants.push(smart_stories_variant);
+    }
+    var smart_stories_token = getCookieSmartStories("ss_token");
+    var smart_stories_object= { ss_token: smart_stories_token ,
+                                checkout_id: checkout_id,
+                                smart_stories_products: smart_stories_order_variants };
+    var smart_stories_object_string= JSON.stringify(smart_stories_object);
+    
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: smart_stories_object_string,
+        redirect: 'follow'
+    };
+    fetch("https://beta.smartstories.io/api/conversion_rate", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+</script>
+<!-- smart stories script end -->
+
+  
   <style>
 .w-webflow-badge {
   display: none !important;
@@ -51,6 +103,57 @@
   
 <body>
   <div class="page-wrapper">
+
+<!-- smart stories script -->
+<script>
+    function getCookieSmartStories(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+        }
+        return "";
+    }
+    
+    var smart_stories_order_variants = [];
+    var checkout_id = "YOUR_CHECKOUT_ID"; //change to fit checkout id
+    var line_items = "YOUR_LINE_ITEMS_ARRAY"; //change to your line items array
+    for (var i = 0; i < line_items.length; i++) {
+        var line = line_items[i];
+        var smart_stories_variant = {
+            product_id: line.id, //change with your product id attribute
+            product_price: line.price //change with your price attribute
+        };
+        smart_stories_order_variants.push(smart_stories_variant);
+    }
+    var smart_stories_token = getCookieSmartStories("ss_token");
+    var smart_stories_object= { ss_token: smart_stories_token ,
+                                checkout_id: checkout_id,
+                                smart_stories_products: smart_stories_order_variants };
+    var smart_stories_object_string= JSON.stringify(smart_stories_object);
+    
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: smart_stories_object_string,
+        redirect: 'follow'
+    };
+    fetch("https://beta.smartstories.io/api/conversion_rate", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+</script>
+<!-- smart stories script end -->
+    
     <div data-animation="default" data-collapse="all"
     data-duration="400" data-easing="ease" data-easing2="ease"
     role="banner" class="navbar w-nav">
