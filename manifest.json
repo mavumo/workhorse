@@ -7,11 +7,11 @@
   "orientation": "natural",
   "scope": "/",
   "short_name": "JOBBR",
-  "start_url": "/login",
+  "start_url": "/",
   "theme_color": "#1321ff",
   "icons": [
     {
-      "src": "https://jobbr.africa/JOBBR logo_20240424_072112_0000.png",
+      "src": "https://raw.githubusercontent.com/mavumo/jobbr-africa/main/image%20(1).png",
       "type": "image/png",
       "sizes": "500x500"
     }
@@ -24,6 +24,7 @@
   "categories": [
     "business",
     "education",
-    "productivity"
+    "productivity",
+    "jobs"
   ]
 }
