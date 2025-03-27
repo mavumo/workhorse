@@ -3,10 +3,10 @@
   "description": "Discover new career paths and connect with employers in Africa through our job search and career management platform for professionals in various industries...",
   "dir": "ltr",
   "display": "standalone",
-  "name": "JOBBR by Monogamy Digital",
+  "name": "JOBBR",
   "orientation": "natural",
   "scope": "/",
-  "short_name": "JOBBR by Monogamy Digital",
+  "short_name": "JOBBR",
   "start_url": "/",
   "theme_color": "#1321ff",
   "icons": [
