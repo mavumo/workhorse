@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recruitment Suite by Jobbyist® - Powered by WorkHorse</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom colors */
+    :root {
+      --brand-blue: #1e3a8a;
+      --brand-orange: #f97316;
+      --brand-green: #10b981;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+  <!-- Header -->
+  <header class="bg-[var(--brand-blue)] text-white py-8">
+    <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
+      <!-- Logo -->
+      <div class="text-2xl font-bold">
+        <span>Recruitment Suite<br>by Jobbyist®</span>
+      </div>
+      <!-- Headline & CTAs -->
+      <div class="text-center md:text-right mt-6 md:mt-0">
+        <h1 class="text-4xl font-extrabold">Smarter Hiring. Better Careers.</h1>
+        <p class="mt-2 text-lg">Recruitment Suite by Jobbyist® is your all-in-one solution for seamless hiring and career growth.</p>
+        <div class="mt-4 space-x-4">
+          <a href="#employers" class="px-6 py-3 bg-[var(--brand-orange)] rounded-lg font-semibold hover:bg-orange-600">Outsource Your HR</a>
+          <a href="#jobseekers" class="px-6 py-3 border-2 border-white rounded-lg font-semibold hover:bg-white hover:text-[var(--brand-blue)]">Try Recruitment Suite</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-6 py-16 space-y-20">
+    <!-- Employers Section -->
+    <section id="employers" class="flex flex-col lg:flex-row items-center gap-12">
+      <div class="lg:w-1/2">
+        <h2 class="text-3xl font-bold text-[var(--brand-blue)]">For Employers</h2>
+        <ul class="mt-6 space-y-4">
+          <li class="flex items-start"><span class="text-[var(--brand-orange)] mr-2">•</span> AI-Powered Job Matching</li>
+          <li class="flex items-start"><span class="text-[var(--brand-orange)] mr-2">•</span> Resume Database Access</li>
+          <li class="flex items-start"><span class="text-[var(--brand-orange)] mr-2">•</span> Unlimited Job Listings</li>
+          <li class="flex items-start"><span class="text-[var(--brand-orange)] mr-2">•</span> Pre-Screening Services</li>
+          <li class="flex items-start"><span class="text-[var(--brand-orange)] mr-2">•</span> Background Checks</li>
+          <li class="flex items-start"><span class="text-[var(--brand-orange)] mr-2">•</span> Dedicated Recruitment Support</li>
+        </ul>
+      </div>
+      <div class="lg:w-1/2 grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <!-- Pricing Card -->
+        <div class="border rounded-2xl p-6 drop-shadow-lg">
+          <h3 class="text-xl font-semibold mb-4">Starter</h3>
+          <p class="text-3xl font-bold">R999<span class="text-lg font-medium">/mo</span></p>
+          <ul class="mt-4 space-y-2">
+            <li>10 Job Listings</li>
+            <li>Resume Access</li>
+            <li>AI Matching</li>
+          </ul>
+          <a href="#" class="mt-6 inline-block w-full text-center py-3 bg-[var(--brand-blue)] text-white rounded-lg font-semibold hover:bg-blue-700">Start Hiring</a>
+        </div>
+        <div class="border rounded-2xl p-6 drop-shadow-lg">
+          <h3 class="text-xl font-semibold mb-4">Pro</h3>
+          <p class="text-3xl font-bold">R1,499<span class="text-lg font-medium">/mo</span></p>
+          <ul class="mt-4 space-y-2">
+            <li>Unlimited Listings</li>
+            <li>Homepage Features</li>
+            <li>Pre-Screening</li>
+          </ul>
+          <a href="#" class="mt-6 inline-block w-full text-center py-3 bg-[var(--brand-blue)] text-white rounded-lg font-semibold hover:bg-blue-700">Start Hiring</a>
+        </div>
+        <div class="border rounded-2xl p-6 drop-shadow-lg">
+          <h3 class="text-xl font-semibold mb-4">Enterprise</h3>
+          <p class="text-3xl font-bold">R2,999<span class="text-lg font-medium">/mo</span></p>
+          <ul class="mt-4 space-y-2">
+            <li>All Pro Features</li>
+            <li>Background Checks</li>
+            <li>Support Manager</li>
+          </ul>
+          <a href="#" class="mt-6 inline-block w-full text-center py-3 bg-[var(--brand-blue)] text-white rounded-lg font-semibold hover:bg-blue-700">Start Hiring</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Job Seekers Section -->
+    <section id="jobseekers" class="flex flex-col lg:flex-row-reverse items-center gap-12">
+      <div class="lg:w-1/2">
+        <h2 class="text-3xl font-bold text-[var(--brand-green)]">For Job Seekers</h2>
+        <ul class="mt-6 space-y-4">
+          <li class="flex items-start"><span class="text-[var(--brand-green)] mr-2">•</span> Dedicated Career Support Manager</li>
+          <li class="flex items-start"><span class="text-[var(--brand-green)] mr-2">•</span> Interview Prep Resources</li>
+          <li class="flex items-start"><span class="text-[var(--brand-green)] mr-2">•</span> Upskilling Courses</li>
+          <li class="flex items-start"><span class="text-[var(--brand-green)] mr-2">•</span> Personal Resume Website</li>
+          <li class="flex items-start"><span class="text-[var(--brand-green)] mr-2">•</span> Early Job Alerts</li>
+        </ul>
+        <div class="mt-8 border rounded-2xl p-6 drop-shadow-lg lg:w-2/3">
+          <h3 class="text-xl font-semibold mb-4">Career Pro</h3>
+          <p class="text-3xl font-bold">R249<span class="text-lg font-medium">/mo</span></p>
+          <p class="mt-2 italic">Limited-Time Offer (Regular R499)</p>
+          <a href="#" class="mt-6 inline-block w-full text-center py-3 bg-[var(--brand-green)] text-white rounded-lg font-semibold hover:bg-green-600">Launch Your Career</a>
+        </div>
+      </div>
+      <div class="lg:w-1/2 text-center">
+        <!-- Illustrative placeholder -->
+        <img src="https://via.placeholder.com/400x300" alt="Job Seeker Illustration" class="mx-auto rounded-lg" />
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 py-8">
+    <div class="container mx-auto px-6 text-center">
+      <nav class="space-x-6">
+        <a href="#about" class="hover:underline">About</a>
+        <a href="#contact" class="hover:underline">Contact</a>
+        <a href="#terms" class="hover:underline">Terms</a>
+        <a href="#privacy" class="hover:underline">Privacy</a>
+      </nav>
+      <p class="mt-4">Built with ❤️ in South Africa</p>
+    </div>
+  </footer>
+</body>
+</html>
