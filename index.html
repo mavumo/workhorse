@@ -588,7 +588,7 @@
           <div class="jobs-tittle-wrapper">
             <h2 class="job-circular-tittle">Featured Jobs</h2>
             <div class="job-cat-flex-wrapper">
-              <a href="https://careers.jobbyist.co.za/jobs" class=
+              <a href="https://jobs.jobbyist.co.za/" class=
               "single-cat-link active w-inline-block w--current">
               <div>
                 All Jobs
@@ -629,6 +629,27 @@
             </div>
           </div>
           <div class="job-list-wrapper">
+
+            <div id="job-list"></div>
+
+<script>
+fetch('jobs.json')
+  .then(res => res.json())
+  .then(jobs => {
+    const container = document.getElementById('job-list');
+    jobs.forEach(job => {
+      const el = document.createElement('div');
+      el.innerHTML = `<h3>${job.title}</h3><a href="${job.link}" target="_blank">Apply</a><hr>`;
+      container.appendChild(el);
+    });
+  });
+</script>
+            
+
+
+            <!----
+
+            
             <div class="w-dyn-list">
               <div role="list" class=
               "job-post-grid-wrap w-dyn-items">
@@ -891,7 +912,12 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> 
+
+
+            ----->
+
+            
           </div>
           <div class="more-job-btn-wrap">
             <a href="https://careers.jobbyist.co.za/registration" target="_blank" class=
