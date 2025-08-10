@@ -1,804 +1,785 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Jobbyist – Modern Job Board</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <meta name="description" content="Jobbyist: Find jobs, upgrade your career, and access professional resume services.">
-  <!-- Fonts & Icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,600,900&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lexend:700&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jobbyist South Africa — Find the right fit. Remote-friendly.</title>
+  <meta name="description" content="Search millions of jobs across South Africa. Remote-friendly. Smart matching. Verified companies." />
+
+  <!-- Placeholder for Google AdSense -->
+  <!--
+    Replace with your AdSense script once approved:
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX" crossorigin="anonymous"></script>
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-:root {
-  /* Light theme */
-  --bg: #fff;
-  --text: #20222a;
-  --text-light: #909090;
-  --accent: #0054ff;
-  --primary: #0a224a;
-  --card: #f9fafd;
-  --card-border: #e8ebf0;
-  --gradient: linear-gradient(90deg, #0054ff 0%, #ff46a5 80%);
-  --btn-shadow: 0 2px 24px 0 #0054ff33, 0 4px 32px 0 #ff46a522;
-  --doodle1: #ff7be8;
-  --doodle2: #0054ff;
-  --focus: #0054ff;
-  --error: #ff3b7a;
-  --success: #22c493;
-  --input-bg: #f6f8fb;
-  --input-border: #e4e9f0;
-  --modal-bg: #000c;
-}
-[data-theme="dark"] {
-  --bg: #10121a;
-  --text: #f7f8fa;
-  --text-light: #abb3ba;
-  --accent: #00d1fc;
-  --primary: #fff;
-  --card: #151822;
-  --card-border: #23293b;
-  --gradient: linear-gradient(90deg, #00d1fc 0%, #ff46a5 85%);
-  --btn-shadow: 0 2px 32px 0 #00d1fc22, 0 4px 32px 0 #ff46a512;
-  --doodle1: #2247a7;
-  --doodle2: #00d1fc;
-  --focus: #00d1fc;
-  --error: #ff3b7a;
-  --success: #22c493;
-  --input-bg: #181c2b;
-  --input-border: #23293b;
-  --modal-bg: #000e;
-}
-html,body {
-  min-height:100%; margin:0;padding:0;
-  background: var(--bg); color: var(--text);
-  font-family: 'Inter', Arial, sans-serif; font-size: 1.07rem;
-  transition: background 0.35s cubic-bezier(.68,-0.25,.27,1.25), color .22s;
-}
-a { color: var(--accent); text-decoration: none; transition: color .14s;}
-a:hover, a:focus { color: #ff46a5; }
-h1,h2,h3,h4 { font-family: 'Lexend', 'Inter', Arial, sans-serif; margin: 0;}
-h1 { font-size:2.1rem;}
-h2 { font-size:1.6rem;}
-h3 { font-size:1.12rem;}
-/* NAV */
-nav {
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0.9rem 2vw 0.7rem 2vw;
-  background:var(--card);
-  border-bottom:1.5px solid var(--card-border);
-  box-shadow:0 2px 16px #0054ff08;
-  z-index:10; position:sticky; top:0;
-}
-.nav-logo {
-  display:flex; align-items:center; font-family:'Lexend',sans-serif; font-weight:900;
-  font-size:1.5rem; color:var(--accent); letter-spacing:-0.04em;
-}
-.logo-anim {
-  width:36px; height:36px; margin-right:0.4rem; animation:bounce 2.3s infinite cubic-bezier(.42,0,0,1.05);
-}
-@keyframes bounce {0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
-.nav-links { display:flex;align-items:center;gap:2.5vw;}
-.nav-group { position:relative;}
-.nav-group > button {
-  background:none; border:none; color:var(--text); font-weight:600; font-size:1rem; cursor:pointer;
-  padding:0.4em 0.3em; border-radius:4px;
-}
-.nav-group > button:focus, .nav-group:hover > button {color:var(--accent);background:var(--input-bg);}
-.nav-dropdown {
-  display:none; position:absolute; left:0; top:110%;
-  background:var(--card); border:1.5px solid var(--card-border); box-shadow:0 2px 20px #0054ff0e;
-  border-radius:8px; min-width:160px; z-index:15; padding:0.2rem 0;
-}
-.nav-group:focus-within .nav-dropdown, .nav-group:hover .nav-dropdown { display:block;}
-.nav-dropdown a {
-  display:block; padding:0.7em 1em; color:var(--text-light); border-radius:4px; font-weight:500;
-}
-.nav-dropdown a:hover, .nav-dropdown a:focus { background:var(--input-bg); color:var(--accent);}
-.theme-toggle {
-  margin-left:1.3rem; font-size:1.3rem; background:none; border:none;
-  color:var(--accent); cursor:pointer; padding:0.2em 0.4em; border-radius:7px; transition:color .18s;
-}
-.theme-toggle:focus {color:#ff46a5;}
-/* HERO */
-.hero {
-  position:relative;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  min-height:420px; padding:4.7rem 2vw 2.5rem 2vw; text-align:center;
-  overflow:hidden;
-}
-.hero-bg {
-  position:absolute;inset:0;pointer-events:none;z-index:0;
-}
-.doodle {
-  position:absolute; border-radius:50%; filter:blur(2.5px);opacity:0.18;z-index:1;
-  animation:float 8s infinite alternate;
-}
-@keyframes float {0%{transform:translateY(0) scale(1);} 100%{transform:translateY(-24px) scale(1.1);}}
-.d1 {width:210px;height:120px; background:var(--doodle1); left:-40px; top:-50px;}
-.d2 {width:120px;height:90px; background:var(--doodle2); right:5vw; top:38px; animation-delay:2.2s;}
-.d3 {width:70px;height:60px; background:var(--doodle1); left:3vw; bottom:32px; animation-delay:1.1s;}
-.d4 {width:100px;height:54px; background:var(--doodle2); right:7vw; bottom:28px; animation-delay:3.4s;}
-.hero-content { position:relative; z-index:2; max-width:530px;}
-.hero h1 { margin-bottom:0.44em;}
-.hero p { color:var(--text-light);}
-.hero-search {
-  display:flex; flex-wrap:wrap; gap:1vw;
-  justify-content:center;align-items:center;
-  margin:2.2em auto 0; background:var(--card);
-  border-radius:15px; box-shadow:0 4px 24px #0054ff10;
-  padding:1.2em 1.5em; border:1.5px solid var(--card-border);
-  max-width:670px; z-index:2; position:relative;
-}
-.hero-search input, .hero-search select {
-  background:var(--input-bg); border:1.5px solid var(--input-border);
-  font-size:1rem; color:var(--text);
-  border-radius:7px; padding:0.7em 1em; margin:0.2em 0; min-width:145px;
-  font-family:inherit; transition: border-color .19s, box-shadow .22s;
-  outline:none;
-}
-.hero-search input:focus, .hero-search select:focus {
-  border-color:var(--focus); box-shadow:0 0 0 2px var(--focus)22;
-}
-.gradient-btn {
-  background:var(--gradient); color:#fff; font-weight:700; font-family:inherit;
-  border:none; border-radius:30px; padding:0.75em 2.1em; font-size:1.09rem;
-  box-shadow:var(--btn-shadow); cursor:pointer; margin-left:0.2em;
-  position:relative; outline:none; transition:transform .13s, box-shadow .19s, filter .17s;
-  overflow:hidden;
-}
-.gradient-btn:hover, .gradient-btn:focus {
-  transform:translateY(-2px) scale(1.04); filter:brightness(1.07); box-shadow:0 4px 32px #0054ff33, 0 1px 8px #ff46a522;
-}
-.gradient-btn .glow { position:absolute;top:50%;left:50%;width:110%;height:90%;background:inherit;filter:blur(12px) brightness(1.2);z-index:0;pointer-events:none;transform:translate(-50%,-50%); opacity:0.17;}
-/* FEATURE CARDS */
-.features-section {
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:2vw;max-width:1100px;margin:3.7rem auto 1.3rem auto;padding:0 2vw;
-}
-.feature-card {
-  background:var(--card); border:1.5px solid var(--card-border); border-radius:12px; padding:1.18em 1em 1.1em 1em;
-  box-shadow:0 2px 22px #0054ff0d; position:relative; transition:box-shadow .18s, border-color .18s, transform .16s;
-  cursor:pointer; min-height:150px; will-change:transform;
-}
-.feature-card:hover, .feature-card:focus {
-  box-shadow:0 8px 34px #0054ff22, 0 2px 24px #ff46a522;
-  border-color:var(--focus); transform:translateY(-3px) scale(1.025);
-}
-.feature-card .card-icon { font-size:2.1rem;margin-bottom:0.3em;color:var(--accent);transition:color .18s;}
-.feature-card h3 { font-weight:700; margin-bottom:0.16em;}
-.feature-card p {color:var(--text-light);}
-/* STATS */
-.stats-section {
-  display:flex;justify-content:center;gap:3vw;max-width:840px;margin:2.5rem auto 1.1rem auto;padding:0 2vw;
-}
-.stat-card {
-  background:var(--card); border:1.5px solid var(--card-border); border-radius:11px;
-  padding:1.1em 2em; display:flex;flex-direction:column;align-items:center;min-width:145px;
-  box-shadow:0 2px 15px #0054ff09; transition:box-shadow .18s,border-color .18s,transform .13s; cursor:pointer;
-}
-.stat-card:hover, .stat-card:focus {
-  box-shadow:0 7px 32px #0054ff22, 0 2px 24px #ff46a522;
-  border-color:var(--focus); transform:scale(1.025);
-}
-.stat-number {
-  font-size:2.1rem; font-weight:900;
-  background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.08em;
-  transition:color .2s;
-}
-.stat-label { color:var(--text-light); font-size:1em;}
-/* JOBS */
-.jobs-section {max-width:1100px;margin:2.3rem auto 1.2rem auto;padding:0 2vw;}
-.jobs-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2vw;}
-.job-card {
-  background:var(--card); border:1.5px solid var(--card-border); border-radius:13px;
-  box-shadow:0 2px 16px #0054ff0a; padding:1.2em 1em 1.1em 1em;
-  min-height:195px; transition:box-shadow .17s,border-color .17s,transform .11s; cursor:pointer; position:relative; overflow:hidden; z-index:1;
-}
-.job-card:hover, .job-card:focus {
-  box-shadow:0 7px 32px #0054ff22, 0 2px 24px #ff46a522;
-  border-color:var(--focus); transform:translateY(-2px) scale(1.012);
-}
-.job-title { font-size:1.14rem; font-weight:700; color:var(--primary);}
-.job-meta { color:var(--text-light); font-size:1.01em; margin-bottom:0.7em; display:flex;gap:1.2em;flex-wrap:wrap;}
-.job-desc {color:var(--text);margin-bottom:1em; font-size:0.97em;}
-.job-footer { margin-top:auto;display:flex;align-items:center;justify-content:space-between;}
-.apply-btn {
-  background:var(--gradient);color:#fff; font-weight:600; border:none; border-radius:24px; padding:0.53em 1.4em;
-  box-shadow:var(--btn-shadow); cursor:pointer; transition:transform .13s, box-shadow .19s, filter .15s; position:relative; outline:none;
-}
-.apply-btn:hover, .apply-btn:focus { transform:translateY(-2px) scale(1.04); filter:brightness(1.07); box-shadow:0 4px 32px #0054ff33, 0 1px 8px #ff46a522;}
-/* MODAL STYLES */
-.modal-backdrop {position:fixed;inset:0;background:var(--modal-bg);z-index:500;display:none;}
-.modal.active .modal-backdrop {display:block;animation:fadeIn .28s;}
-@keyframes fadeIn {0%{opacity:0;}100%{opacity:1;}}
-.modal-content {position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(0.96);min-width:330px;max-width:97vw;width:410px;background:var(--card);box-shadow:0 4px 36px #0054ff18;z-index:600;border-radius:18px;border:1.7px solid var(--card-border);padding:1.8rem 1.5rem;transition:all .34s cubic-bezier(.42,0,.63,1.24);opacity:0;pointer-events:none;}
-.modal.active .modal-content {opacity:1;pointer-events:auto;transform:translate(-50%,-51%) scale(1);}
-@media (max-width:650px) {.modal-content {min-width:96vw;padding:1.1rem 0.5rem;}}
-.modal-close {position:absolute;right:1rem;top:1rem;background:none;border:none;color:var(--text-light);font-size:1.5rem;cursor:pointer;}
-/* FORM STYLES */
-.reg-form-step {display:none;}
-.reg-form-step.active {display:block;}
-.reg-form-progress {
-  display:flex;justify-content:center;align-items:center;margin-bottom:1.7em;gap:0.25em;
-}
-.reg-form-progress span {
-  width:32px;height:5px;border-radius:7px;background:var(--card-border);
-  transition:background .21s;display:inline-block;
-}
-.reg-form-progress span.active {background:var(--gradient);}
-.form-group {margin-bottom:1.1em;}
-.form-group label {display:block;margin-bottom:0.45em;font-weight:600;color:var(--text);}
-.form-group input[type="text"],.form-group input[type="email"],.form-group input[type="number"],.form-group input[type="tel"],.form-group select, .form-group textarea {
-  width:100%;background:var(--input-bg);border:1.5px solid var(--input-border);border-radius:7px;
-  padding:0.62em 0.9em;font-size:1em;font-family:inherit;color:var(--text);
-  transition:border-color .18s,box-shadow .19s;outline:none;resize:none;
-}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus {border-color:var(--focus);}
-.form-group .input-error {color:var(--error);font-size:0.99em;margin-top:0.19em;}
-.form-group .input-success {color:var(--success);font-size:0.98em;}
-.file-dropzone {
-  background:var(--input-bg);border:2px dashed var(--input-border);border-radius:9px;
-  padding:1.2em;display:flex;align-items:center;justify-content:center;flex-direction:column;
-  transition:border-color .22s;background-clip:padding-box;cursor:pointer;min-height:86px;
-  margin-bottom:0.4em;
-}
-.file-dropzone.dragover {border-color:var(--accent);}
-.file-dropzone .dz-preview {margin-top:0.55em;font-size:0.97em;}
-.file-dropzone .dz-file-thumb {max-width:44px;max-height:44px;border-radius:8px;margin-right:8px;}
-.form-actions {display:flex;justify-content:space-between;gap:1.1em;}
-.form-actions button {width:48%;}
-/* Upsell Modals */
-.upsell-modal {
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-51%);z-index:700;background:var(--card);
-  border-radius:14px;padding:2.1em 1.5em;max-width:380px;min-width:290px;box-shadow:0 7px 38px #0054ff22;border:1.5px solid var(--card-border);display:none;
-}
-.upsell-modal.active {display:block;}
-.upsell-close {position:absolute;right:1.1rem;top:1rem;background:none;border:none;color:var(--text-light);font-size:1.5rem;cursor:pointer;}
-/* Responsive */
-@media (max-width:950px){
-  .features-section, .jobs-grid {grid-template-columns:1fr 1fr;}
-  .stats-section{flex-wrap:wrap;gap:1.3em;}
-}
-@media (max-width:650px){
-  nav {flex-direction:column;align-items:flex-start;gap:0.7em;}
-  .features-section, .jobs-grid {grid-template-columns:1fr;}
-  .stats-section{flex-direction:column;gap:1.1em;}
-  .hero{padding-top:2.5rem;}
-}
+    :root{
+      --bg:#0f1220; --card:#1a1f36; --muted:#8a90a3; --text:#eef1f6; --accent:#6ee7ff;
+      --accent-2:#7c5cff; --chip:#2a3048; --success:#22c55e; --danger:#ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.03) inset;
+      --radius: 16px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(120deg,#0f1220 0%,#171a2b 50%,#121528 100%);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;z-index:50;background:rgba(15,18,32,.75);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+    .brand{font-weight:800;font-size:24px;letter-spacing:.2px}
+    .brand .dot{color:var(--accent)}
+    .menu{display:flex;gap:18px;align-items:center}
+    .menu a{padding:10px 12px;border-radius:10px}
+    .menu a:hover{background:rgba(255,255,255,.06)}
+    .cta{background:linear-gradient(90deg,var(--accent-2),var(--accent));padding:10px 14px;border-radius:12px;font-weight:700;color:#0b0e1a;box-shadow:var(--shadow)}
+    .hero{padding:48px 24px}
+    .search-card{background:radial-gradient(1200px 400px at 20% 0%,rgba(124,92,255,.25),transparent 60%),radial-gradient(1000px 300px at 80% 30%,rgba(110,231,255,.2),transparent 60%),var(--card);padding:28px;border-radius:24px;box-shadow:var(--shadow)}
+    .search-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .search-grid input, .search-grid select{width:100%;padding:16px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#111427;color:var(--text)}
+    .search-btn{padding:16px;border-radius:12px;background:#262c4a;color:#fff;font-weight:700;border:1px solid rgba(255,255,255,.08)}
+    .kpis{display:flex;gap:40px;flex-wrap:wrap;margin-top:22px;color:#c6cbe0}
+    .kpi{font-size:28px;font-weight:800}
+    .section{padding:24px;margin-top:10px}
+    .section h2{margin:12px 0 6px;font-size:28px}
+    .muted{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}.search-grid{grid-template-columns:1fr}}
+    @media (max-width:640px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+    .chip{background:var(--chip);display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;margin-right:8px;margin-top:8px}
+    .job-top{display:flex;gap:12px;align-items:center}
+    .logo{width:44px;height:44px;border-radius:10px;background:#0d1020;display:grid;place-items:center;font-weight:800;border:1px solid rgba(255,255,255,.08)}
+    .title{font-weight:700;font-size:16px}
+    .company{color:#cfd3e6}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+    .actions{display:flex;gap:10px;margin-top:10px}
+    button{cursor:pointer}
+    .btn{padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#232845;color:#fff}
+    .btn:hover{filter:brightness(1.1)}
+    .btn-icon{padding:10px;border-radius:10px;background:#1f2440;border:1px solid rgba(255,255,255,.08)}
+    .save.active{background:var(--success)}
+    .viewmore{margin-top:18px;text-align:center}
+    .verified{color:#7ee787;font-weight:700}
+    .rating{display:flex;gap:6px}
+    .star{filter:grayscale(.2)}
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(8,10,20,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}
+    .modal{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:18px;max-width:920px;width:100%;box-shadow:var(--shadow)}
+    .modal-header{padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
+    .modal-body{padding:18px}
+    .close{background:transparent;border:0;color:#cfd3e6;font-size:22px}
+    /* Multi-step form */
+    .steps{display:flex;gap:10px;margin-bottom:16px}
+    .step{height:8px;flex:1;border-radius:999px;background:#2a2f4a}
+    .step.active{background:linear-gradient(90deg,var(--accent-2),var(--accent))}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form-grid input, .form-grid select, .form-grid textarea{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#14172a;color:#fff;width:100%}
+    .form-nav{display:flex;justify-content:space-between;margin-top:10px}
+    /* Tabs/pages */
+    .page{display:none}
+    .page.active{display:block}
+    /* Cookie banner */
+    .cookie{position:fixed;bottom:16px;left:16px;right:16px;background:#0f1327;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px;display:none;z-index:80}
+    /* Footer */
+    footer{margin-top:52px;border-top:1px solid rgba(255,255,255,.06);padding:28px 24px;color:#bfc5db}
+    .columns{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    @media (max-width:900px){.columns{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.columns{grid-template-columns:1fr}}
+    /* Ads block placeholder */
+    .ad{border:1px dashed rgba(255,255,255,.2);padding:14px;border-radius:12px;text-align:center;color:#aab0c6}
+    /* Small helpers */
+    .hidden{display:none !important}
+    .pill{display:inline-block;padding:8px 12px;border-radius:999px;background:#232845;border:1px solid rgba(255,255,255,.08)}
   </style>
 </head>
 <body>
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">
-    <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4bc.svg" alt="logo" class="logo-anim" />
-    Jobbyist
-  </div>
-  <div class="nav-links">
-    <div class="nav-group">
-      <button>For Job Seekers <i class="fa fa-angle-down"></i></button>
-      <div class="nav-dropdown">
-        <a href="#">Browse Jobs</a>
-        <a href="#">ResumeAudit</a>
-        <a href="#">Upgrade To Pro</a>
-        <a href="#">Upskilling Tools</a>
-      </div>
+<header>
+  <nav class="nav container">
+    <a class="brand" href="#home">Jobbyist<span class="dot">.</span> South Africa</a>
+    <div class="menu">
+      <a href="#home">Jobs</a>
+      <a href="#companies">Companies</a>
+      <a href="#jobstats">JobStats</a>
+      <a href="https://audit.jobbyist.co.za" target="_blank" rel="noopener">Free ResumeAudit</a>
+      <a class="pill" href="#recruitment-suite">Recruitment Suite</a>
+      <a class="cta" href="#pro">Get Jobbyist Pro — R99</a>
     </div>
-    <div class="nav-group">
-      <button>For Employers <i class="fa fa-angle-down"></i></button>
-      <div class="nav-dropdown">
-        <a href="#">Claim Your Page</a>
-        <a href="#">Recruitment Suite</a>
-        <a href="#">Candidate Directory</a>
-      </div>
-    </div>
-    <div class="nav-group">
-      <button>Legal Stuff <i class="fa fa-angle-down"></i></button>
-      <div class="nav-dropdown">
-        <a href="#">Privacy</a>
-        <a href="#">Cookies</a>
-        <a href="#">Terms</a>
-      </div>
-    </div>
-    <div class="nav-group">
-      <button>More <i class="fa fa-angle-down"></i></button>
-      <div class="nav-dropdown">
-        <a href="#">Help Center</a>
-        <a href="#">Contact Us</a>
-      </div>
-    </div>
-    <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Switch theme">
-      <i class="fa fa-moon" id="themeIcon"></i>
-    </button>
-  </div>
-</nav>
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg">
-    <div class="doodle d1"></div>
-    <div class="doodle d2"></div>
-    <div class="doodle d3"></div>
-    <div class="doodle d4"></div>
-  </div>
-  <div class="hero-content">
-    <h1>Discover Your Next Opportunity</h1>
-    <p>Explore top jobs in South Africa &amp; Nigeria.<br />Join Jobbyist for expert resume audits, career upgrades, and more.</p>
-    <form class="hero-search" id="jobSearchForm" autocomplete="off">
-      <input type="text" id="jobTitle" placeholder="Job Title or Keyword…" aria-label="Job Title">
-      <select id="jobType" aria-label="Job Type">
-        <option value="">All Types</option>
-        <option>Full-time</option>
-        <option>Part-time</option>
-        <option>Contract</option>
-        <option>Internship</option>
-        <option>Remote</option>
-      </select>
-      <select id="location" aria-label="Location">
-        <option value="">All Locations</option>
-        <option>Nigeria</option>
-        <option>South Africa</option>
-        <option>Remote</option>
-        <option>Lagos</option>
-        <option>Johannesburg</option>
-        <option>Cape Town</option>
-        <option>Abuja</option>
-        <option>Pretoria</option>
-        <option>Durban</option>
-      </select>
-      <button class="gradient-btn" type="submit">
-        <span class="glow"></span>
-        <i class="fa fa-search"></i> Search Jobs
-      </button>
-    </form>
-  </div>
-</section>
-<!-- FEATURE CARDS -->
-<section class="features-section">
-  <div class="feature-card" tabindex="0">
-    <div class="card-icon"><i class="fa fa-briefcase"></i></div>
-    <h3>Modern Job Search</h3>
-    <p>Browse thousands of curated jobs with powerful filtering and sorting.</p>
-  </div>
-  <div class="feature-card" tabindex="0">
-    <div class="card-icon"><i class="fa fa-magic"></i></div>
-    <h3>Resume Audit</h3>
-    <p>Get a professional review &amp; ATS optimization. Free for a limited time!</p>
-  </div>
-  <div class="feature-card" tabindex="0">
-    <div class="card-icon"><i class="fa fa-crown"></i></div>
-    <h3>Upgrade to Pro</h3>
-    <p>Access premium alerts, salary insights &amp; expert coaching. 3-day free trial.</p>
-  </div>
-  <div class="feature-card" tabindex="0">
-    <div class="card-icon"><i class="fa fa-graduation-cap"></i></div>
-    <h3>Upskilling Tools</h3>
-    <p>Unlock courses, certifications, and learning paths to boost your career.</p>
-  </div>
-</section>
-<!-- STATS -->
-<section class="stats-section">
-  <div class="stat-card" tabindex="0">
-    <span class="stat-number" data-count="2042">0</span>
-    <span class="stat-label">Jobs Listed</span>
-  </div>
-  <div class="stat-card" tabindex="0">
-    <span class="stat-number" data-count="860">0</span>
-    <span class="stat-label">Employers</span>
-  </div>
-  <div class="stat-card" tabindex="0">
-    <span class="stat-number" data-count="13200">0</span>
-    <span class="stat-label">Candidates</span>
-  </div>
-</section>
-<!-- JOB LISTINGS -->
-<section class="jobs-section">
-  <h2>Featured Jobs</h2>
-  <div class="jobs-grid" id="jobsGrid">
-    <!-- 8 Sample Jobs, All Apply Buttons trigger Registration -->
-  </div>
-</section>
-<!-- REGISTRATION MODAL -->
-<div class="modal" id="regModal" aria-modal="true" role="dialog" style="display:none;">
-  <div class="modal-backdrop"></div>
-  <div class="modal-content" tabindex="-1">
-    <button class="modal-close" id="closeModal" aria-label="Close">&times;</button>
-    <form id="regForm" autocomplete="off" novalidate>
-      <div class="reg-form-progress" id="regProgress">
-        <span class="active"></span><span></span><span></span><span></span>
-      </div>
-      <!-- Step 1: Personal Info -->
-      <div class="reg-form-step active" id="regStep1">
-        <h3>Step 1: Personal Information</h3>
-        <div class="form-group">
-          <label for="fullName">Full Name *</label>
-          <input id="fullName" type="text" required autocomplete="name" />
-          <div class="input-error" id="errFullName"></div>
-        </div>
-        <div class="form-group">
-          <label for="email">Email Address *</label>
-          <input id="email" type="email" required autocomplete="email" />
-          <div class="input-error" id="errEmail"></div>
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone Number *</label>
-          <input id="phone" type="tel" required autocomplete="tel" pattern="[0-9+\s()-]{7,}" />
-          <div class="input-error" id="errPhone"></div>
-        </div>
-        <div class="form-group">
-          <label for="locationSel">Location *</label>
-          <select id="locationSel" required>
-            <option value="">Select Location</option>
-            <option>Lagos</option><option>Johannesburg</option><option>Cape Town</option>
-            <option>Abuja</option><option>Pretoria</option><option>Durban</option><option>Other</option>
+  </nav>
+</header>
+
+<main id="app">
+  <!-- HOME -->
+  <section id="home" class="page active">
+    <div class="container hero">
+      <div class="search-card">
+        <h1 style="margin:0 0 4px">Search for a job</h1>
+        <p class="muted" style="margin:0 0 16px">Search thousands of roles. Do meaningful work that impacts the world.</p>
+        <div class="search-grid">
+          <input id="q" placeholder="Job title or keyword" />
+          <input id="loc" placeholder="Location (e.g. Johannesburg, Remote)" />
+          <select id="type">
+            <option value="">Any type</option>
+            <option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option><option>Remote</option>
           </select>
-          <div class="input-error" id="errLocation"></div>
+          <button class="search-btn" id="searchBtn">Search</button>
         </div>
-        <div class="form-group">
-          <label>Profile Picture</label>
-          <div class="file-dropzone" id="picDrop">
-            <span><i class="fa fa-user-circle"></i> Drag & drop or click to upload</span>
-            <input type="file" accept="image/*" style="display:none;" />
-            <div class="dz-preview" id="picPreview"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Resume/CV (PDF, DOC, DOCX)</label>
-          <div class="file-dropzone" id="cvDrop">
-            <span><i class="fa fa-file-alt"></i> Drag & drop or click to upload</span>
-            <input type="file" accept=".pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none;" />
-            <div class="dz-preview" id="cvPreview"></div>
-          </div>
-        </div>
-        <div class="form-actions">
-          <button class="gradient-btn" id="step1Next" type="button">Next</button>
+        <div class="kpis">
+          <div class="kpi"><span id="kpiJobs">0</span> <span class="muted">available jobs today</span></div>
+          <div class="kpi"><span id="kpiCos">0</span> <span class="muted">companies today</span></div>
+          <div class="kpi"><span id="kpiRemote">0</span> <span class="muted">remote-friendly</span></div>
         </div>
       </div>
-      <!-- Step 2: Professional Details -->
-      <div class="reg-form-step" id="regStep2">
-        <h3>Step 2: Professional Details</h3>
-        <div class="form-group">
-          <label>Employment Status *</label>
-          <select id="empStatus" required>
-            <option value="">Select</option>
-            <option>Employed</option><option>Unemployed</option><option>Student</option><option>Freelancer</option>
-          </select>
-          <div class="input-error" id="errEmp"></div>
+
+      <div class="section">
+        <h2>Find the right fit. <span class="muted">Remote-friendly.</span></h2>
+        <p class="muted">Begin your journey by searching our latest career opportunities.</p>
+        <div class="ad">AdSense Placeholder</div>
+        <div id="jobGrid" class="grid" aria-live="polite"></div>
+        <div class="viewmore">
+          <button id="viewMore" class="btn">View more jobs</button>
         </div>
-        <div class="form-group">
-          <label>Years of Experience *</label>
-          <select id="expYears" required>
-            <option value="">Select</option>
-            <option>0-1</option><option>1-3</option><option>3-5</option><option>5-10</option><option>10+</option>
-          </select>
-          <div class="input-error" id="errExp"></div>
+      </div>
+
+      <!-- Jobbyist Pro CTA on homepage -->
+      <div class="section card">
+        <h2>Unlock everything with <span style="color:#6ee7ff">Jobbyist Pro</span> — <del>R199</del> <strong>R99</strong>/month</h2>
+        <p class="muted">Limited-time offer. ResumeAudit Pro, AI job matching, personal .cv site, interview prep, ad-free experience, unlimited listings, and more.</p>
+        <div class="actions">
+          <a href="#pro" class="cta">Start 7-day trial</a>
+          <button class="btn" onclick="openRegister('cta')">Create free account</button>
         </div>
-        <div class="form-group">
-          <label>Desired Job Title *</label>
-          <input id="desJobTitle" type="text" required />
-          <div class="input-error" id="errJobTitle"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPANIES -->
+  <section id="companies" class="page">
+    <div class="container section">
+      <h2>Verified companies</h2>
+      <p class="muted">Discover employers hiring now. Follow to get updates.</p>
+      <div id="companyGrid" class="grid"></div>
+    </div>
+  </section>
+
+  <!-- PRO PAGE -->
+  <section id="pro" class="page">
+    <div class="container section">
+      <h2>Jobbyist Pro — Career OS for job seekers</h2>
+      <p class="muted">Everything you need to get hired faster.</p>
+      <ul>
+        <li>ResumeAudit Pro with instant, sharable report</li>
+        <li>Smart AI-powered matching + personalised recommendations</li>
+        <li>Unlimited access to all listings (no registration wall)</li>
+        <li>Interview prep templates & practice bank</li>
+        <li>Professional profile website on your free <strong>.cv</strong> domain</li>
+        <li>Ad-free browsing + priority support</li>
+      </ul>
+      <div class="card">
+        <h3><del class="muted">R199</del> <strong>R99 / month</strong> — limited promo</h3>
+        <div class="actions">
+          <button class="cta" onclick="subscribePro()">Subscribe now</button>
+          <button class="btn" onclick="openRegister('pro')">Create free account first</button>
         </div>
-        <div class="form-group">
-          <label>Preferred Industry *</label>
-          <input id="industry" type="text" required />
-          <div class="input-error" id="errIndustry"></div>
-        </div>
-        <div class="form-group">
-          <label>Expected Salary Range *</label>
-          <div style="display:flex;gap:0.7em;">
-            <select id="salaryCur" required>
-              <option value="ZAR">ZAR</option>
-              <option value="NGN">NGN</option>
+      </div>
+      <div class="ad" style="margin-top:16px">AdSense Placeholder</div>
+    </div>
+  </section>
+
+  <!-- RECRUITMENT SUITE PAGE -->
+  <section id="recruitment-suite" class="page">
+    <div class="container section">
+      <h2>Recruitment Suite — early access (launches early 2026)</h2>
+      <p class="muted">Turnkey talent management for SMEs: multi-channel posting, AI shortlisting, candidate CRM, careers page builder, analytics, and compliance tooling.</p>
+      <div class="card">
+        <h3>Create or claim your company profile</h3>
+        <form id="suiteForm" onsubmit="event.preventDefault();alert('Thanks! We’ll reach out for verification.');">
+          <div class="form-grid">
+            <input required placeholder="Company name" />
+            <input required placeholder="Company website" />
+            <input required placeholder="Work email" type="email" />
+            <select required>
+              <option value="">Company size</option>
+              <option>1–10</option><option>11–50</option><option>51–200</option><option>200–1000</option><option>1000+</option>
             </select>
-            <input id="salaryRange" type="number" min="0" placeholder="e.g. 15000" required style="width:75%;" />
+            <select required>
+              <option value="">Are you claiming an existing profile?</option>
+              <option>Yes, claim existing profile</option>
+              <option>No, create new profile</option>
+            </select>
+            <input placeholder="Phone (optional)" />
           </div>
-          <div class="input-error" id="errSalary"></div>
-        </div>
-        <div class="form-group">
-          <label>Availability to Start *</label>
-          <select id="avail" required>
-            <option value="">Select</option>
-            <option>Immediately</option>
-            <option>1 week</option><option>2 weeks</option><option>1 month</option><option>2+ months</option>
-          </select>
-          <div class="input-error" id="errAvail"></div>
-        </div>
-        <div class="form-actions">
-          <button class="gradient-btn" id="step2Back" type="button">Back</button>
-          <button class="gradient-btn" id="step2Next" type="button">Next</button>
-        </div>
+          <div class="actions" style="margin-top:10px">
+            <button class="cta">Request early access</button>
+          </div>
+        </form>
       </div>
-      <!-- Step 3: Background & Info -->
-      <div class="reg-form-step" id="regStep3">
-        <h3>Step 3: Background & Additional Info</h3>
-        <div class="form-group">
-          <label>Highest Education Level *</label>
-          <select id="eduLevel" required>
-            <option value="">Select</option>
-            <option>High School</option><option>Diploma</option>
-            <option>Bachelor's</option><option>Master's</option><option>PhD</option>
-          </select>
-          <div class="input-error" id="errEdu"></div>
-        </div>
-        <div class="form-group">
-          <label>Criminal History?</label>
-          <select id="criminalHist">
-            <option value="No">No</option>
-            <option value="Yes">Yes</option>
-          </select>
-          <input id="crimDetails" type="text" placeholder="(Optional) Details" style="margin-top:0.3em;" />
-        </div>
-        <div class="form-group">
-          <label>Willing to Relocate?</label>
-          <select id="relocate"><option value="No">No</option><option value="Yes">Yes</option></select>
-        </div>
-        <div class="form-group">
-          <label>Work Authorization</label>
-          <input id="workAuth" type="text" placeholder="e.g. SA Citizen, Nigerian PR, etc." />
-        </div>
-        <div class="form-group">
-          <label>LinkedIn Profile</label>
-          <input id="linkedin" type="url" placeholder="https://linkedin.com/in/..." />
-        </div>
-        <div class="form-group">
-          <label>Portfolio URL</label>
-          <input id="portfolio" type="url" placeholder="https://yourportfolio.com" />
-        </div>
-        <div class="form-group">
-          <label>Brief Bio (max 500 chars)</label>
-          <textarea id="bio" maxlength="500" rows="3"></textarea>
-        </div>
-        <div class="form-actions">
-          <button class="gradient-btn" id="step3Back" type="button">Back</button>
-          <button class="gradient-btn" id="step3Next" type="button">Next</button>
-        </div>
+      <p class="muted" style="margin-top:10px">After verification, you’ll be eligible to post unlimited jobs during the early access period.</p>
+      <div class="ad" style="margin-top:16px">AdSense Placeholder</div>
+    </div>
+  </section>
+
+  <!-- JOBSTATS PAGE -->
+  <section id="jobstats" class="page">
+    <div class="container section">
+      <h2>JobStats — live SA job market insights</h2>
+      <p class="muted">Updated continuously from our listings feed. Connect Google Sheets to power real-time charts (see implementation notes in code).</p>
+      <div class="grid">
+        <div class="card"><h3>Top Locations</h3><canvas id="chartLocations" height="200"></canvas></div>
+        <div class="card"><h3>Top Industries</h3><canvas id="chartIndustries" height="200"></canvas></div>
+        <div class="card"><h3>Remote vs On-site</h3><canvas id="chartRemote" height="200"></canvas></div>
       </div>
-      <!-- Step 4: Upselling -->
-      <div class="reg-form-step" id="regStep4">
-        <h3>Step 4: Boost Your Job Search!</h3>
-        <div class="form-group">
-          <label>
-            <b>Digital Resume Audit:</b>
-            <span class="gradient-btn" style="font-size:0.96em;padding:0.2em 1em;vertical-align:middle;" id="showAudit">Learn More</span>
-            <span style="color:var(--success);font-weight:600;">FREE</span>
-            <small style="display:block;color:var(--text-light);font-size:0.96em;">Usually R299 / ₦15,000</small>
-          </label>
-        </div>
-        <div class="form-group">
-          <label>
-            <b>Jobbyist Pro Subscription:</b>
-            <span class="gradient-btn" style="font-size:0.96em;padding:0.2em 1em;vertical-align:middle;" id="showPro">Learn More</span>
-            <span style="color:var(--success);font-weight:600;">3-day FREE trial</span>
-            <small style="display:block;color:var(--text-light);font-size:0.96em;">R199 / ₦8,000 monthly</small>
-          </label>
-        </div>
-        <div class="form-actions">
-          <button class="gradient-btn" id="step4Back" type="button">Back</button>
-          <button class="gradient-btn" id="submitReg" type="submit">Finish & Create Account</button>
-        </div>
-      </div>
-      <!-- Success -->
-      <div class="reg-form-step" id="regStepSuccess">
-        <h3>Welcome to Jobbyist! 🎉</h3>
-        <p>Your profile has been created.</p>
-        <div style="margin-top:1.2em;">
-          <button class="gradient-btn" id="applyExternalBtn" type="button">Apply to Job Now</button>
-        </div>
-      </div>
-    </form>
+      <div class="ad" style="margin-top:16px">AdSense Placeholder</div>
+    </div>
+  </section>
+
+  <!-- LEGAL PAGES -->
+  <section id="legal-terms" class="page">
+    <div class="container section">
+      <h2>Terms of Service</h2>
+      <p class="muted">Your standard ToS content goes here. Placeholder text…</p>
+    </div>
+  </section>
+  <section id="legal-privacy" class="page">
+    <div class="container section">
+      <h2>Privacy Policy</h2>
+      <p class="muted">We value your privacy. Placeholder text…</p>
+    </div>
+  </section>
+  <section id="legal-cookies" class="page">
+    <div class="container section">
+      <h2>Cookie Settings</h2>
+      <p class="muted">Manage preferences. Placeholder text…</p>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container columns">
+    <div>
+      <div class="brand">Jobbyist<span class="dot">.</span> SA</div>
+      <p class="muted">© <span id="year"></span> Jobbyist South Africa.</p>
+      <p><a href="#legal-terms">Terms</a> • <a href="#legal-privacy">Privacy</a> • <a href="#legal-cookies">Cookies</a></p>
+    </div>
+    <div>
+      <h4>Job seekers</h4>
+      <p><a href="#pro">Get Jobbyist Pro</a></p>
+      <p><a href="https://audit.jobbyist.co.za" target="_blank">Free ResumeAudit</a></p>
+      <p><a href="#home">Browse jobs</a></p>
+    </div>
+    <div>
+      <h4>Employers</h4>
+      <p><a href="#recruitment-suite">Recruitment Suite</a></p>
+      <p><a href="#companies">Verified companies</a></p>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <p class="muted">@jobbyist.sa</p>
+    </div>
+  </div>
+</footer>
+
+<!-- COOKIE CONSENT -->
+<div id="cookie" class="cookie container">
+  <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+    <div>
+      We use cookies to improve your experience. <a href="#legal-cookies">Learn more</a>.
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="dismissCookie()">Decline</button>
+      <button class="cta" onclick="acceptCookie()">Accept</button>
+    </div>
   </div>
 </div>
-<!-- UPSALES -->
-<div class="upsell-modal" id="auditModal">
-  <button class="upsell-close" onclick="closeUpsell('auditModal')" aria-label="Close">&times;</button>
-  <h3>Digital Resume Audit (FREE for Limited Time)</h3>
-  <ul style="margin:0 0 1.1em 1.1em;padding:0;font-size:1em;">
-    <li>Expert review by certified HR pros</li>
-    <li>ATS (Applicant Tracking System) optimization</li>
-    <li>Personalized feedback & improvement tips</li>
-    <li>Usually R299 / ₦15,000 – <b>now free!</b></li>
-  </ul>
-  <p style="color:var(--text-light);margin-bottom:0.2em;">Boost your job search success – it's quick, easy, and free!</p>
-  <button class="gradient-btn" style="width:100%;" onclick="closeUpsell('auditModal')">OK, Got It</button>
+
+<!-- REGISTRATION / ONBOARDING MODAL -->
+<div id="registerModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="regTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="regTitle">Create your free Jobbyist account</h3>
+      <button class="close" onclick="closeRegister()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="steps" id="stepBar">
+        <div class="step active"></div><div class="step"></div><div class="step"></div><div class="step"></div>
+      </div>
+      <!-- Multi-page onboarding -->
+      <form id="onboardForm" onsubmit="event.preventDefault();finishOnboarding();">
+        <!-- STEP 1: Account -->
+        <div class="page active">
+          <div class="form-grid">
+            <input required name="fullName" placeholder="Full name" />
+            <input required type="email" name="email" placeholder="Email" />
+            <input required type="password" name="pass" placeholder="Create password" />
+            <select required name="workAuth">
+              <option value="">Work authorisation</option>
+              <option>South African citizen</option>
+              <option>Permanent resident</option>
+              <option>Work visa</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-nav">
+            <span></span>
+            <button class="cta" onclick="nextStep()">Continue</button>
+          </div>
+        </div>
+        <!-- STEP 2: Profile -->
+        <div class="page">
+          <div class="form-grid">
+            <select required name="experience">
+              <option value="">Experience level</option>
+              <option>Intern / Entry</option><option>Junior</option><option>Mid</option><option>Senior</option><option>Director</option>
+            </select>
+            <select required name="function">
+              <option value="">Primary function</option>
+              <option>Software Engineering</option><option>Design</option><option>Product</option><option>Marketing</option><option>Sales</option>
+              <option>Operations</option><option>Finance</option><option>Legal</option><option>HR/People</option><option>Customer Support</option>
+              <option>Data/AI</option><option>Healthcare</option><option>Mining/Engineering</option><option>Retail</option><option>Education</option>
+            </select>
+            <input placeholder="Headline (e.g., Senior Data Analyst)" />
+            <input placeholder="City, Province" />
+            <textarea rows="4" placeholder="Short bio"></textarea>
+          </div>
+          <div class="form-nav">
+            <button class="btn" onclick="prevStep()">Back</button>
+            <button class="cta" onclick="nextStep()">Continue</button>
+          </div>
+        </div>
+        <!-- STEP 3: Preferences -->
+        <div class="page">
+          <div class="form-grid">
+            <select required name="typePref">
+              <option value="">Preferred job type</option>
+              <option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option>
+            </select>
+            <select required name="workMode">
+              <option value="">Work mode</option>
+              <option>On-site</option><option>Hybrid</option><option>Remote</option>
+            </select>
+            <input type="number" placeholder="Target salary (ZAR per year)" />
+            <input placeholder="Skills (comma-separated)" />
+            <input placeholder="LinkedIn URL (optional)" />
+            <input placeholder="Portfolio / .cv URL (optional)" />
+          </div>
+          <div class="form-nav">
+            <button class="btn" onclick="prevStep()">Back</button>
+            <button class="cta" onclick="nextStep()">Continue</button>
+          </div>
+        </div>
+        <!-- STEP 4: Uploads & Alerts -->
+        <div class="page">
+          <div class="form-grid">
+            <input type="file" accept=".pdf,.doc,.docx" />
+            <select>
+              <option>Weekly job alerts</option>
+              <option>Daily job alerts</option>
+              <option>Off</option>
+            </select>
+            <label><input type="checkbox" checked /> Make my profile discoverable to verified employers</label>
+            <label><input type="checkbox" /> I want to try Jobbyist Pro (7-day trial)</label>
+          </div>
+          <div class="form-nav">
+            <button class="btn" onclick="prevStep()">Back</button>
+            <button class="cta">Create account</button>
+          </div>
+        </div>
+      </form>
+      <p class="muted" style="margin-top:8px">By continuing you agree to our <a href="#legal-terms">Terms</a> and <a href="#legal-privacy">Privacy Policy</a>.</p>
+    </div>
+  </div>
 </div>
-<div class="upsell-modal" id="proModal">
-  <button class="upsell-close" onclick="closeUpsell('proModal')" aria-label="Close">&times;</button>
-  <h3>Jobbyist Pro Subscription</h3>
-  <ul style="margin:0 0 1.1em 1.1em;padding:0;font-size:1em;">
-    <li>Premium job alerts (WhatsApp, email)</li>
-    <li>Salary & market insights</li>
-    <li>Career coaching + interview prep</li>
-    <li>3-day free trial – R199 / ₦8,000 monthly</li>
-    <li>Cancel anytime, no risk</li>
-  </ul>
-  <button class="gradient-btn" style="width:100%;" onclick="closeUpsell('proModal')">Sounds Great!</button>
+
+<!-- COMPANY MODAL -->
+<div id="companyModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="companyTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="companyTitle">Company</h3>
+      <button class="close" onclick="closeCompany()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body" id="companyBody">
+      <!-- Filled by JS -->
+    </div>
+  </div>
 </div>
+
+<!-- IMPLEMENTATION GUIDE & APP LOGIC -->
 <script>
-/* ===== THEME TOGGLE ===== */
-const htmlEl = document.documentElement;
-const themeBtn = document.getElementById('themeToggle');
-const themeIcon = document.getElementById('themeIcon');
-function setTheme(mode) {
-  htmlEl.setAttribute('data-theme', mode);
-  themeIcon.className = mode === "dark" ? "fa fa-sun" : "fa fa-moon";
-  localStorage.setItem('theme', mode);
-}
-themeBtn.onclick = () => setTheme(htmlEl.getAttribute('data-theme') === "dark" ? "light" : "dark");
-if(localStorage.getItem('theme')) setTheme(localStorage.getItem('theme'));
+/* =========================================================================
+   IMPLEMENTATION GUIDE (Zapier / Google Sheets / Crawlers)
+   -------------------------------------------------------------------------
+   1) Jobs data source:
+      - Maintain a Google Sheet with columns:
+        title,description,datePosted,validThrough,employmentType,companyName,
+        companyUrl,logo,streetAddress,addressLocality,addressRegion,postalCode,
+        salaryMin,salaryMax,salaryCurrency,workMode,jobLocationType,city,
+        url,id,industry
+      - Use Zapier to sync rows to a JSON endpoint (e.g., App Scripts web app)
+        or push directly to this site via GitHub Actions.
+      - Replace the 'jobs' array below with a fetch() to your JSON endpoint.
 
-/* ===== ANIMATED COUNTERS ===== */
-function animateCounters() {
-  document.querySelectorAll('.stat-number').forEach(stat=>{
-    let target = parseInt(stat.getAttribute('data-count')), count = 0;
-    if(stat._counted) return; stat._counted = true;
-    const inc = Math.max(1, Math.floor(target / 90));
-    const tick = () => {
-      count += inc; if(count > target) count = target;
-      stat.textContent = count.toLocaleString();
-      if(count < target) setTimeout(tick, 12 + Math.random()*13);
-    }; tick();
-  });
-}
-let statsSection = document.querySelector('.stats-section');
-window.addEventListener('scroll',()=>{
-  let rect = statsSection.getBoundingClientRect();
-  if(rect.top<window.innerHeight-50 && !statsSection._animated) { animateCounters(); statsSection._animated=true; }
-});
+   2) Verified companies:
+      - Keep a separate Google Sheet for companies (name, industry, hqCity,
+        size, rating, logo, about, website).
+      - Wire into the 'companies' array or a fetch().
 
-/* ===== JOBS DATA ===== */
-const sampleJobs = [
-  {title:"Frontend Developer", company:"TechNova", loc:"Lagos", type:"Full-time", pay:"₦420,000/mo", url:"https://company.com/apply"},
-  {title:"Digital Marketing Lead", company:"Medi8 Africa", loc:"Cape Town", type:"Remote", pay:"R38,000/mo", url:"https://company.com/apply"},
-  {title:"Data Analyst", company:"QuickData", loc:"Johannesburg", type:"Contract", pay:"R29,000/mo", url:"https://company.com/apply"},
-  {title:"HR Officer", company:"PeoplePower", loc:"Abuja", type:"Full-time", pay:"₦340,000/mo", url:"https://company.com/apply"},
-  {title:"Backend Engineer", company:"KodeHaus", loc:"Pretoria", type:"Full-time", pay:"R47,000/mo", url:"https://company.com/apply"},
-  {title:"Product Manager", company:"NextStep", loc:"Durban", type:"Remote", pay:"R56,000/mo", url:"https://company.com/apply"},
-  {title:"Customer Success", company:"Linkify", loc:"Nigeria", type:"Part-time", pay:"₦280,000/mo", url:"https://company.com/apply"},
-  {title:"AI Research Intern", company:"NeuraWorks", loc:"Remote", type:"Internship", pay:"₦110,000/mo", url:"https://company.com/apply"},
+   3) Google Jobs (schema.org JobPosting):
+      - This script emits one JSON-LD <script type="application/ld+json"> per
+        visible listing. When you switch to fetch(), keep the same fields.
+
+   4) Framer / GitHub Pages:
+      - This single-file SPA uses hash routing (#home, #companies, #pro, etc),
+        perfect for static hosting and Framer embeds.
+
+   5) Ads:
+      - Replace the AdSense placeholders with your real code once approved.
+
+   6) Registration wall:
+      - Modal opens for: View more, Save Job, View/Follow company.
+      - Replace finishOnboarding() with your backend signup (Formspree, Supabase,
+        Firebase Auth, or a Zapier Webhook).
+
+   ======================================================================= */
+
+/* -------------------------- Demo data (50 jobs) ------------------------- */
+const companies = [
+  {name:"Naspers", city:"Cape Town", website:"https://www.naspers.com", logo:"N"},
+  {name:"Sasol", city:"Johannesburg", website:"https://www.sasol.com", logo:"S"},
+  {name:"MTN South Africa", city:"Johannesburg", website:"https://www.mtn.co.za", logo:"M"},
+  {name:"Vodacom", city:"Midrand", website:"https://www.vodacom.co.za", logo:"V"},
+  {name:"Standard Bank", city:"Johannesburg", website:"https://www.standardbank.co.za", logo:"SB"},
+  {name:"FirstRand (FNB)", city:"Johannesburg", website:"https://www.fnb.co.za", logo:"F"},
+  {name:"Absa Group", city:"Johannesburg", website:"https://www.absa.co.za", logo:"A"},
+  {name:"Nedbank", city:"Sandton", website:"https://www.nedbank.co.za", logo:"N"},
+  {name:"Discovery", city:"Sandton", website:"https://www.discovery.co.za", logo:"D"},
+  {name:"Shoprite", city:"Cape Town", website:"https://www.shoprite.co.za", logo:"Sh"},
+  {name:"Woolworths", city:"Cape Town", website:"https://www.woolworths.co.za", logo:"W"},
+  {name:"Anglo American", city:"Johannesburg", website:"https://www.angloamerican.com", logo:"AA"},
+  {name:"De Beers", city:"Johannesburg", website:"https://www.debeersgroup.com", logo:"DB"},
+  {name:"Sanlam", city:"Cape Town", website:"https://www.sanlam.co.za", logo:"Sa"},
+  {name:"Old Mutual", city:"Cape Town", website:"https://www.oldmutual.co.za", logo:"OM"},
+  {name:"Capitec Bank", city:"Stellenbosch", website:"https://www.capitecbank.co.za", logo:"C"},
+  {name:"Tiger Brands", city:"Bryanston", website:"https://www.tigerbrands.com", logo:"T"},
+  {name:"Bidvest", city:"Johannesburg", website:"https://www.bidvest.co.za", logo:"B"},
+  {name:"Aspen Pharmacare", city:"Durban", website:"https://www.aspenpharma.com", logo:"As"},
+  {name:"Clicks Group", city:"Cape Town", website:"https://www.clicksgroup.co.za", logo:"Cl"},
+  {name:"Takealot", city:"Cape Town", website:"https://www.takealot.com", logo:"Ta"},
+  {name:"Mr Price", city:"Durban", website:"https://www.mrpricegroup.com", logo:"Mr"},
+  {name:"Pick n Pay", city:"Cape Town", website:"https://www.picknpay.co.za", logo:"PnP"},
+  {name:"Transnet", city:"Johannesburg", website:"https://www.transnet.net", logo:"Tr"},
+  {name:"Eskom", city:"Johannesburg", website:"https://www.eskom.co.za", logo:"E"},
+  {name:"Sappi", city:"Johannesburg", website:"https://www.sappi.com", logo:"SaP"},
+  {name:"Mondi", city:"Johannesburg", website:"https://www.mondigroup.com", logo:"Mo"},
+  {name:"MultiChoice", city:"Randburg", website:"https://www.multichoice.com", logo:"MC"},
+  {name:"Dimension Data", city:"Johannesburg", website:"https://www.dimensiondata.com", logo:"DD"},
+  {name:"BCX", city:"Centurion", website:"https://www.bcx.co.za", logo:"BCX"},
 ];
-const jobsGrid = document.getElementById('jobsGrid');
-sampleJobs.forEach((job,i)=>{
-  jobsGrid.innerHTML += `
-  <div class="job-card" tabindex="0">
-    <div class="job-title">${job.title}</div>
-    <div class="job-meta">
-      <span><i class="fa fa-building"></i> ${job.company}</span>
-      <span><i class="fa fa-map-marker-alt"></i> ${job.loc}</span>
-      <span><i class="fa fa-clock"></i> ${job.type}</span>
-    </div>
-    <div class="job-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut risus nec nulla facilisis.</div>
-    <div class="job-footer">
-      <span style="color:var(--accent);font-weight:600;">${job.pay}</span>
-      <button class="apply-btn" data-job='${JSON.stringify(job)}'><i class="fa fa-paper-plane"></i> Apply Now</button>
-    </div>
-  </div>`;
-});
 
-/* ===== REGISTRATION MODAL FLOW ===== */
-const regModal = document.getElementById('regModal');
-let applyUrl = "#";
-function openRegModal(job){
-  regModal.style.display="block"; regModal.classList.add('active');
-  document.body.style.overflow="hidden";
-  applyUrl = job ? job.url : "#";
-  showStep(1);
-}
-function closeRegModal(){
-  regModal.classList.remove('active'); regModal.style.display="none";
-  document.body.style.overflow="auto";
-}
-document.getElementById('closeModal').onclick = closeRegModal;
-document.querySelectorAll('.apply-btn').forEach(btn=>{
-  btn.onclick = e => { e.preventDefault(); openRegModal(JSON.parse(btn.getAttribute('data-job')));}
-});
-/* Focus trap and Esc close */
-document.addEventListener('keydown',function(e){
-  if(e.key==="Escape") { closeRegModal(); closeUpsell('auditModal'); closeUpsell('proModal'); }
-});
+const roles = [
+  {title:"Software Engineer", industry:"Technology", type:"Full-time", salary:[600000,900000], remote:true},
+  {title:"Data Analyst", industry:"Technology", type:"Full-time", salary:[450000,700000], remote:true},
+  {title:"Product Manager", industry:"Technology", type:"Full-time", salary:[800000,1200000], remote:true},
+  {title:"UI/UX Designer", industry:"Design", type:"Full-time", salary:[500000,800000], remote:true},
+  {title:"Marketing Manager", industry:"Marketing", type:"Full-time", salary:[550000,850000], remote:false},
+  {title:"Finance Manager", industry:"Finance", type:"Full-time", salary:[700000,1100000], remote:false},
+  {title:"Internal Auditor", industry:"Finance", type:"Full-time", salary:[550000,800000], remote:false},
+  {title:"Legal Counsel", industry:"Legal", type:"Full-time", salary:[800000,1200000], remote:true},
+  {title:"HR Business Partner", industry:"HR", type:"Full-time", salary:[600000,900000], remote:false},
+  {title:"Recruiter", industry:"HR", type:"Contract", salary:[360000,600000], remote:true},
+  {title:"Operations Manager", industry:"Operations", type:"Full-time", salary:[650000,950000], remote:false},
+  {title:"Supply Chain Analyst", industry:"Operations", type:"Full-time", salary:[500000,780000], remote:false},
+  {title:"Civil Engineer", industry:"Engineering", type:"Full-time", salary:[700000,1100000], remote:false},
+  {title:"Mechanical Engineer", industry:"Engineering", type:"Full-time", salary:[700000,1100000], remote:false},
+  {title:"Electrical Engineer", industry:"Engineering", type:"Full-time", salary:[700000,1100000], remote:false},
+  {title:"Mining Geologist", industry:"Mining", type:"Full-time", salary:[750000,1150000], remote:false},
+  {title:"Nursing Practitioner", industry:"Healthcare", type:"Full-time", salary:[420000,680000], remote:false},
+  {title:"Pharmacist", industry:"Healthcare", type:"Full-time", salary:[550000,900000], remote:false},
+  {title:"Retail Store Manager", industry:"Retail", type:"Full-time", salary:[350000,500000], remote:false},
+  {title:"E-commerce Operations Lead", industry:"Retail", type:"Full-time", salary:[600000,900000], remote:true},
+  {title:"QA Tester", industry:"Technology", type:"Full-time", salary:[450000,720000], remote:true},
+  {title:"Data Scientist", industry:"Technology", type:"Full-time", salary:[900000,1400000], remote:true},
+  {title:"Cloud Engineer", industry:"Technology", type:"Full-time", salary:[800000,1300000], remote:true},
+  {title:"Customer Success Manager", industry:"Customer Support", type:"Full-time", salary:[480000,780000], remote:true},
+  {title:"Sales Executive", industry:"Sales", type:"Full-time", salary:[400000,900000], remote:true},
+  {title:"Business Analyst", industry:"Business", type:"Full-time", salary:[550000,850000], remote:true},
+  {title:"Project Manager", industry:"Business", type:"Full-time", salary:[650000,1000000], remote:true},
+  {title:"Risk Manager", industry:"Finance", type:"Full-time", salary:[800000,1200000], remote:false},
+  {title:"Compliance Officer", industry:"Legal", type:"Full-time", salary:[650000,950000], remote:false},
+  {title:"Content Strategist", industry:"Marketing", type:"Part-time", salary:[250000,420000], remote:true},
+];
 
-/* Stepper logic & persistence */
-let regData = JSON.parse(localStorage.getItem('regForm')||"{}")||{};
-let regStep = 1;
-function showStep(n){
-  regStep = n;
-  [...document.querySelectorAll('.reg-form-step')].forEach((el,i)=>el.classList.toggle('active',i===n-1));
-  let bars = document.querySelectorAll('.reg-form-progress span');
-  bars.forEach((b,i)=>b.classList.toggle('active',i<n));
-}
-function saveRegData(key,val){ regData[key]=val; localStorage.setItem('regForm',JSON.stringify(regData)); }
-function fillRegFields(){
-  if(!regData) return;
-  Object.entries(regData).forEach(([k,v])=>{
-    let el=document.getElementById(k); if(el){
-      if(el.type==='file')return; if(el.type==='checkbox'||el.type==='radio') el.checked=v; else el.value=v;
-    }
-  });
-}
-fillRegFields();
-/* === File Drop Zones === */
-function fileDropZone(zoneId,previewId,accept,storeKey){
-  const dz = document.getElementById(zoneId);
-  const inp = dz.querySelector('input[type="file"]');
-  const preview = document.getElementById(previewId);
-  dz.onclick = ()=>inp.click();
-  dz.ondragover = e=>{e.preventDefault(); dz.classList.add('dragover');};
-  dz.ondragleave = e=>dz.classList.remove('dragover');
-  dz.ondrop = e=>{
-    e.preventDefault(); dz.classList.remove('dragover');
-    if(!e.dataTransfer.files.length) return;
-    inp.files = e.dataTransfer.files;
-    showPreview(inp.files[0]);
+const cities = [
+  {locality:"Johannesburg", region:"Gauteng", postal:"2000", street:"123 Business St"},
+  {locality:"Cape Town", region:"Western Cape", postal:"8000", street:"22 Longmarket Rd"},
+  {locality:"Durban", region:"KwaZulu-Natal", postal:"4001", street:"7 Beach Ave"},
+  {locality:"Pretoria", region:"Gauteng", postal:"0002", street:"45 Union St"},
+  {locality:"Sandton", region:"Gauteng", postal:"2196", street:"10 Rivonia Rd"},
+  {locality:"Stellenbosch", region:"Western Cape", postal:"7600", street:"5 Dorp St"},
+  {locality:"Midrand", region:"Gauteng", postal:"1685", street:"3 New Rd"},
+  {locality:"Randburg", region:"Gauteng", postal:"2194", street:"89 Republic Rd"},
+];
+
+function rand(arr){return arr[Math.floor(Math.random()*arr.length)]}
+function id(){return Math.random().toString(36).slice(2,10)}
+const today = new Date();
+const in60 = new Date(Date.now()+60*24*60*60*1000);
+
+const jobs = Array.from({length:50}).map((_,i)=>{
+  const co = rand(companies); const ro = rand(roles); const city = rand(cities);
+  const remote = ro.remote ? (Math.random()>.4 ? "HYBRID" : "TELECOMMUTE") : "ON_SITE";
+  const job = {
+    id: "JOB-" + id(),
+    title: ro.title,
+    description: `${ro.title} at ${co.name}. Join a high-impact team in ${ro.industry}. Responsibilities include cross-functional collaboration, delivery excellence and stakeholder management.`,
+    datePosted: new Date(Date.now()-Math.floor(Math.random()*10)*24*60*60*1000).toISOString().split("T")[0],
+    validThrough: in60.toISOString().split("T")[0],
+    employmentType: ro.type,
+    companyName: co.name,
+    companyUrl: co.website,
+    logo: co.logo,
+    streetAddress: city.street,
+    addressLocality: city.locality,
+    addressRegion: city.region,
+    postalCode: city.postal,
+    salaryMin: ro.salary[0],
+    salaryMax: ro.salary[1],
+    salaryCurrency: "ZAR",
+    workMode: remote==="TELECOMMUTE"?"Remote":(remote==="HYBRID"?"Hybrid":"On-site"),
+    jobLocationType: remote,
+    city: city.locality,
+    url: "https://jobbyist.africa/jobs/"+encodeURIComponent(ro.title.toLowerCase().replace(/\s+/g,'-'))+"-"+i,
+    industry: ro.industry,
+    remote: remote!=="ON_SITE"
   };
-  inp.onchange = ()=> inp.files[0] && showPreview(inp.files[0]);
-  function showPreview(file){
-    if(!file) return;
-    if(!accept.includes(file.type) && !(accept.includes("application")&&file.name.match(/\.(pdf|docx?|DOCX?|PDF)$/))){
-      preview.innerHTML='<span style="color:var(--error)">Invalid file type.</span>'; inp.value=""; return;
-    }
-    let reader = new FileReader();
-    reader.onload = function(e){
-      if(file.type.startsWith("image/"))
-        preview.innerHTML='<img src="'+e.target.result+'" alt="Profile Pic" class="dz-file-thumb"/>';
-      else preview.innerHTML='<span class="fa fa-file-alt"></span> '+file.name;
-      saveRegData(storeKey,'uploaded');
-    };
-    reader.readAsDataURL(file);
-  }
-}
-fileDropZone('picDrop','picPreview',["image/png","image/jpeg","image/jpg","image/gif"],'profilePic');
-fileDropZone('cvDrop','cvPreview',["application/pdf","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document"],'resumeCV');
-/* === Registration Form Logic === */
-const regForm = document.getElementById('regForm');
-let fields1=["fullName","email","phone","locationSel"];
-let fields2=["empStatus","expYears","desJobTitle","industry","salaryRange","salaryCur","avail"];
-let fields3=["eduLevel"];
-function validateStep1(){
-  let ok = true;
-  fields1.forEach(f=>{
-    let el=document.getElementById(f), err=document.getElementById('err'+f.charAt(0).toUpperCase()+f.slice(1));
-    if(!el.value.trim()) { err.textContent="Required."; ok=false; }
-    else if(f=="email" && !el.value.match(/.+@.+\..+/)) { err.textContent="Invalid email."; ok=false;}
-    else if(f=="phone" && el.value.replace(/[^\d]/g,'').length<7) { err.textContent="Enter valid phone."; ok=false;}
-    else { err.textContent=""; saveRegData(f,el.value.trim());}
-  });
-  return ok;
-}
-function validateStep2(){
-  let ok = true;
-  if(!document.getElementById('salaryRange').value||!document.getElementById('salaryCur').value)
-    {document.getElementById('errSalary').textContent="Enter salary.";ok=false;}
-  else document.getElementById('errSalary').textContent="";
-  ["empStatus","expYears","desJobTitle","industry","avail"].forEach(f=>{
-    let el=document.getElementById(f),err=document.getElementById('err'+f.charAt(0).toUpperCase()+f.slice(1));
-    if(!el.value.trim()){ err.textContent="Required."; ok=false;}
-    else{ err.textContent=""; saveRegData(f,el.value.trim());}
-  });
-  saveRegData('salaryRange',document.getElementById('salaryRange').value);
-  saveRegData('salaryCur',document.getElementById('salaryCur').value);
-  return ok;
-}
-function validateStep3(){
-  let ok=true;
-  if(!document.getElementById('eduLevel').value) { document.getElementById('errEdu').textContent="Required."; ok=false;}
-  else { document.getElementById('errEdu').textContent=""; saveRegData('eduLevel',document.getElementById('eduLevel').value);}
-  return ok;
-}
-document.getElementById('step1Next').onclick=()=>{ if(validateStep1()){showStep(2);} };
-document.getElementById('step2Back').onclick=()=>showStep(1);
-document.getElementById('step2Next').onclick=()=>{ if(validateStep2()){showStep(3);} };
-document.getElementById('step3Back').onclick=()=>showStep(2);
-document.getElementById('step3Next').onclick=()=>{ if(validateStep3()){showStep(4);} };
-document.getElementById('step4Back').onclick=()=>showStep(3);
-regForm.onsubmit=(e)=>{e.preventDefault();showStep(5);};
-document.getElementById('applyExternalBtn').onclick=()=>{window.open(applyUrl,'_blank');closeRegModal();};
-/* Save progress in localStorage */
-document.querySelectorAll('#regForm input, #regForm select, #regForm textarea').forEach(inp=>{
-  inp.oninput=()=>saveRegData(inp.id,inp.value);
+  return job;
 });
-/* Open upsell modals */
-document.getElementById('showAudit').onclick=()=>openUpsell('auditModal');
-document.getElementById('showPro').onclick=()=>openUpsell('proModal');
-function openUpsell(id){document.getElementById(id).classList.add('active');}
-function closeUpsell(id){document.getElementById(id).classList.remove('active');}
+
+/* ---------------------- Verified company profiles (10) ------------------ */
+const verifiedCos = [
+  {name:"Naspers", size:"10k+", rating:4.4, hq:"Cape Town", industry:"Technology & Media", about:"Global consumer internet group and one of the largest tech investors.", website:"https://www.naspers.com"},
+  {name:"Sasol", size:"30k+", rating:4.2, hq:"Johannesburg", industry:"Energy & Chemicals", about:"Integrated energy and chemical company.", website:"https://www.sasol.com"},
+  {name:"MTN South Africa", size:"18k+", rating:4.3, hq:"Johannesburg", industry:"Telecommunications", about:"Leading mobile operator across Africa.", website:"https://www.mtn.co.za"},
+  {name:"Vodacom", size:"10k+", rating:4.1, hq:"Midrand", industry:"Telecommunications", about:"Part of the Vodafone Group.", website:"https://www.vodacom.co.za"},
+  {name:"Standard Bank", size:"50k+", rating:4.4, hq:"Johannesburg", industry:"Financial Services", about:"Africa’s largest bank by assets.", website:"https://www.standardbank.co.za"},
+  {name:"Discovery", size:"12k+", rating:4.5, hq:"Sandton", industry:"Financial Services & Health", about:"Shared-value insurance and health innovation leader.", website:"https://www.discovery.co.za"},
+  {name:"Shoprite", size:"140k+", rating:4.0, hq:"Cape Town", industry:"Retail", about:"Africa’s largest fast-moving consumer goods retailer.", website:"https://www.shoprite.co.za"},
+  {name:"Anglo American", size:"90k+", rating:4.2, hq:"Johannesburg", industry:"Mining", about:"Global mining company.", website:"https://www.angloamerican.com"},
+  {name:"Capitec Bank", size:"15k+", rating:4.6, hq:"Stellenbosch", industry:"Banking", about:"Digital-first South African bank.", website:"https://www.capitecbank.co.za"},
+  {name:"Takealot", size:"7k+", rating:4.3, hq:"Cape Town", industry:"E-commerce", about:"South Africa’s leading online retailer.", website:"https://www.takealot.com"}
+];
+
+/* ------------------------------- UI Render ------------------------------ */
+const jobGrid = document.getElementById('jobGrid');
+const kpiJobs = document.getElementById('kpiJobs');
+const kpiCos = document.getElementById('kpiCos');
+const kpiRemote = document.getElementById('kpiRemote');
+
+function renderJobs(list=jobs){
+  jobGrid.innerHTML = '';
+  list.forEach((j,idx)=>{
+    const el = document.createElement('div');
+    el.className='card';
+    el.innerHTML = `
+      <div class="job-top">
+        <div class="logo" aria-hidden="true">${j.logo}</div>
+        <div>
+          <div class="title">${j.title}</div>
+          <div class="company">${j.companyName} • ${j.city} • <span class="muted">${j.workMode}</span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <span class="chip">${j.employmentType}</span>
+        <span class="chip">ZAR ${formatNum(j.salaryMin)}–${formatNum(j.salaryMax)}</span>
+        <span class="chip">${j.industry}</span>
+      </div>
+      <p class="muted">${j.description}</p>
+      <div class="actions">
+        <a class="btn" href="${j.url}" onclick="event.preventDefault();openRegister('view');">View job</a>
+        <button class="btn-icon save" title="Save" onclick="openRegister('save')">★</button>
+        <a class="btn" href="#pro">Go Pro (R99)</a>
+      </div>
+      <small class="muted">Posted ${j.datePosted}</small>
+    `;
+    jobGrid.appendChild(el);
+    // Emit Google Jobs JSON-LD for each listing (compliant)
+    const ld = {
+      "@context":"https://schema.org/",
+      "@type":"JobPosting",
+      "title": j.title,
+      "description": j.description,
+      "datePosted": j.datePosted,
+      "validThrough": j.validThrough,
+      "employmentType": j.employmentType,
+      "directApply": true,
+      "hiringOrganization": {"@type":"Organization","name": j.companyName, "sameAs": j.companyUrl},
+      "jobLocationType": j.jobLocationType,
+      "jobLocation": j.jobLocationType==="TELECOMMUTE" ? undefined : {
+        "@type":"Place",
+        "address":{"@type":"PostalAddress","streetAddress": j.streetAddress,"addressLocality": j.addressLocality,"addressRegion": j.addressRegion,"postalCode": j.postalCode,"addressCountry":"ZA"}
+      },
+      "applicantLocationRequirements": j.jobLocationType==="TELECOMMUTE" ? {"@type":"Country","name":"ZA"} : undefined,
+      "baseSalary":{"@type":"MonetaryAmount","currency": j.salaryCurrency,"value":{"@type":"QuantitativeValue","minValue": j.salaryMin,"maxValue": j.salaryMax,"unitText":"YEAR"}},
+      "industry": j.industry,
+      "identifier":{"@type":"PropertyValue","name":"Jobbyist South Africa","value": j.id},
+      "url": j.url
+    };
+    const s = document.createElement('script');
+    s.type = "application/ld+json";
+    s.textContent = JSON.stringify(ld);
+    document.head.appendChild(s);
+  });
+  kpiJobs.textContent = list.length.toLocaleString('en-ZA');
+  kpiCos.textContent = new Set(list.map(x=>x.companyName)).size.toLocaleString('en-ZA');
+  kpiRemote.textContent = list.filter(x=>x.remote).length.toLocaleString('en-ZA');
+}
+function formatNum(n){return n.toLocaleString('en-ZA')}
+
+/* Search */
+document.getElementById('searchBtn').addEventListener('click',()=>{
+  const q = document.getElementById('q').value.toLowerCase();
+  const loc = document.getElementById('loc').value.toLowerCase();
+  const type = document.getElementById('type').value;
+  const filtered = jobs.filter(j=>
+    (!q || (j.title.toLowerCase().includes(q)||j.companyName.toLowerCase().includes(q)||j.industry.toLowerCase().includes(q))) &&
+    (!loc || j.city.toLowerCase().includes(loc) || (loc.includes('remote') && j.remote)) &&
+    (!type || j.employmentType===type || (type==='Remote' && j.remote))
+  );
+  renderJobs(filtered);
+});
+
+/* View more -> registration wall */
+document.getElementById('viewMore').addEventListener('click',()=>openRegister('viewmore'));
+
+/* Companies grid */
+const companyGrid = document.getElementById('companyGrid');
+function renderCompanies(){
+  companyGrid.innerHTML='';
+  verifiedCos.forEach(c=>{
+    const el = document.createElement('div');
+    el.className='card';
+    el.innerHTML = `
+      <div class="job-top">
+        <div class="logo">${c.name.split(' ').map(w=>w[0]).slice(0,2).join('')}</div>
+        <div>
+          <div class="title">${c.name} <span class="verified">✔</span></div>
+          <div class="muted">${c.industry} • HQ: ${c.hq} • ${c.size} employees</div>
+        </div>
+      </div>
+      <p class="muted">${c.about}</p>
+      <div class="rating">${"★★★★★".split('').map((s,i)=>`<span class="star">${i<Math.round(c.rating)?'★':'☆'}</span>`).join('')} <span class="muted">(${c.rating.toFixed(1)})</span></div>
+      <div class="actions">
+        <button class="btn" onclick="openCompany('${encodeURIComponent(c.name)}')">View profile</button>
+        <button class="btn" onclick="openRegister('follow')">Follow</button>
+      </div>
+    `;
+    companyGrid.appendChild(el);
+  });
+}
+
+/* Company modal content */
+function openCompany(nameEnc){
+  const c = verifiedCos.find(v=>encodeURIComponent(v.name)===nameEnc);
+  const body = document.getElementById('companyBody');
+  document.getElementById('companyTitle').textContent = c.name+' — Verified';
+  body.innerHTML = `
+    <p class="muted">${c.about}</p>
+    <p><strong>Industry:</strong> ${c.industry} • <strong>HQ:</strong> ${c.hq} • <strong>Size:</strong> ${c.size}</p>
+    <p><a class="pill" href="${c.website}" target="_blank" rel="noopener">Visit website</a></p>
+    <div style="margin:12px 0">
+      <label>Rate this company:</label>
+      <div class="actions" style="margin-top:6px">${[1,2,3,4,5].map(n=>`<button class="btn" onclick="alert('Thanks for rating ${n} star(s)!')">${'★'.repeat(n)}</button>`).join(' ')}</div>
+    </div>
+    <div class="actions">
+      <button class="cta" onclick="openRegister('follow')">Follow for job updates</button>
+      <button class="btn" onclick="openRegister('review')">Write a review</button>
+    </div>
+  `;
+  document.getElementById('companyModal').style.display='flex';
+}
+function closeCompany(){document.getElementById('companyModal').style.display='none'}
+
+/* Registration wall modal control */
+const regModal = document.getElementById('registerModal');
+function openRegister(source){
+  regModal.dataset.source = source || '';
+  regModal.style.display='flex';
+}
+function closeRegister(){regModal.style.display='none'}
+
+/* Multi-step onboarding */
+let step=0;
+const pages = document.querySelectorAll('#onboardForm .page');
+const bar = document.getElementById('stepBar').children;
+function nextStep(){event.preventDefault(); if(step<pages.length-1){pages[step].classList.remove('active'); bar[step].classList.remove('active'); step++; pages[step].classList.add('active'); bar[step].classList.add('active');}}
+function prevStep(){event.preventDefault(); if(step>0){pages[step].classList.remove('active'); bar[step].classList.remove('active'); step--; pages[step].classList.add('active'); bar[step].classList.add('active');}}
+function finishOnboarding(){
+  alert('Account created! We’ll email you a verification link and add your profile to the Job Seeker Directory for employers to discover.');
+  closeRegister();
+}
+
+/* Cookie banner */
+const cookie = document.getElementById('cookie');
+function acceptCookie(){localStorage.setItem('cookieOK','1'); cookie.style.display='none'}
+function dismissCookie(){localStorage.setItem('cookieOK','0'); cookie.style.display='none'}
+
+/* Routing */
+function showPage(id){
+  document.querySelectorAll('#app .page').forEach(p=>p.classList.remove('active'));
+  const el = document.querySelector(id) || document.querySelector('#home');
+  el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+window.addEventListener('hashchange',()=>showPage(location.hash));
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* Charts (vanilla Canvas) */
+function drawBar(canvasId, labels, values){
+  const c = document.getElementById(canvasId); const ctx = c.getContext('2d');
+  const w = c.width = c.clientWidth; const h = c.height = 220;
+  const max = Math.max(...values) || 1;
+  const pad = 32; const barW = (w - pad*2) / values.length * .7;
+  ctx.clearRect(0,0,w,h);
+  values.forEach((v,i)=>{
+    const x = pad + i*((w-pad*2)/values.length) + 8;
+    const y = h - pad - (v/max)*(h-pad*2);
+    ctx.fillStyle = '#7c5cff'; ctx.fillRect(x,y,barW,h-pad-y);
+    ctx.fillStyle = '#cfd3e6'; ctx.font='12px Inter'; ctx.textAlign='center';
+    ctx.fillText(labels[i], x+barW/2, h-10);
+  });
+}
+
+/* Init */
+renderJobs(jobs);
+renderCompanies();
+if(!localStorage.getItem('cookieOK')) cookie.style.display='block';
+showPage(location.hash || '#home');
+
+/* JobStats from jobs[] */
+function rebuildStats(){
+  const byCity = {};
+  const byIndustry = {};
+  let remote=0, onsite=0;
+  jobs.forEach(j=>{
+    byCity[j.city]=(byCity[j.city]||0)+1;
+    byIndustry[j.industry]=(byIndustry[j.industry]||0)+1;
+    j.remote ? remote++ : onsite++;
+  });
+  const topCity = Object.entries(byCity).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const topInd = Object.entries(byIndustry).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  drawBar('chartLocations', topCity.map(x=>x[0]), topCity.map(x=>x[1]));
+  drawBar('chartIndustries', topInd.map(x=>x[0]), topInd.map(x=>x[1]));
+  drawBar('chartRemote', ['Remote/Hybrid','On-site'], [remote, onsite]);
+}
+rebuildStats();
+
+/* Pro subscribe stub */
+function subscribePro(){ alert('Thanks! Redirecting to secure checkout at R99/month…'); location.hash='#pro'; }
+
+/* Accessibility tweaks */
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){ closeRegister(); closeCompany(); }
+});
 </script>
-</body>
 </html>
