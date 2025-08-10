@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobbyist - Your Dream Career Starts Here!</title>
+    <meta name="description" content="Don't just find a job - discover your calling! Join 50,000+ professionals who've transformed their careers with Jobbyist.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google AdSense - Replace with your actual publisher ID -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXX"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Language Selector Floating Button -->
+    <div class="language-selector">
+        <button class="language-btn" onclick="toggleLanguageMenu()">
+            <span>EN</span> ⌄
+        </button>
+        <div class="language-menu hidden">
+            <button onclick="changeLanguage('en')">🇺🇸 English</button>
+            <button onclick="changeLanguage('af')">🇿🇦 Afrikaans</button>
+            <button onclick="changeLanguage('zu')">🇿🇦 isiZulu</button>
+        </div>
+    </div>
+
+    <!-- Live Chat Floating Button -->
+    <div class="chat-widget">
+        <button class="chat-btn" onclick="openChatWidget()">
+            💬
+        </button>
+    </div>
+
+    <!-- User Limits Notification -->
+    <div id="limitsNotification" class="limits-notification hidden">
+        <div class="limits-content">
+            <h4>Daily Usage Limits</h4>
+            <p>Job views: <span id="jobViewsCount">0</span>/50</p>
+            <p>Applications: <span id="applicationsCount">0</span>/5</p>
+            <button class="btn btn--primary btn--sm" onclick="showUpgradeModal()">Upgrade to Pro</button>
+            <button class="btn btn--secondary btn--sm" onclick="closeLimitsNotification()">Close</button>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__brand">
+                <h1 class="nav__logo">Jobbyist <sup>🇿🇦</sup></h1>
+            </div>
+            <ul class="nav__menu">
+                <li><a href="#home" class="nav__link active">Home</a></li>
+                <li><a href="#jobs" class="nav__link">Jobs</a></li>
+                <li><a href="#companies" class="nav__link">Companies</a></li>
+                <li><a href="#jobstats" class="nav__link">JobStats</a></li>
+                <li><a href="https://audit.jobbyist.co.za" class="nav__link" target="_blank">Resume Audit</a></li>
+                <li><a href="#pro" class="nav__link">Jobbyist Pro</a></li>
+            </ul>
+            <div class="nav__actions">
+                <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <button class="btn btn--outline btn--sm" onclick="openRegistrationModal('signup')">Sign Up</button>
+                <button class="btn btn--primary btn--sm" onclick="openRegistrationModal('login')">Login</button>
+            </div>
+            <button class="nav__toggle" onclick="toggleMobileMenu()">☰</button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Homepage Section -->
+        <section id="home" class="page active">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="container">
+                    <div class="hero__content">
+                        <h1 class="hero__title">Your Dream Career Starts Here!</h1>
+                        <p class="hero__subtitle">Join 50,000+ professionals who've transformed their careers with Jobbyist. Stop settling for ordinary - you deserve extraordinary!</p>
+                        
+                        <!-- Job Search Form -->
+                        <form class="hero__search" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="searchJobs(event)">
+                            <div class="search__field">
+                                <input type="text" placeholder="Your dream job title..." name="job_title" id="jobKeyword" class="form-control">
+                            </div>
+                            <div class="search__field">
+                                <input type="text" placeholder="Where do you want to work?" name="location" id="jobLocation" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn--primary search__btn">Find My Dream Job</button>
+                        </form>
+
+                        <!-- Statistics -->
+                        <div class="hero__stats">
+                            <div class="stat">
+                                <span class="stat__number">24,680</span>
+                                <span class="stat__label">Dream Jobs Waiting</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat__number">1,250+</span>
+                                <span class="stat__label">Top Companies</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat__number">47%</span>
+                                <span class="stat__label">Remote Opportunities</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Banner Ad -->
+            <div class="ad-container" id="ad-banner-top">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXX"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-XXXXXXXXX"
+                     data-ad-slot="XXXXXXXXX"
+                     data-ad-format="banner"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+            <!-- Jobbyist Pro CTA -->
+            <div class="pro-cta">
+                <div class="container">
+                    <div class="pro-cta__content">
+                        <h3>Unlock Your Full Career Potential</h3>
+                        <p>Transform your career trajectory with unlimited job access, AI-powered matching, and premium tools for just <strong>R99/month</strong> (limited time offer)</p>
+                        <button class="btn btn--primary" onclick="showPage('pro')">Upgrade Your Career Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Job Categories -->
+            <div class="categories">
+                <div class="container">
+                    <h2 class="section__title">Opportunities That Match Your Ambition</h2>
+                    <div class="categories__grid">
+                        <div class="category-card" data-category="Information Technology">
+                            <div class="category-card__icon">💻</div>
+                            <h3>Information Technology</h3>
+                            <p>8,450 career-changing opportunities</p>
+                        </div>
+                        <div class="category-card" data-category="Sales & Marketing">
+                            <div class="category-card__icon">📈</div>
+                            <h3>Sales & Marketing</h3>
+                            <p>5,230 success stories waiting</p>
+                        </div>
+                        <div class="category-card" data-category="Finance & Accounting">
+                            <div class="category-card__icon">💰</div>
+                            <h3>Finance & Accounting</h3>
+                            <p>3,890 prosperity paths open</p>
+                        </div>
+                        <div class="category-card" data-category="Healthcare">
+                            <div class="category-card__icon">🏥</div>
+                            <h3>Healthcare</h3>
+                            <p>2,340 life-changing roles</p>
+                        </div>
+                        <div class="category-card" data-category="Engineering">
+                            <div class="category-card__icon">🔧</div>
+                            <h3>Engineering</h3>
+                            <p>2,180 innovation opportunities</p>
+                        </div>
+                        <div class="category-card" data-category="Education">
+                            <div class="category-card__icon">📚</div>
+                            <h3>Education</h3>
+                            <p>1,890 future-shaping positions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Jobs Section -->
+        <section id="jobs" class="page">
+            <div class="container">
+                <div class="jobs__header">
+                    <h2 class="section__title">Opportunities That Match Your Ambition</h2>
+                    <p class="motivational-subtitle">Your next breakthrough is just one click away!</p>
+                    <div class="jobs__filters">
+                        <select class="form-control" id="categoryFilter">
+                            <option value="">All Dream Categories</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Finance & Accounting">Finance & Accounting</option>
+                            <option value="Sales & Marketing">Sales & Marketing</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Engineering">Engineering</option>
+                        </select>
+                        <select class="form-control" id="locationFilter">
+                            <option value="">Everywhere in SA</option>
+                            <option value="Cape Town">Cape Town</option>
+                            <option value="Johannesburg">Johannesburg</option>
+                            <option value="Durban">Durban</option>
+                            <option value="Pretoria">Pretoria</option>
+                        </select>
+                        <select class="form-control" id="typeFilter">
+                            <option value="">All Opportunity Types</option>
+                            <option value="FULL_TIME">Full-time</option>
+                            <option value="PART_TIME">Part-time</option>
+                            <option value="CONTRACT">Contract</option>
+                            <option value="INTERN">Internship</option>
+                        </select>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="remoteFilter"> Remote Freedom
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Free User Limit Warning -->
+                <div id="jobLimitWarning" class="limit-warning hidden">
+                    <p><strong>Amazing!</strong> You've viewed <span id="viewedJobsCount">0</span>/50 opportunities today. <button class="btn btn--primary btn--sm" onclick="showUpgradeModal()">Unlock unlimited views with Pro!</button></p>
+                </div>
+
+                <div class="jobs__grid" id="jobsGrid">
+                    <!-- Jobs will be loaded here by JavaScript -->
+                </div>
+
+                <!-- Ad between jobs every 3rd job -->
+                <div class="ad-container ad-between-jobs" style="display: none;">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXX"></script>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-XXXXXXXXX"
+                         data-ad-slot="XXXXXXXXX"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+
+                <div class="jobs__pagination">
+                    <button class="btn btn--secondary" id="prevPage" onclick="changePage(-1)">Previous Opportunities</button>
+                    <span class="pagination__info" id="paginationInfo">Page 1 of 5</span>
+                    <button class="btn btn--primary" id="nextPage" onclick="changePage(1)">More Opportunities</button>
+                    <button class="btn btn--outline" onclick="showProFeatureModal('unlimited-jobs')">Unlock All Jobs</button>
+                </div>
+
+                <!-- Sidebar Ad -->
+                <div class="ad-container ad-sidebar">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXX"></script>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-XXXXXXXXX"
+                         data-ad-slot="XXXXXXXXX"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+            </div>
+        </section>
+
+        <!-- Companies Section -->
+        <section id="companies" class="page">
+            <div class="container">
+                <h2 class="section__title">Connect With Industry Leaders</h2>
+                <p class="section__subtitle">Join thousands who've already upgraded their professional life by connecting with top companies!</p>
+                
+                <div class="companies__grid" id="companiesGrid">
+                    <!-- Companies will be loaded here by JavaScript -->
+                </div>
+
+                <!-- Ad after companies -->
+                <div class="ad-container">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXX"></script>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-XXXXXXXXX"
+                         data-ad-slot="XXXXXXXXX"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+            </div>
+        </section>
+
+        <!-- JobStats Section -->
+        <section id="jobstats" class="page">
+            <div class="container">
+                <h2 class="section__title">Market Insights That Power Success</h2>
+                
+                <div class="stats__overview">
+                    <div class="stat-card">
+                        <h3>32.9%</h3>
+                        <p>Current Unemployment Rate - You Can Beat This!</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>24,680</h3>
+                        <p>Dreams Waiting to Be Matched</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>47%</h3>
+                        <p>Remote Freedom Available</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>1,250+</h3>
+                        <p>Success Partners Ready</p>
+                    </div>
+                </div>
+
+                <div class="charts__grid">
+                    <div class="chart__container">
+                        <h3>Where Success Stories Happen</h3>
+                        <div class="chart-wrapper" style="position: relative; height: 300px;">
+                            <canvas id="categoriesChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart__container">
+                        <h3>Your Earning Potential by Industry</h3>
+                        <div class="chart-wrapper" style="position: relative; height: 300px;">
+                            <canvas id="salariesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Jobbyist Pro Section -->
+        <section id="pro" class="page">
+            <div class="container">
+                <div class="pro__hero">
+                    <h2 class="section__title">Transform Your Career Trajectory Today!</h2>
+                    <p class="section__subtitle">Don't let limits hold back your potential. Join the elite circle of unlimited career builders.</p>
+                    
+                    <div class="pricing__cards">
+                        <div class="pricing__card featured">
+                            <div class="pricing__badge">Career Game-Changer</div>
+                            <h3>Pro Unlimited</h3>
+                            <div class="pricing__price">
+                                <span class="price__currency">R</span>
+                                <span class="price__amount">99</span>
+                                <span class="price__period">/month</span>
+                            </div>
+                            <div class="price__original">Regular price: R199/month</div>
+                            <button class="btn btn--primary btn--full-width">Start Your Transformation</button>
+                        </div>
+                    </div>
+
+                    <div class="features__grid">
+                        <div class="feature">
+                            <div class="feature__icon">🎯</div>
+                            <h4>AI-Powered Dream Matching</h4>
+                            <p>Get personalized opportunities that align with your career destiny</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature__icon">📈</div>
+                            <h4>ResumeAudit Mastery</h4>
+                            <p>Transform your resume into a job-winning masterpiece</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature__icon">🌟</div>
+                            <h4>Professional Domain Power</h4>
+                            <p>Get your own .cv domain that showcases your brilliance</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature__icon">🚀</div>
+                            <h4>Interview Victory Prep</h4>
+                            <p>Master every interview with our comprehensive success system</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature__icon">✨</div>
+                            <h4>Distraction-Free Excellence</h4>
+                            <p>Focus on your future without ad interruptions</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature__icon">♾️</div>
+                            <h4>Unlimited Career Access</h4>
+                            <p>Apply to unlimited opportunities and accelerate your success</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Registration/Login Modal -->
+    <div id="registrationModal" class="modal hidden">
+        <div class="modal__backdrop" onclick="closeRegistrationModal()"></div>
+        <div class="modal__content">
+            <button class="modal__close" onclick="closeRegistrationModal()">×</button>
+            
+            <div class="modal__header">
+                <h3 id="modalTitle">Launch Your Success Story Today!</h3>
+                <div class="progress-bar" id="progressContainer" style="display: none;">
+                    <div class="progress-bar__fill" id="progressBar" style="width: 20%"></div>
+                </div>
+                <p class="progress-text" id="progressText" style="display: none;">Step <span id="currentStep">1</span> of 5 - You're <span id="progressPercent">20%</span> closer to your dream job!</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" action="https://formspree.io/f/YOUR_LOGIN_FORM_ID" method="POST" class="auth-form">
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your success email" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Your secure password" required class="form-control">
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">Launch My Career</button>
+                <p class="form-switch">New to success? <button type="button" onclick="switchToSignup()" class="link-btn">Create your power account</button></p>
+            </form>
+
+            <!-- Registration Form -->
+            <form id="registrationForm" action="https://formspree.io/f/YOUR_SIGNUP_FORM_ID" method="POST" onsubmit="handleRegistrationStep(event)" style="display: none;">
+                <!-- Step 1: Basic Info -->
+                <div class="form-step active" data-step="1">
+                    <h4>Let's Build Your Success Foundation</h4>
+                    <div class="form-group">
+                        <input type="text" placeholder="Your first name" required class="form-control" name="first_name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Your last name" required class="form-control" name="last_name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your professional email" required class="form-control" name="email">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Your contact number" required class="form-control" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Create a strong password" required class="form-control" name="password">
+                    </div>
+                </div>
+
+                <!-- Step 2: Professional Info -->
+                <div class="form-step" data-step="2">
+                    <h4>Define Your Professional Power</h4>
+                    <div class="form-group">
+                        <select required class="form-control" name="experience_level">
+                            <option value="">Your experience level</option>
+                            <option value="entry">Rising Star (0-2 years)</option>
+                            <option value="junior">Growing Talent (2-5 years)</option>
+                            <option value="senior">Proven Expert (5-10 years)</option>
+                            <option value="lead">Industry Leader (10+ years)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Your current role (or dream role)" class="form-control" name="current_role">
+                    </div>
+                    <div class="form-group">
+                        <select required class="form-control" name="industry">
+                            <option value="">Your success industry</option>
+                            <option value="it">Information Technology</option>
+                            <option value="finance">Finance & Banking</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="engineering">Engineering</option>
+                            <option value="marketing">Marketing & Sales</option>
+                            <option value="education">Education</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Step 3: Career Goals -->
+                <div class="form-step" data-step="3">
+                    <h4>Design Your Success Path</h4>
+                    <div class="form-group">
+                        <input type="text" placeholder="Your target job title" class="form-control" name="target_job">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" placeholder="Minimum salary goal (ZAR)" class="form-control" name="salary_goal">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Your preferred work location" class="form-control" name="location">
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="remote_work"> I want remote work freedom
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 4: Skills & Education -->
+                <div class="form-step" data-step="4">
+                    <h4>Showcase Your Superpowers</h4>
+                    <div class="form-group">
+                        <textarea placeholder="Your key skills (comma separated)" class="form-control" name="skills" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <select required class="form-control" name="education">
+                            <option value="">Your education achievement</option>
+                            <option value="high-school">High School Graduate</option>
+                            <option value="diploma">Diploma/Certificate Holder</option>
+                            <option value="bachelors">Bachelor's Degree</option>
+                            <option value="masters">Master's Degree</option>
+                            <option value="phd">PhD/Doctorate</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Languages you speak" class="form-control" name="languages">
+                    </div>
+                </div>
+
+                <!-- Step 5: Final Profile Setup -->
+                <div class="form-step" data-step="5">
+                    <h4>Complete Your Success Profile</h4>
+                    <div class="form-group">
+                        <label class="form-label">Upload your CV (Optional)</label>
+                        <input type="file" accept=".pdf,.doc,.docx" class="form-control" name="cv">
+                    </div>
+                    <div class="form-group">
+                        <input type="url" placeholder="Your LinkedIn profile URL" class="form-control" name="linkedin">
+                    </div>
+                    <div class="form-group">
+                        <input type="url" placeholder="Your portfolio/website URL" class="form-control" name="portfolio">
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="newsletter" checked> Send me success opportunities and career tips
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal__actions">
+                    <button type="button" class="btn btn--secondary" id="prevStepBtn" onclick="previousStep()" style="display: none;">Previous</button>
+                    <button type="submit" class="btn btn--primary" id="nextStepBtn">Next Step to Success</button>
+                </div>
+                
+                <p class="form-switch">Already on the success track? <button type="button" onclick="switchToLogin()" class="link-btn">Sign in to your account</button></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Company Modal -->
+    <div id="companyModal" class="modal hidden">
+        <div class="modal__backdrop" onclick="closeCompanyModal()"></div>
+        <div class="modal__content company-modal">
+            <button class="modal__close" onclick="closeCompanyModal()">×</button>
+            
+            <div id="companyModalContent">
+                <!-- Company details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Pro Feature Modal -->
+    <div id="proFeatureModal" class="modal hidden">
+        <div class="modal__backdrop" onclick="closeProFeatureModal()"></div>
+        <div class="modal__content">
+            <button class="modal__close" onclick="closeProFeatureModal()">×</button>
+            
+            <div class="pro-feature-content">
+                <h3>🚀 Ready to Unlock Your Full Potential?</h3>
+                <p>This premium feature is available with Jobbyist Pro. Join thousands who've already accelerated their career success!</p>
+                
+                <div class="feature-benefits">
+                    <div class="benefit">✅ Unlimited job applications</div>
+                    <div class="benefit">✅ Company review access</div>
+                    <div class="benefit">✅ Follow unlimited companies</div>
+                    <div class="benefit">✅ AI-powered job matching</div>
+                    <div class="benefit">✅ Ad-free experience</div>
+                </div>
+                
+                <button class="btn btn--primary btn--full-width" onclick="showPage('pro'); closeProFeatureModal();">Upgrade to Pro Now</button>
+                <button class="btn btn--secondary btn--full-width" onclick="closeProFeatureModal()">Maybe Later</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h4>Jobbyist 🇿🇦</h4>
+                    <p>Your dream career starts here! Transform your professional life with South Africa's most motivational job platform.</p>
+                </div>
+                <div class="footer__section">
+                    <h5>For Success Seekers</h5>
+                    <ul>
+                        <li><a href="#jobs">Discover Opportunities</a></li>
+                        <li><a href="#pro">Jobbyist Pro</a></li>
+                        <li><a href="https://audit.jobbyist.co.za" target="_blank">Resume Power-Up</a></li>
+                        <li><a href="#companies">Company Intelligence</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h5>For Employers</h5>
+                    <ul>
+                        <li><a href="#recruitment">Talent Solutions</a></li>
+                        <li><a href="#companies">Post Opportunities</a></li>
+                        <li><a href="#companies">Brand Excellence</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h5>Legal & Support</h5>
+                    <ul>
+                        <li><a href="javascript:showLegalPage('terms')">Terms of Success</a></li>
+                        <li><a href="javascript:showLegalPage('privacy')">Privacy Policy</a></li>
+                        <li><a href="javascript:showLegalPage('cookies')">Cookie Policy</a></li>
+                        <li><a href="javascript:showLegalPage('contact')">Contact Success Team</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Footer Ad -->
+            <div class="ad-container">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXX"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-XXXXXXXXX"
+                     data-ad-slot="XXXXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+            
+            <div class="footer__bottom">
+                <p>&copy; 2025 Jobbyist. All rights reserved. Your success story starts today!</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+
+    <!-- 
+    OpenAI ChatBot Integration Guide:
+    
+    1. Sign up for OpenAI API at https://platform.openai.com/
+    2. Generate an API key from your dashboard
+    3. Replace 'YOUR_OPENAI_API_KEY' in the app.js file
+    4. The chat widget will connect to GPT-4 mini for job-related queries
+    5. Customize the system prompt in the chatbot configuration
+    6. Test the integration thoroughly before going live
+    
+    Implementation steps:
+    - Set up OpenAI API key in environment variables
+    - Configure the chat widget to handle job search queries
+    - Add context about available jobs for better responses
+    - Implement conversation history for better user experience
+    -->
+
+    <!-- JSON-LD Structured Data for Google Jobs -->
+    <script type="application/ld+json" id="jobStructuredData">
+    {
+        "@context": "https://schema.org/",
+        "@type": "JobPosting",
+        "title": "Software Developer",
+        "description": "Transform the future of financial technology with South Africa's leading financial services company. Join our innovative team and build solutions that impact millions of lives.",
+        "identifier": {
+            "@type": "PropertyValue",
+            "name": "Sanlam Ltd",
+            "value": "1"
+        },
+        "datePosted": "2025-08-07",
+        "validThrough": "2025-10-11",
+        "employmentType": "CONTRACT",
+        "hiringOrganization": {
+            "@type": "Organization",
+            "name": "Sanlam Ltd",
+            "sameAs": "https://www.sanlam.co.za"
+        },
+        "jobLocation": {
+            "@type": "Place",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "",
+                "addressLocality": "Cape Town",
+                "addressRegion": "Western Cape",
+                "addressCountry": "ZA"
+            }
+        },
+        "baseSalary": {
+            "@type": "MonetaryAmount",
+            "currency": "ZAR",
+            "value": {
+                "@type": "QuantitativeValue",
+                "minValue": 39449,
+                "maxValue": 51876,
+                "unitText": "MONTH"
+            }
+        }
+    }
+    </script>
+</body>
+</html>

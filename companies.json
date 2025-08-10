@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Vodacom Group",
+    "industry": "Telecommunications",
+    "location": "Midrand, Gauteng",
+    "description": "Leading telecommunications company in South Africa",
+    "rating": 4.5,
+    "employees": "8000+",
+    "verified": true
+  },
+  {
+    "name": "HCL Technologies SA",
+    "industry": "Information Technology",
+    "location": "Johannesburg, Gauteng",
+    "description": "Global technology and services company",
+    "rating": 4.3,
+    "employees": "5000+",
+    "verified": true
+  },
+  {
+    "name": "Daimler Truck Southern Africa",
+    "industry": "Automotive",
+    "location": "Johannesburg, Gauteng",
+    "description": "Commercial vehicle manufacturer and distributor",
+    "rating": 4.2,
+    "employees": "3000+",
+    "verified": true
+  },
+  {
+    "name": "Heineken Beverages",
+    "industry": "Food & Beverages",
+    "location": "Johannesburg, Gauteng",
+    "description": "Leading beverage company in South Africa",
+    "rating": 4.1,
+    "employees": "2500+",
+    "verified": true
+  },
+  {
+    "name": "Santam Ltd",
+    "industry": "Insurance",
+    "location": "Cape Town, Western Cape",
+    "description": "Leading short-term insurance company",
+    "rating": 4.4,
+    "employees": "4000+",
+    "verified": true
+  },
+  {
+    "name": "Accenture South Africa",
+    "industry": "Professional Services",
+    "location": "Johannesburg, Gauteng",
+    "description": "Global professional services company",
+    "rating": 4.0,
+    "employees": "3500+",
+    "verified": true
+  },
+  {
+    "name": "Unilever South Africa",
+    "industry": "FMCG",
+    "location": "Durban, KwaZulu-Natal",
+    "description": "Multinational consumer goods company",
+    "rating": 4.3,
+    "employees": "2000+",
+    "verified": true
+  },
+  {
+    "name": "Mondelez South Africa",
+    "industry": "Food & Beverages",
+    "location": "Johannesburg, Gauteng",
+    "description": "Global snacking company",
+    "rating": 4.2,
+    "employees": "1500+",
+    "verified": true
+  },
+  {
+    "name": "Mercedes-Benz South Africa",
+    "industry": "Automotive",
+    "location": "East London, Eastern Cape",
+    "description": "Premium automotive manufacturer",
+    "rating": 4.4,
+    "employees": "3000+",
+    "verified": true
+  },
+  {
+    "name": "Sanlam Ltd",
+    "industry": "Financial Services",
+    "location": "Cape Town, Western Cape",
+    "description": "Leading financial services group",
+    "rating": 4.1,
+    "employees": "12000+",
+    "verified": true
+  }
+]
