@@ -1,785 +1,849 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jobbyist South Africa — Find the right fit. Remote-friendly.</title>
-  <meta name="description" content="Search millions of jobs across South Africa. Remote-friendly. Smart matching. Verified companies." />
-
-  <!-- Placeholder for Google AdSense -->
-  <!--
-    Replace with your AdSense script once approved:
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX" crossorigin="anonymous"></script>
-  -->
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Jobbyist — Find work you’ll be proud of</title>
+  <meta name="description" content="Jobbyist helps South Africans land work they love. Remote-friendly roles, AI matching, ResumeAudit, and verified companies."/>
+  <!-- Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
+    /* =========================================================
+       THEME: Light/Dark + System default
+       ========================================================= */
     :root{
-      --bg:#0f1220; --card:#1a1f36; --muted:#8a90a3; --text:#eef1f6; --accent:#6ee7ff;
-      --accent-2:#7c5cff; --chip:#2a3048; --success:#22c55e; --danger:#ef4444;
-      --shadow: 0 10px 30px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.03) inset;
-      --radius: 16px;
+      --radius:14px; --shadow: 0 10px 28px rgba(0,0,0,.25);
+      --brand:#5c7cfa; --accent:#7b6cff; --success:#12c29a; --danger:#ff6b6b;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:linear-gradient(120deg,#0f1220 0%,#171a2b 50%,#121528 100%);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text)}
+    /* Light */
+    :root[data-theme="light"]{
+      --bg:#f7f8ff; --ink:#0e1320; --muted:#5c647a;
+      --card:#ffffff; --line:#e6e8f2; --chip:#eef0ff;
+      --nav:rgba(255,255,255,.75);
+    }
+    /* Dark */
+    :root[data-theme="dark"]{
+      --bg:linear-gradient(140deg,#10131b 0%,#121726 60%,#181a2b 100%);
+      --ink:#e9ecff; --muted:#aab3d4; --card:#121626; --line:#273155; --chip:#1b2340; --nav:rgba(10,12,20,.7);
+    }
+    html{height:100%}
+    body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);
+      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      -webkit-font-smoothing:antialiased}
     a{color:inherit;text-decoration:none}
-    .container{max-width:1200px;margin:0 auto;padding:24px}
-    header{position:sticky;top:0;z-index:50;background:rgba(15,18,32,.75);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
-    .brand{font-weight:800;font-size:24px;letter-spacing:.2px}
-    .brand .dot{color:var(--accent)}
-    .menu{display:flex;gap:18px;align-items:center}
-    .menu a{padding:10px 12px;border-radius:10px}
-    .menu a:hover{background:rgba(255,255,255,.06)}
-    .cta{background:linear-gradient(90deg,var(--accent-2),var(--accent));padding:10px 14px;border-radius:12px;font-weight:700;color:#0b0e1a;box-shadow:var(--shadow)}
-    .hero{padding:48px 24px}
-    .search-card{background:radial-gradient(1200px 400px at 20% 0%,rgba(124,92,255,.25),transparent 60%),radial-gradient(1000px 300px at 80% 30%,rgba(110,231,255,.2),transparent 60%),var(--card);padding:28px;border-radius:24px;box-shadow:var(--shadow)}
-    .search-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .search-grid input, .search-grid select{width:100%;padding:16px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#111427;color:var(--text)}
-    .search-btn{padding:16px;border-radius:12px;background:#262c4a;color:#fff;font-weight:700;border:1px solid rgba(255,255,255,.08)}
-    .kpis{display:flex;gap:40px;flex-wrap:wrap;margin-top:22px;color:#c6cbe0}
-    .kpi{font-size:28px;font-weight:800}
-    .section{padding:24px;margin-top:10px}
-    .section h2{margin:12px 0 6px;font-size:28px}
-    .muted{color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}.search-grid{grid-template-columns:1fr}}
-    @media (max-width:640px){.grid{grid-template-columns:1fr}}
-    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
-    .chip{background:var(--chip);display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;margin-right:8px;margin-top:8px}
-    .job-top{display:flex;gap:12px;align-items:center}
-    .logo{width:44px;height:44px;border-radius:10px;background:#0d1020;display:grid;place-items:center;font-weight:800;border:1px solid rgba(255,255,255,.08)}
-    .title{font-weight:700;font-size:16px}
-    .company{color:#cfd3e6}
-    .meta{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
-    .actions{display:flex;gap:10px;margin-top:10px}
-    button{cursor:pointer}
-    .btn{padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#232845;color:#fff}
-    .btn:hover{filter:brightness(1.1)}
-    .btn-icon{padding:10px;border-radius:10px;background:#1f2440;border:1px solid rgba(255,255,255,.08)}
-    .save.active{background:var(--success)}
-    .viewmore{margin-top:18px;text-align:center}
-    .verified{color:#7ee787;font-weight:700}
-    .rating{display:flex;gap:6px}
-    .star{filter:grayscale(.2)}
-    /* Modal */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(8,10,20,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}
-    .modal{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:18px;max-width:920px;width:100%;box-shadow:var(--shadow)}
-    .modal-header{padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
-    .modal-body{padding:18px}
-    .close{background:transparent;border:0;color:#cfd3e6;font-size:22px}
-    /* Multi-step form */
-    .steps{display:flex;gap:10px;margin-bottom:16px}
-    .step{height:8px;flex:1;border-radius:999px;background:#2a2f4a}
-    .step.active{background:linear-gradient(90deg,var(--accent-2),var(--accent))}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .form-grid input, .form-grid select, .form-grid textarea{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#14172a;color:#fff;width:100%}
-    .form-nav{display:flex;justify-content:space-between;margin-top:10px}
-    /* Tabs/pages */
-    .page{display:none}
-    .page.active{display:block}
-    /* Cookie banner */
-    .cookie{position:fixed;bottom:16px;left:16px;right:16px;background:#0f1327;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px;display:none;z-index:80}
+    .container{max-width:1180px;margin:auto;padding:0 20px}
+
+    /* ===== Header ===== */
+    header{position:sticky;top:0;z-index:50;background:var(--nav);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{font-weight:800;letter-spacing:.2px;font-size:22px;display:flex;align-items:center;gap:6px}
+    .brand sup{font-size:12px}
+    .nav-links{display:none;gap:6px}
+    .nav-links a{padding:10px 12px;border-radius:10px;color:var(--muted)}
+    .nav-links a.active,.nav-links a:hover{color:var(--ink);background:rgba(124,133,255,.12)}
+    .cta{background:var(--brand);color:#0b0f1a;border:none;padding:10px 14px;border-radius:12px;font-weight:700;cursor:pointer}
+    .cta.secondary{background:#23293a;color:#dfe3f5;border:1px solid #2e3550}
+    .icon-btn{background:transparent;border:1px solid var(--line);padding:8px 10px;border-radius:12px;cursor:pointer}
+
+    /* Burger drawer */
+    .sheet{position:fixed;inset:0;display:none;background:rgba(0,0,0,.45);z-index:70}
+    .sheet.open{display:block}
+    .drawer{position:absolute;left:0;top:0;bottom:0;width:88vw;max-width:360px;background:var(--card);
+      border-right:1px solid var(--line);padding:16px;box-shadow:var(--shadow)}
+    .drawer a{display:block;padding:12px;border-radius:10px;color:var(--ink)}
+    .drawer a:hover{background:rgba(124,133,255,.12)}
+    .row{display:flex;gap:10px;align-items:center}
+
+    /* ===== Hero ===== */
+    .hero{padding:56px 0}
+    .panel{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+    .search-grid{display:grid;grid-template-columns:2fr 1.4fr auto;gap:12px}
+    .input{display:flex;align-items:center;background:var(--chip);border:1px solid var(--line);border-radius:14px;padding:12px 14px;gap:10px}
+    .input input,.input select,.input textarea{flex:1;background:transparent;border:none;color:var(--ink);outline:none;font-size:16px}
+    .hero-copy h1{font-size:40px;margin:24px 0 8px}
+    .hero-copy p{color:var(--muted);margin:0 0 16px}
+    .stats{display:flex;gap:18px;margin-top:10px;flex-wrap:wrap}
+    .stat{background:var(--chip);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+    .stat b{font-size:20px}
+    .badge{background:linear-gradient(90deg,#63e6be,#5c7cfa);-webkit-background-clip:text;color:transparent;font-weight:800}
+
+    /* ===== Sections ===== */
+    section{padding:28px 0}
+    h2{margin:8px 0 10px;font-size:26px}
+    .sub{color:var(--muted);margin-top:-2px}
+    .grid{display:grid;gap:14px}
+    .jobs{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+    .companies{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+    .chip{font-size:12px;border:1px solid var(--line);background:var(--chip);border-radius:999px;padding:6px 10px;color:inherit}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+    .btn{background:transparent;border:1px solid var(--line);padding:9px 12px;border-radius:12px;cursor:pointer}
+    .btn:hover{border-color:#39477c}
+    .btn.save{border-color:#184a45}
+    .btn.follow{border-color:#392566}
+
+    /* Job Ad card */
+    .ad-card{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;height:100px}
+
     /* Footer */
-    footer{margin-top:52px;border-top:1px solid rgba(255,255,255,.06);padding:28px 24px;color:#bfc5db}
-    .columns{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-    @media (max-width:900px){.columns{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:560px){.columns{grid-template-columns:1fr}}
-    /* Ads block placeholder */
-    .ad{border:1px dashed rgba(255,255,255,.2);padding:14px;border-radius:12px;text-align:center;color:#aab0c6}
-    /* Small helpers */
-    .hidden{display:none !important}
-    .pill{display:inline-block;padding:8px 12px;border-radius:999px;background:#232845;border:1px solid rgba(255,255,255,.08)}
+    footer{padding:32px 0;color:var(--muted);border-top:1px solid var(--line)}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:18px}
+
+    /* Modals */
+    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(5,7,11,.65);z-index:80}
+    .modal.open{display:grid}
+    .modal .content{width:min(860px,94vw);max-height:92vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+    .modal header{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--line);padding:12px 16px;display:flex;gap:10px;align-items:center;z-index:10}
+    .modal header h3{margin:0;font-size:18px}
+    .modal .body{padding:16px}
+    .close-x{margin-left:auto} .close-x,.toggle{background:transparent;border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer}
+
+    /* Steps */
+    .steps{display:flex;gap:8px;margin:2px 0 12px}
+    .step{height:6px;flex:1;border-radius:999px;background:var(--chip);border:1px solid var(--line)}
+    .step.active{background:linear-gradient(90deg,#74c0fc,#5c7cfa)}
+
+    /* Cookie banner & floating buttons */
+    .cookie{position:fixed;left:16px;right:16px;bottom:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:none;z-index:200}
+    .cookie.open{display:block}
+    .float-left,.float-right{position:fixed;bottom:18px;z-index:65}
+    .float-left{left:18px} .float-right{right:18px}
+    .fab{padding:10px 12px;border-radius:12px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+
+    /* Responsive */
+    @media (min-width:980px){ .nav-links{display:flex} .burger{display:none} }
+    @media (max-width:979px){ .search-grid{grid-template-columns:1fr} .footer-grid{grid-template-columns:1fr 1fr} }
   </style>
 </head>
 <body>
 <header>
-  <nav class="nav container">
-    <a class="brand" href="#home">Jobbyist<span class="dot">.</span> South Africa</a>
-    <div class="menu">
-      <a href="#home">Jobs</a>
-      <a href="#companies">Companies</a>
-      <a href="#jobstats">JobStats</a>
-      <a href="https://audit.jobbyist.co.za" target="_blank" rel="noopener">Free ResumeAudit</a>
-      <a class="pill" href="#recruitment-suite">Recruitment Suite</a>
-      <a class="cta" href="#pro">Get Jobbyist Pro — R99</a>
+  <div class="container nav">
+    <div class="row">
+      <button class="icon-btn burger" aria-label="Open menu" id="openMenu">☰</button>
+      <div class="brand">Jobbyist<sup>🇿🇦</sup></div>
     </div>
-  </nav>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#home" class="active">Home</a>
+      <a href="#pro">Pro</a>
+      <a href="#recruitment">Recruitment Suite</a>
+      <a href="#jobstats">JobStats</a>
+      <a href="https://audit.jobbyist.co.za" target="_blank" rel="noopener">ResumeAudit</a>
+    </nav>
+    <div class="row">
+      <button class="toggle" id="themeToggle" title="Toggle theme">🌓</button>
+      <button class="cta" id="openSignup">Create free account</button>
+    </div>
+  </div>
 </header>
 
-<main id="app">
-  <!-- HOME -->
-  <section id="home" class="page active">
-    <div class="container hero">
-      <div class="search-card">
-        <h1 style="margin:0 0 4px">Search for a job</h1>
-        <p class="muted" style="margin:0 0 16px">Search thousands of roles. Do meaningful work that impacts the world.</p>
-        <div class="search-grid">
-          <input id="q" placeholder="Job title or keyword" />
-          <input id="loc" placeholder="Location (e.g. Johannesburg, Remote)" />
-          <select id="type">
-            <option value="">Any type</option>
-            <option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option><option>Remote</option>
+<!-- Drawer -->
+<div class="sheet" id="navSheet" aria-hidden="true">
+  <div class="drawer">
+    <div class="row" style="justify-content:space-between"><div class="brand">Jobbyist<sup>🇿🇦</sup></div><button class="icon-btn" onclick="closeSheet()">✕</button></div><hr style="border:none;border-top:1px solid var(--line)">
+    <a href="#home" onclick="closeSheet()">Home</a>
+    <a href="#pro" onclick="closeSheet()">Jobbyist Pro</a>
+    <a href="#recruitment" onclick="closeSheet()">Recruitment Suite</a>
+    <a href="#jobstats" onclick="closeSheet()">JobStats</a>
+    <a href="https://audit.jobbyist.co.za" target="_blank" rel="noopener">ResumeAudit (Free)</a>
+    <hr style="border:none;border-top:1px solid var(--line)">
+    <button class="cta" onclick="openSignup()">Create free account</button>
+  </div>
+</div>
+
+<main id="router">
+  <!-- ===== HOME ===== -->
+  <section id="home" class="container hero">
+    <div class="panel">
+      <div class="search-grid" role="search">
+        <div class="input"><span>🔎</span><input id="qTitle" placeholder="Search job title or keyword (e.g., Accountant, React, Nurse)"/></div>
+        <div class="input"><span>📍</span><input id="qLoc" placeholder="Location (e.g., Johannesburg, Remote)"/></div>
+        <button class="cta" id="searchBtn">Find jobs</button>
+      </div>
+      <div class="hero-copy">
+        <h1>Stop scrolling. Start interviewing.</h1>
+        <p class="sub">Power up your job hunt with verified roles, AI matching, and a profile employers can’t ignore.</p>
+        <div class="stats">
+          <div class="stat"><b id="jobsCount">0</b><div>fresh roles today</div></div>
+          <div class="stat"><b>1 150</b><div>hiring companies</div></div>
+          <div class="stat"><b>R99</b><div>Pro launch offer</div></div>
+        </div>
+        <div class="card ad-card"><!-- AdSense Placeholder: Hero -->
+          <!-- Your AdSense code -->
+          Ad — Google AdSense will render here.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2>Latest jobs</h2>
+    <div class="sub">Across industries • On-site / Hybrid / Remote • Structured for Google Jobs</div>
+    <div class="grid jobs" id="jobsGrid" aria-live="polite"></div>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:14px">
+      <button class="btn" id="viewMore">View more jobs</button>
+      <button class="cta secondary" onclick="location.hash='#pro'">Go Pro — R99/mo</button>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2>Verified companies</h2>
+    <div class="sub">Follow the leaders. Get first dibs on new roles.</div>
+    <div class="grid companies" id="companiesGrid"></div>
+  </section>
+
+  <section class="container">
+    <div class="panel">
+      <h2>Own your next move.</h2>
+      <p class="sub">ResumeAudit, AI-powered matches, ad-free browsing, interview prep, and your own <b>.cv</b> site.</p>
+      <div class="actions">
+        <button class="cta" onclick="location.hash='#pro'">Unlock Pro — R99/mo</button>
+        <button class="btn" onclick="openSignup()">Create free account</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRO ===== -->
+  <section class="container" id="pro" style="display:none">
+    <h2>Jobbyist Pro — Make recruiters chase you <span class="badge">R99/mo</span> <span class="sub">(R199 regular)</span></h2>
+    <div class="grid" style="grid-template-columns:2fr 1fr">
+      <div class="card">
+        <ul>
+          <li><b>ResumeAudit</b>: instant ATS scoring & fixes</li>
+          <li><b>AI matches</b> & personalised recommendations</li>
+          <li><b>Unlimited listings</b> + ad-free experience</li>
+          <li>Interview prep and practice drills</li>
+          <li>Professional profile site with free <b>.cv</b> domain</li>
+          <li>Smart alerts, saved searches, recruiter discovery</li>
+        </ul>
+        <div class="card ad-card">Ad — Google AdSense here</div>
+      </div>
+      <div class="card">
+        <div class="chip">Limited time</div>
+        <h3>Lock in R99 / month</h3>
+        <p class="sub">Cancel anytime. Price locked for 12 months.</p>
+        <button class="cta" onclick="openSignup('subscribePro')">Create account & subscribe</button>
+        <button class="btn" onclick="window.open('https://audit.jobbyist.co.za','_blank')">Try ResumeAudit free →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RECRUITMENT SUITE ===== -->
+  <section class="container" id="recruitment" style="display:none">
+    <h2>Recruitment Suite — Early Access (Launching early 2026)</h2>
+    <p class="sub">Hire like a powerhouse: branded careers pages, candidate CRM, automation, AI shortlists, and unlimited job posts.</p>
+    <div class="grid" style="grid-template-columns:2fr 1fr">
+      <div class="card">
+        <h3>Get on the list</h3>
+        <form id="bizForm" action="https://formspree.io/f/xeokkzle" method="POST" class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
+          <input class="input" name="company" placeholder="Company name" required/>
+          <input class="input" name="website" placeholder="Company website (https://)"/>
+          <input class="input" name="contact_name" placeholder="Your name" required/>
+          <input class="input" name="email" type="email" placeholder="Work email" required/>
+          <select class="input" name="size" required>
+            <option value="" selected disabled>Company size</option>
+            <option>1-10</option><option>11-50</option><option>51-200</option><option>200+</option>
           </select>
-          <button class="search-btn" id="searchBtn">Search</button>
-        </div>
-        <div class="kpis">
-          <div class="kpi"><span id="kpiJobs">0</span> <span class="muted">available jobs today</span></div>
-          <div class="kpi"><span id="kpiCos">0</span> <span class="muted">companies today</span></div>
-          <div class="kpi"><span id="kpiRemote">0</span> <span class="muted">remote-friendly</span></div>
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>Find the right fit. <span class="muted">Remote-friendly.</span></h2>
-        <p class="muted">Begin your journey by searching our latest career opportunities.</p>
-        <div class="ad">AdSense Placeholder</div>
-        <div id="jobGrid" class="grid" aria-live="polite"></div>
-        <div class="viewmore">
-          <button id="viewMore" class="btn">View more jobs</button>
-        </div>
-      </div>
-
-      <!-- Jobbyist Pro CTA on homepage -->
-      <div class="section card">
-        <h2>Unlock everything with <span style="color:#6ee7ff">Jobbyist Pro</span> — <del>R199</del> <strong>R99</strong>/month</h2>
-        <p class="muted">Limited-time offer. ResumeAudit Pro, AI job matching, personal .cv site, interview prep, ad-free experience, unlimited listings, and more.</p>
-        <div class="actions">
-          <a href="#pro" class="cta">Start 7-day trial</a>
-          <button class="btn" onclick="openRegister('cta')">Create free account</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMPANIES -->
-  <section id="companies" class="page">
-    <div class="container section">
-      <h2>Verified companies</h2>
-      <p class="muted">Discover employers hiring now. Follow to get updates.</p>
-      <div id="companyGrid" class="grid"></div>
-    </div>
-  </section>
-
-  <!-- PRO PAGE -->
-  <section id="pro" class="page">
-    <div class="container section">
-      <h2>Jobbyist Pro — Career OS for job seekers</h2>
-      <p class="muted">Everything you need to get hired faster.</p>
-      <ul>
-        <li>ResumeAudit Pro with instant, sharable report</li>
-        <li>Smart AI-powered matching + personalised recommendations</li>
-        <li>Unlimited access to all listings (no registration wall)</li>
-        <li>Interview prep templates & practice bank</li>
-        <li>Professional profile website on your free <strong>.cv</strong> domain</li>
-        <li>Ad-free browsing + priority support</li>
-      </ul>
-      <div class="card">
-        <h3><del class="muted">R199</del> <strong>R99 / month</strong> — limited promo</h3>
-        <div class="actions">
-          <button class="cta" onclick="subscribePro()">Subscribe now</button>
-          <button class="btn" onclick="openRegister('pro')">Create free account first</button>
-        </div>
-      </div>
-      <div class="ad" style="margin-top:16px">AdSense Placeholder</div>
-    </div>
-  </section>
-
-  <!-- RECRUITMENT SUITE PAGE -->
-  <section id="recruitment-suite" class="page">
-    <div class="container section">
-      <h2>Recruitment Suite — early access (launches early 2026)</h2>
-      <p class="muted">Turnkey talent management for SMEs: multi-channel posting, AI shortlisting, candidate CRM, careers page builder, analytics, and compliance tooling.</p>
-      <div class="card">
-        <h3>Create or claim your company profile</h3>
-        <form id="suiteForm" onsubmit="event.preventDefault();alert('Thanks! We’ll reach out for verification.');">
-          <div class="form-grid">
-            <input required placeholder="Company name" />
-            <input required placeholder="Company website" />
-            <input required placeholder="Work email" type="email" />
-            <select required>
-              <option value="">Company size</option>
-              <option>1–10</option><option>11–50</option><option>51–200</option><option>200–1000</option><option>1000+</option>
-            </select>
-            <select required>
-              <option value="">Are you claiming an existing profile?</option>
-              <option>Yes, claim existing profile</option>
-              <option>No, create new profile</option>
-            </select>
-            <input placeholder="Phone (optional)" />
-          </div>
-          <div class="actions" style="margin-top:10px">
-            <button class="cta">Request early access</button>
-          </div>
+          <select class="input" name="intent" required>
+            <option value="" selected disabled>I want to…</option>
+            <option>Create a new verified profile</option>
+            <option>Claim an existing company profile</option>
+          </select>
+          <textarea class="input full" name="notes" rows="4" placeholder="Hiring goals / roles you'll post first"></textarea>
+          <button class="cta">Request early access</button>
         </form>
       </div>
-      <p class="muted" style="margin-top:10px">After verification, you’ll be eligible to post unlimited jobs during the early access period.</p>
-      <div class="ad" style="margin-top:16px">AdSense Placeholder</div>
-    </div>
-  </section>
-
-  <!-- JOBSTATS PAGE -->
-  <section id="jobstats" class="page">
-    <div class="container section">
-      <h2>JobStats — live SA job market insights</h2>
-      <p class="muted">Updated continuously from our listings feed. Connect Google Sheets to power real-time charts (see implementation notes in code).</p>
-      <div class="grid">
-        <div class="card"><h3>Top Locations</h3><canvas id="chartLocations" height="200"></canvas></div>
-        <div class="card"><h3>Top Industries</h3><canvas id="chartIndustries" height="200"></canvas></div>
-        <div class="card"><h3>Remote vs On-site</h3><canvas id="chartRemote" height="200"></canvas></div>
+      <div class="card">
+        <h3>What you’ll get</h3>
+        <ul>
+          <li>Unlimited verified job posts</li>
+          <li>Google Sheets + Zapier automations</li>
+          <li>AI shortlists and email sequences</li>
+          <li>Branded company profile & follower pool</li>
+          <li>POPIA-ready candidate consent flows</li>
+        </ul>
+        <div class="card ad-card">Ad — Google AdSense here</div>
       </div>
-      <div class="ad" style="margin-top:16px">AdSense Placeholder</div>
     </div>
   </section>
 
-  <!-- LEGAL PAGES -->
-  <section id="legal-terms" class="page">
-    <div class="container section">
-      <h2>Terms of Service</h2>
-      <p class="muted">Your standard ToS content goes here. Placeholder text…</p>
+  <!-- ===== JOBSTATS ===== -->
+  <section class="container" id="jobstats" style="display:none">
+    <h2>JobStats — South Africa</h2>
+    <p class="sub">Real-time hiring signals to steer your search.</p>
+    <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr))">
+      <div class="card"><h3>Open Roles (30d)</h3><div id="statOpen">—</div></div>
+      <div class="card"><h3>Remote Share</h3><div id="statRemote">—</div></div>
+      <div class="card"><h3>Median Salary</h3><div id="statSalary">—</div></div>
+      <div class="card"><h3>Time-to-Fill</h3><div id="statTTF">—</div></div>
+      <div class="card"><h3>Top Industry</h3><div id="statTopInd">—</div></div>
+      <div class="card"><h3>Hot Skill</h3><div id="statSkill">—</div></div>
     </div>
+    <div class="card ad-card">Ad — Google AdSense here</div>
+    <p class="sub" style="margin-top:10px">Hook this to a Google Sheet or API via Zapier → call <code>updateJobStats()</code>.</p>
   </section>
-  <section id="legal-privacy" class="page">
-    <div class="container section">
-      <h2>Privacy Policy</h2>
-      <p class="muted">We value your privacy. Placeholder text…</p>
-    </div>
+
+  <!-- ===== LEGAL ===== -->
+  <section class="container" id="legal-terms" style="display:none">
+    <h2>Terms of Service</h2>
+    <div class="card"><p>Sample ToS. Replace with your legal text. Use of Jobbyist constitutes acceptance…</p></div>
   </section>
-  <section id="legal-cookies" class="page">
-    <div class="container section">
-      <h2>Cookie Settings</h2>
-      <p class="muted">Manage preferences. Placeholder text…</p>
+  <section class="container" id="legal-privacy" style="display:none">
+    <h2>Privacy Policy</h2>
+    <div class="card"><p>We process data to provide job search, matching, and analytics. POPIA compliant. Deletion on request.</p></div>
+  </section>
+  <section class="container" id="legal-cookies" style="display:none">
+    <h2>Cookie Settings</h2>
+    <div class="card">
+      <p>Control analytics/ads cookies. Essential cookies keep the site running.</p>
+      <label><input type="checkbox" id="analyticsCookies" checked> Analytics cookies</label><br>
+      <label><input type="checkbox" id="adsCookies" checked> Advertising cookies</label><br><br>
+      <button class="btn" onclick="alert('Preferences saved')">Save</button>
     </div>
   </section>
 </main>
 
-<!-- FOOTER -->
 <footer>
-  <div class="container columns">
+  <div class="container footer-grid">
     <div>
-      <div class="brand">Jobbyist<span class="dot">.</span> SA</div>
-      <p class="muted">© <span id="year"></span> Jobbyist South Africa.</p>
-      <p><a href="#legal-terms">Terms</a> • <a href="#legal-privacy">Privacy</a> • <a href="#legal-cookies">Cookies</a></p>
+      <div class="brand">Jobbyist<sup>🇿🇦</sup></div>
+      <p class="sub">Your career, upgraded. We put job seekers first.</p>
+      <div class="card ad-card">Ad — Google AdSense here</div>
     </div>
     <div>
-      <h4>Job seekers</h4>
-      <p><a href="#pro">Get Jobbyist Pro</a></p>
-      <p><a href="https://audit.jobbyist.co.za" target="_blank">Free ResumeAudit</a></p>
-      <p><a href="#home">Browse jobs</a></p>
+      <b>Product</b><br>
+      <a href="#home">Home</a><br>
+      <a href="#pro">Jobbyist Pro</a><br>
+      <a href="#jobstats">JobStats</a><br>
+      <a href="https://audit.jobbyist.co.za" target="_blank" rel="noopener">ResumeAudit</a>
     </div>
     <div>
-      <h4>Employers</h4>
-      <p><a href="#recruitment-suite">Recruitment Suite</a></p>
-      <p><a href="#companies">Verified companies</a></p>
+      <b>Employers</b><br>
+      <a href="#recruitment">Recruitment Suite</a><br>
+      <a href="#" id="openCompanyWall">Create/claim company profile</a>
     </div>
     <div>
-      <h4>Follow</h4>
-      <p class="muted">@jobbyist.sa</p>
+      <b>Legal</b><br>
+      <a href="#legal-terms">Terms</a><br>
+      <a href="#legal-privacy">Privacy</a><br>
+      <a href="#legal-cookies">Cookie settings</a>
     </div>
   </div>
+  <div class="container" style="margin-top:14px">© <span id="yr"></span> Jobbyist. All rights reserved.</div>
 </footer>
 
-<!-- COOKIE CONSENT -->
-<div id="cookie" class="cookie container">
-  <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
-    <div>
-      We use cookies to improve your experience. <a href="#legal-cookies">Learn more</a>.
-    </div>
-    <div class="actions">
-      <button class="btn" onclick="dismissCookie()">Decline</button>
-      <button class="cta" onclick="acceptCookie()">Accept</button>
+<!-- ===== JOB DETAILS MODAL (counts "views") ===== -->
+<div class="modal" id="jobModal" aria-hidden="true" role="dialog">
+  <div class="content">
+    <header><h3 id="jobTitle">Job</h3><button class="close-x" onclick="closeModal('#jobModal')">✕</button></header>
+    <div class="body" id="jobBody"></div>
+  </div>
+</div>
+
+<!-- ===== SIGNUP / ONBOARDING ===== -->
+<div class="modal" id="signupModal" aria-hidden="true" role="dialog">
+  <div class="content">
+    <header><h3>Join Jobbyist — Free</h3><button class="close-x" onclick="closeModal('#signupModal')">✕</button></header>
+    <div class="body">
+      <div class="steps" id="stepDots"></div>
+      <form id="signupFlow" action="https://formspree.io/f/xeokkzle" method="POST" novalidate></form>
     </div>
   </div>
 </div>
 
-<!-- REGISTRATION / ONBOARDING MODAL -->
-<div id="registerModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="regTitle">
-  <div class="modal">
-    <div class="modal-header">
-      <h3 id="regTitle">Create your free Jobbyist account</h3>
-      <button class="close" onclick="closeRegister()" aria-label="Close">✕</button>
+<!-- ===== COMPANY PROFILE ===== -->
+<div class="modal" id="companyModal" aria-hidden="true" role="dialog">
+  <div class="content">
+    <header><h3 id="coTitle">Company</h3><button class="close-x" onclick="closeModal('#companyModal')">✕</button></header>
+    <div class="body" id="coBody"></div>
+  </div>
+</div>
+
+<!-- ===== COOKIE BANNER ===== -->
+<div class="cookie" id="cookieBanner">
+  <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+    <div>🍪 We use cookies for essential features, analytics and ads. See <a href="#legal-cookies">settings</a>.</div>
+    <div style="margin-left:auto;display:flex;gap:8px">
+      <button class="btn" onclick="acceptCookies(false)">Only essential</button>
+      <button class="cta" onclick="acceptCookies(true)">Accept all</button>
     </div>
-    <div class="modal-body">
-      <div class="steps" id="stepBar">
-        <div class="step active"></div><div class="step"></div><div class="step"></div><div class="step"></div>
-      </div>
-      <!-- Multi-page onboarding -->
-      <form id="onboardForm" onsubmit="event.preventDefault();finishOnboarding();">
-        <!-- STEP 1: Account -->
-        <div class="page active">
-          <div class="form-grid">
-            <input required name="fullName" placeholder="Full name" />
-            <input required type="email" name="email" placeholder="Email" />
-            <input required type="password" name="pass" placeholder="Create password" />
-            <select required name="workAuth">
-              <option value="">Work authorisation</option>
-              <option>South African citizen</option>
-              <option>Permanent resident</option>
-              <option>Work visa</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-nav">
-            <span></span>
-            <button class="cta" onclick="nextStep()">Continue</button>
-          </div>
-        </div>
-        <!-- STEP 2: Profile -->
-        <div class="page">
-          <div class="form-grid">
-            <select required name="experience">
-              <option value="">Experience level</option>
-              <option>Intern / Entry</option><option>Junior</option><option>Mid</option><option>Senior</option><option>Director</option>
-            </select>
-            <select required name="function">
-              <option value="">Primary function</option>
-              <option>Software Engineering</option><option>Design</option><option>Product</option><option>Marketing</option><option>Sales</option>
-              <option>Operations</option><option>Finance</option><option>Legal</option><option>HR/People</option><option>Customer Support</option>
-              <option>Data/AI</option><option>Healthcare</option><option>Mining/Engineering</option><option>Retail</option><option>Education</option>
-            </select>
-            <input placeholder="Headline (e.g., Senior Data Analyst)" />
-            <input placeholder="City, Province" />
-            <textarea rows="4" placeholder="Short bio"></textarea>
-          </div>
-          <div class="form-nav">
-            <button class="btn" onclick="prevStep()">Back</button>
-            <button class="cta" onclick="nextStep()">Continue</button>
-          </div>
-        </div>
-        <!-- STEP 3: Preferences -->
-        <div class="page">
-          <div class="form-grid">
-            <select required name="typePref">
-              <option value="">Preferred job type</option>
-              <option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option>
-            </select>
-            <select required name="workMode">
-              <option value="">Work mode</option>
-              <option>On-site</option><option>Hybrid</option><option>Remote</option>
-            </select>
-            <input type="number" placeholder="Target salary (ZAR per year)" />
-            <input placeholder="Skills (comma-separated)" />
-            <input placeholder="LinkedIn URL (optional)" />
-            <input placeholder="Portfolio / .cv URL (optional)" />
-          </div>
-          <div class="form-nav">
-            <button class="btn" onclick="prevStep()">Back</button>
-            <button class="cta" onclick="nextStep()">Continue</button>
-          </div>
-        </div>
-        <!-- STEP 4: Uploads & Alerts -->
-        <div class="page">
-          <div class="form-grid">
-            <input type="file" accept=".pdf,.doc,.docx" />
-            <select>
-              <option>Weekly job alerts</option>
-              <option>Daily job alerts</option>
-              <option>Off</option>
-            </select>
-            <label><input type="checkbox" checked /> Make my profile discoverable to verified employers</label>
-            <label><input type="checkbox" /> I want to try Jobbyist Pro (7-day trial)</label>
-          </div>
-          <div class="form-nav">
-            <button class="btn" onclick="prevStep()">Back</button>
-            <button class="cta">Create account</button>
-          </div>
-        </div>
+  </div>
+</div>
+
+<!-- ===== FLOATING LANGUAGE & CHAT FABs ===== -->
+<div class="float-left fab">
+  <label class="sub" style="font-size:12px;display:block;margin-bottom:4px">Language</label>
+  <select id="langSelect">
+    <option value="en" selected>English</option>
+    <option value="zu">isiZulu</option>
+    <option value="xh">isiXhosa</option>
+    <option value="af">Afrikaans</option>
+    <option value="st">Sesotho</option>
+  </select>
+</div>
+
+<div class="float-right fab" id="chatFab">💬 Chat</div>
+
+<!-- Simple chat panel (front-end only; see Worker instructions below) -->
+<div class="modal" id="chatModal" aria-hidden="true">
+  <div class="content" style="max-width:720px">
+    <header><h3>Ask Jobbyist Assistant</h3><button class="close-x" onclick="closeModal('#chatModal')">✕</button></header>
+    <div class="body">
+      <div id="chatBox" style="min-height:240px;max-height:360px;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:10px"></div>
+      <form id="chatForm">
+        <input class="input" name="q" placeholder="Type your question (e.g., ‘Show remote React roles in Cape Town’)"/>
+        <button class="cta" style="margin-top:10px">Send</button>
       </form>
-      <p class="muted" style="margin-top:8px">By continuing you agree to our <a href="#legal-terms">Terms</a> and <a href="#legal-privacy">Privacy Policy</a>.</p>
+      <p class="sub">Powered by OpenAI GPT-5 mini (set up in a Cloudflare Worker — instructions in code).</p>
     </div>
   </div>
 </div>
 
-<!-- COMPANY MODAL -->
-<div id="companyModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="companyTitle">
-  <div class="modal">
-    <div class="modal-header">
-      <h3 id="companyTitle">Company</h3>
-      <button class="close" onclick="closeCompany()" aria-label="Close">✕</button>
-    </div>
-    <div class="modal-body" id="companyBody">
-      <!-- Filled by JS -->
-    </div>
-  </div>
-</div>
-
-<!-- IMPLEMENTATION GUIDE & APP LOGIC -->
 <script>
-/* =========================================================================
-   IMPLEMENTATION GUIDE (Zapier / Google Sheets / Crawlers)
-   -------------------------------------------------------------------------
-   1) Jobs data source:
-      - Maintain a Google Sheet with columns:
-        title,description,datePosted,validThrough,employmentType,companyName,
-        companyUrl,logo,streetAddress,addressLocality,addressRegion,postalCode,
-        salaryMin,salaryMax,salaryCurrency,workMode,jobLocationType,city,
-        url,id,industry
-      - Use Zapier to sync rows to a JSON endpoint (e.g., App Scripts web app)
-        or push directly to this site via GitHub Actions.
-      - Replace the 'jobs' array below with a fetch() to your JSON endpoint.
+/* ===========================================================
+   CONFIG / CONSTANTS
+   =========================================================== */
+const FORMSPREE = "https://formspree.io/f/xeokkzle"; // your active endpoint
+const DAILY_LIMITS = { views:50, applies:5 }; // free user daily caps
+const CHAT_API_ENDPOINT = "https://your-worker.example.workers.dev/chat"; // replace after Worker deploy
 
-   2) Verified companies:
-      - Keep a separate Google Sheet for companies (name, industry, hqCity,
-        size, rating, logo, about, website).
-      - Wire into the 'companies' array or a fetch().
+/* ===========================================================
+   ROUTER + BURGER + THEME
+   =========================================================== */
+const routes = ['home','pro','recruitment','jobstats','legal-terms','legal-privacy','legal-cookies'];
+function onRoute(){
+  const hash = (location.hash || '#home').replace('#','');
+  routes.forEach(id=>document.getElementById(id).style.display = (id===hash)?'block':'none');
+  document.querySelectorAll('header nav a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+hash || (hash==='home' && a.getAttribute('href')==='#home')));
+}
+window.addEventListener('hashchange', onRoute); onRoute();
 
-   3) Google Jobs (schema.org JobPosting):
-      - This script emits one JSON-LD <script type="application/ld+json"> per
-        visible listing. When you switch to fetch(), keep the same fields.
+document.getElementById('openMenu').onclick = ()=>document.getElementById('navSheet').classList.add('open');
+function closeSheet(){ document.getElementById('navSheet').classList.remove('open'); }
+document.getElementById('navSheet').addEventListener('click', e=>{ if(e.target.id==='navSheet') closeSheet(); });
 
-   4) Framer / GitHub Pages:
-      - This single-file SPA uses hash routing (#home, #companies, #pro, etc),
-        perfect for static hosting and Framer embeds.
+/* Theme: system by default, user toggle persists */
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+const savedTheme = localStorage.getItem('theme');
+document.documentElement.setAttribute('data-theme', savedTheme || (prefersDark?'dark':'light'));
+document.getElementById('themeToggle').onclick = ()=>{
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+};
 
-   5) Ads:
-      - Replace the AdSense placeholders with your real code once approved.
-
-   6) Registration wall:
-      - Modal opens for: View more, Save Job, View/Follow company.
-      - Replace finishOnboarding() with your backend signup (Formspree, Supabase,
-        Firebase Auth, or a Zapier Webhook).
-
-   ======================================================================= */
-
-/* -------------------------- Demo data (50 jobs) ------------------------- */
+/* ===========================================================
+   JOB DATA (50 examples)  — same structure as before
+   =========================================================== */
+const jobs = [
+  {title:'Software Engineer (Backend)', company:'Naspers', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R900k–R1.2m', datePosted:'2025-07-01', validThrough:'2025-09-30', description:'Build and scale backend services in a cloud-native environment (Go/Java, GCP/AWS).', applyUrl:'https://careers.naspers.com/', industry:'Technology', logo:'🅽'},
+  {title:'Data Analyst', company:'Discovery', verified:true, location:'Sandton, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R500k–R700k', datePosted:'2025-07-02', validThrough:'2025-09-30', description:'Turn complex healthcare and insurance datasets into actionable insights. SQL, Python, BI tools.', applyUrl:'https://careers.discovery.co.za/', industry:'Insurance', logo:'💙'},
+  {title:'Financial Accountant', company:'Absa Group', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'On-site', salary:'R600k–R800k', datePosted:'2025-07-03', validThrough:'2025-09-30', description:'Month-end close, IFRS reporting, controls, and audit support for a major banking portfolio.', applyUrl:'https://careers.absa.africa/', industry:'Banking', logo:'🅰️'},
+  {title:'Network Engineer', company:'MTN South Africa', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R750k–R1m', datePosted:'2025-06-30', validThrough:'2025-09-15', description:'Design and optimise high-availability mobile and enterprise networks (5G/IP/MPLS).', applyUrl:'https://www.mtn.co.za/', industry:'Telecoms', logo:'📶'},
+  {title:'Retail Store Manager', company:'Shoprite Group', verified:true, location:'Durban, KwaZulu-Natal', employmentType:'FULL_TIME', workType:'On-site', salary:'R300k–R420k', datePosted:'2025-06-29', validThrough:'2025-08-31', description:'Lead store operations, merchandising, shrink control and team development.', applyUrl:'https://shopriteholdings-careers.co.za/', industry:'Retail', logo:'🛒'},
+  {title:'Graduate Trainee – Engineering', company:'Sasol', verified:true, location:'Secunda, Mpumalanga', employmentType:'FULL_TIME', workType:'On-site', salary:'R380k–R450k', datePosted:'2025-06-28', validThrough:'2025-09-01', description:'Structured rotations across plant operations, maintenance and process optimisation.', applyUrl:'https://www.sasol.com/careers', industry:'Energy', logo:'⚗️'},
+  {title:'UX/UI Designer', company:'Takealot', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R550k–R800k', datePosted:'2025-07-04', validThrough:'2025-09-30', description:'Design end-to-end e-commerce experiences. Figma, design systems, A/B testing.', applyUrl:'https://careers.takealot.com/', industry:'E-commerce', logo:'🛍️'},
+  {title:'Operations Coordinator', company:'Woolworths', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R350k–R500k', datePosted:'2025-06-26', validThrough:'2025-09-10', description:'Plan and coordinate store operations, inventory and supplier logistics.', applyUrl:'https://careers.woolworths.co.za/', industry:'Retail', logo:'🧵'},
+  {title:'Mining Engineer', company:'Anglo American', verified:true, location:'Rustenburg, North West', employmentType:'FULL_TIME', workType:'On-site', salary:'R900k–R1.4m', datePosted:'2025-07-03', validThrough:'2025-10-01', description:'Mine planning, production optimisation and safety leadership.', applyUrl:'https://www.angloamerican.com/careers', industry:'Mining', logo:'⛏️'},
+  {title:'Customer Success Manager', company:'Yoco', verified:true, location:'Remote, South Africa', employmentType:'FULL_TIME', workType:'Remote', salary:'R500k–R800k', datePosted:'2025-06-30', validThrough:'2025-09-30', description:'Own merchant outcomes, drive adoption/retention for fintech SMB customers.', applyUrl:'https://www.yoco.com/za/', industry:'Fintech', logo:'💳'},
+  {title:'Cloud DevOps Engineer', company:'Vodacom', verified:true, location:'Midrand, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R800k–R1.1m', datePosted:'2025-06-27', validThrough:'2025-09-20', description:'Automate CI/CD and cloud infrastructure (Azure/Kubernetes).', applyUrl:'https://careers.vodacom.com/', industry:'Telecoms', logo:'📡'},
+  {title:'Legal Counsel (Commercial)', company:'Standard Bank', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R900k–R1.3m', datePosted:'2025-07-02', validThrough:'2025-09-30', description:'Draft/negotiation of commercial agreements, regulatory compliance.', applyUrl:'https://careers.standardbank.com/', industry:'Banking', logo:'🏦'},
+  {title:'HR Business Partner', company:'Nedbank', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R650k–R900k', datePosted:'2025-06-25', validThrough:'2025-09-05', description:'Workforce planning & talent programs.', applyUrl:'https://www.nedbank.co.za/content/nedbank/desktop/gt/en/careers.html', industry:'Banking', logo:'🟢'},
+  {title:'Product Manager', company:'Rain', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R900k–R1.2m', datePosted:'2025-06-30', validThrough:'2025-09-30', description:'Own 5G consumer product roadmap; metrics-driven execution.', applyUrl:'https://rain.co.za/', industry:'Telecoms', logo:'🌧️'},
+  {title:'Electrical Engineer', company:'Eskom', verified:true, location:'Various, South Africa', employmentType:'FULL_TIME', workType:'On-site', salary:'R700k–R1m', datePosted:'2025-06-24', validThrough:'2025-09-12', description:'Grid reliability projects and maintenance scheduling.', applyUrl:'https://www.eskom.co.za/careers/', industry:'Utilities', logo:'⚡'},
+  {title:'Front Desk Administrator', company:'Mediclinic', verified:true, location:'Pretoria, Gauteng', employmentType:'FULL_TIME', workType:'On-site', salary:'R180k–R260k', datePosted:'2025-06-23', validThrough:'2025-08-31', description:'Patient admissions, billing support and customer experience.', applyUrl:'https://careers.mediclinic.co.za/', industry:'Healthcare', logo:'🏥'},
+  {title:'QA Tester', company:'Capitec Bank', verified:true, location:'Remote, South Africa', employmentType:'FULL_TIME', workType:'Remote', salary:'R500k–R720k', datePosted:'2025-06-29', validThrough:'2025-09-25', description:'Manual + automated testing across mobile banking apps.', applyUrl:'https://www.capitecbank.co.za/careers/', industry:'Banking', logo:'💜'},
+  {title:'Supply Chain Analyst', company:'Pick n Pay', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R450k–R650k', datePosted:'2025-06-28', validThrough:'2025-09-18', description:'Demand planning, inventory optimisation, data modelling.', applyUrl:'https://www.pnp.co.za/', industry:'Retail', logo:'🧾'},
+  {title:'Digital Marketing Specialist', company:'Sanlam', verified:true, location:'Bellville, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R450k–R700k', datePosted:'2025-06-30', validThrough:'2025-09-30', description:'SEO/SEM, analytics for financial products.', applyUrl:'https://www.sanlam.co.za/careers', industry:'Financial Services', logo:'🟡'},
+  {title:'Compliance Officer', company:'FirstRand', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R700k–R1m', datePosted:'2025-06-29', validThrough:'2025-09-30', description:'Regulatory obligations and controls (FSCA/POPIA).', applyUrl:'https://www.firstrandjobs.mobi/', industry:'Banking', logo:'🦁'},
+  {title:'Security Analyst (SOC)', company:'BCX', verified:true, location:'Centurion, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R600k–R850k', datePosted:'2025-06-22', validThrough:'2025-09-10', description:'Monitor detections and incident response.', applyUrl:'https://www.bcx.co.za/', industry:'IT Services', logo:'🛡️'},
+  {title:'Junior Attorney', company:'ENSafrica', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R420k–R600k', datePosted:'2025-06-26', validThrough:'2025-09-12', description:'Commercial litigation support, drafting, research.', applyUrl:'https://www.ensafrica.com/', industry:'Legal', logo:'⚖️'},
+  {title:'Sales Development Rep', company:'Luno', verified:true, location:'Remote, South Africa', employmentType:'FULL_TIME', workType:'Remote', salary:'R360k–R520k + commission', datePosted:'2025-06-27', validThrough:'2025-09-05', description:'Prospecting and qualifying for a crypto platform.', applyUrl:'https://www.luno.com/en/careers', industry:'Fintech', logo:'🪙'},
+  {title:'Mechanical Technician', company:'Transnet', verified:true, location:'Saldanha, Western Cape', employmentType:'FULL_TIME', workType:'On-site', salary:'R350k–R520k', datePosted:'2025-06-21', validThrough:'2025-09-01', description:'Equipment maintenance, fault finding.', applyUrl:'https://www.transnet.net/Careers/Pages/Careers.aspx', industry:'Logistics', logo:'🚆'},
+  {title:'Head of People', company:'Clickatell', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R1.2m–R1.6m', datePosted:'2025-06-24', validThrough:'2025-09-20', description:'Lead People strategy for a CPaaS scale-up.', applyUrl:'https://www.clickatell.com/careers/', industry:'Technology', logo:'💬'},
+  {title:'Environmental Scientist', company:'De Beers Group', verified:true, location:'Gaborone/Johannesburg', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R700k–R1m', datePosted:'2025-06-23', validThrough:'2025-09-22', description:'ESG programs and regulatory reporting.', applyUrl:'https://www.debeersgroup.com/careers', industry:'Mining', logo:'💎'},
+  {title:'Business Analyst', company:'Old Mutual', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R600k–R850k', datePosted:'2025-06-26', validThrough:'2025-09-30', description:'Requirements and API-driven platforms.', applyUrl:'https://careers.oldmutual.com/', industry:'Financial Services', logo:'🟢'},
+  {title:'Content Writer', company:'Media24', verified:true, location:'Cape Town, Western Cape', employmentType:'CONTRACTOR', workType:'Hybrid', salary:'R25k–R40k / month', datePosted:'2025-06-25', validThrough:'2025-08-31', description:'Long-form features and digital content.', applyUrl:'https://www.media24.com/careers/', industry:'Media', logo:'📰'},
+  {title:'Office Administrator', company:'Massmart', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'On-site', salary:'R180k–R260k', datePosted:'2025-06-22', validThrough:'2025-08-30', description:'Office ops, scheduling, vendor coordination.', applyUrl:'https://careers.massmart.co.za/', industry:'Retail', logo:'📦'},
+  {title:'Data Engineer', company:'FNB (First National Bank)', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R850k–R1.2m', datePosted:'2025-06-30', validThrough:'2025-09-30', description:'Build pipelines (Python/Spark), lakehouse.', applyUrl:'https://www.fnb.co.za/careers/', industry:'Banking', logo:'🦅'},
+  {title:'Project Manager (Construction)', company:'WBHO', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'On-site', salary:'R700k–R1.1m', datePosted:'2025-06-24', validThrough:'2025-09-10', description:'Deliver large infrastructure projects.', applyUrl:'https://www.wbho.co.za/', industry:'Construction', logo:'🏗️'},
+  {title:'Registered Nurse (ICU)', company:'Netcare', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'On-site', salary:'R360k–R540k', datePosted:'2025-06-25', validThrough:'2025-08-31', description:'Critical care nursing in accredited ICU unit.', applyUrl:'https://www.netcare.co.za/Careers', industry:'Healthcare', logo:'🩺'},
+  {title:'Sales Manager (B2B SaaS)', company:'Skynamo', verified:true, location:'Stellenbosch, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R700k–R1m + bonus', datePosted:'2025-06-27', validThrough:'2025-09-27', description:'Lead regional SaaS sales team.', applyUrl:'https://www.skynamo.com/careers/', industry:'Software', logo:'📈'},
+  {title:'Procurement Specialist', company:'Tiger Brands', verified:true, location:'Bryanston, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R500k–R750k', datePosted:'2025-06-21', validThrough:'2025-09-01', description:'Strategic sourcing and supplier performance.', applyUrl:'https://www.tigerbrands.com/careers/', industry:'FMCG', logo:'🐯'},
+  {title:'Junior Graphic Designer', company:'Nando’s', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R240k–R360k', datePosted:'2025-06-23', validThrough:'2025-08-31', description:'Brand creative, social assets, packaging.', applyUrl:'https://careers.nandos.co.za/', industry:'Hospitality', logo:'🔥'},
+  {title:'Quality Assurance Pharmacist', company:'Aspen Pharmacare', verified:true, location:'Durban, KwaZulu-Natal', employmentType:'FULL_TIME', workType:'On-site', salary:'R650k–R900k', datePosted:'2025-06-29', validThrough:'2025-09-25', description:'GMP compliance and batch release.', applyUrl:'https://www.aspenpharma.com/careers/', industry:'Pharma', logo:'💊'},
+  {title:'ICT Support Technician', company:'University of Cape Town', verified:true, location:'Rondebosch, Western Cape', employmentType:'FULL_TIME', workType:'On-site', salary:'R280k–R380k', datePosted:'2025-06-26', validThrough:'2025-09-05', description:'Campus IT support and ticket resolution.', applyUrl:'https://uct.ac.za/careers', industry:'Education', logo:'🎓'},
+  {title:'Senior Copywriter', company:'Ogilvy South Africa', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R500k–R800k', datePosted:'2025-06-24', validThrough:'2025-09-20', description:'Concept and craft for multi-channel campaigns.', applyUrl:'https://ogilvy.co.za/careers', industry:'Advertising', logo:'✍️'},
+  {title:'Civil Engineer', company:'AECOM', verified:true, location:'Centurion, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R800k–R1.1m', datePosted:'2025-06-22', validThrough:'2025-09-12', description:'Design transport & water infrastructure.', applyUrl:'https://aecom.com/careers', industry:'Engineering', logo:'🛣️'},
+  {title:'Data Privacy Specialist', company:'Amazon (Cape Town Dev Center)', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R900k–R1.3m', datePosted:'2025-06-29', validThrough:'2025-10-01', description:'POPIA/GDPR programs, DPIAs.', applyUrl:'https://www.amazon.jobs/', industry:'Technology', logo:'🟧'},
+  {title:'Talent Acquisition Partner', company:'Allan Gray', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R600k–R850k', datePosted:'2025-06-28', validThrough:'2025-09-20', description:'Recruitment for investment teams.', applyUrl:'https://www.allangray.co.za/careers/', industry:'Asset Management', logo:'📊'},
+  {title:'Social Media Manager', company:'Mr Price Group', verified:true, location:'Durban, KwaZulu-Natal', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R380k–R520k', datePosted:'2025-06-25', validThrough:'2025-09-05', description:'Content calendars, influencers, analytics.', applyUrl:'https://www.mrpricegroup.com/careers', industry:'Retail', logo:'🧢'},
+  {title:'Senior Accountant (Manufacturing)', company:'BMW Rosslyn Plant', verified:true, location:'Pretoria, Gauteng', employmentType:'FULL_TIME', workType:'On-site', salary:'R800k–R1.1m', datePosted:'2025-06-21', validThrough:'2025-09-15', description:'Costing, capex, IFRS; SAP experience.', applyUrl:'https://www.bmwgroup.jobs/za', industry:'Automotive', logo:'🚗'},
+  {title:'SHEQ Officer', company:'Coca-Cola Beverages South Africa', verified:true, location:'Port Elizabeth, Eastern Cape', employmentType:'FULL_TIME', workType:'On-site', salary:'R420k–R600k', datePosted:'2025-06-20', validThrough:'2025-09-01', description:'Safety, health, environment & quality.', applyUrl:'https://careers.ccbsa.co.za/', industry:'FMCG', logo:'🥤'},
+  {title:'Customer Support Agent', company:'SweepSouth', verified:true, location:'Remote, South Africa', employmentType:'FULL_TIME', workType:'Remote', salary:'R180k–R240k', datePosted:'2025-06-23', validThrough:'2025-08-31', description:'Omnichannel support, CRM tickets.', applyUrl:'https://sweepsouth.com/', industry:'Marketplace', logo:'🧹'},
+  {title:'SEO Specialist', company:'AutoTrader South Africa', verified:true, location:'Hybrid, Johannesburg', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R420k–R650k', datePosted:'2025-06-24', validThrough:'2025-09-10', description:'Organic growth for automotive marketplace.', applyUrl:'https://www.autotrader.co.za/', industry:'Media', logo:'🚘'},
+  {title:'Risk Analyst', company:'Sanlam Indie', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R550k–R800k', datePosted:'2025-06-22', validThrough:'2025-09-12', description:'Risk modelling for digital insurance.', applyUrl:'https://www.sanlam.co.za/', industry:'Insurtech', logo:'🧠'},
+  {title:'IT Auditor', company:'PwC South Africa', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R650k–R950k', datePosted:'2025-06-27', validThrough:'2025-09-20', description:'Tech controls, cybersecurity, SOX/King IV.', applyUrl:'https://www.pwc.co.za/careers.html', industry:'Consulting', logo:'📚'},
+  {title:'Community Manager', company:'SnapScan', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R360k–R520k', datePosted:'2025-06-26', validThrough:'2025-09-18', description:'Merchant & user community engagement.', applyUrl:'https://www.snapscan.co.za/', industry:'Fintech', logo:'📱'},
+  {title:'AI/ML Engineer', company:'Aerobotics', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R1.1m–R1.6m', datePosted:'2025-06-28', validThrough:'2025-10-01', description:'Computer vision and agritech modelling.', applyUrl:'https://www.aerobotics.com/careers', industry:'AgriTech', logo:'🌱'},
+  {title:'Junior Bookkeeper', company:'Life Healthcare', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'On-site', salary:'R240k–R320k', datePosted:'2025-06-22', validThrough:'2025-09-01', description:'AP/AR and reconciliations.', applyUrl:'https://www.lifehealthcare.co.za/careers/', industry:'Healthcare', logo:'💙'},
+  {title:'Facilities Manager', company:'Growthpoint Properties', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'On-site', salary:'R650k–R900k', datePosted:'2025-06-24', validThrough:'2025-09-12', description:'Commercial property operations.', applyUrl:'https://growthpoint.co.za/careers', industry:'Real Estate', logo:'🏢'},
+  {title:'Senior iOS Engineer', company:'OfferZen', verified:true, location:'Remote, South Africa', employmentType:'FULL_TIME', workType:'Remote', salary:'R1m–R1.4m', datePosted:'2025-06-30', validThrough:'2025-09-30', description:'SwiftUI, performance, product velocity.', applyUrl:'https://www.offerzen.com/', industry:'Technology', logo:'🧑‍💻'},
+  {title:'Warehouse Supervisor', company:'Pepkor', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'On-site', salary:'R260k–R380k', datePosted:'2025-06-20', validThrough:'2025-08-31', description:'DC operations & HSE compliance.', applyUrl:'https://www.pepkor.co.za/careers/', industry:'Retail', logo:'📦'},
+  {title:'CRM Manager', company:'Checkers Sixty60', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R600k–R900k', datePosted:'2025-06-29', validThrough:'2025-09-25', description:'Lifecycle marketing & growth.', applyUrl:'https://sixty60.co.za/', industry:'E-commerce', logo:'🛒'},
+  {title:'Frontend Developer (React)', company:'spend.com (South Africa)', verified:true, location:'Remote, South Africa', employmentType:'FULL_TIME', workType:'Remote', salary:'R900k–R1.3m', datePosted:'2025-06-30', validThrough:'2025-10-01', description:'React/TypeScript, design systems, APIs.', applyUrl:'#', industry:'Fintech', logo:'🧾'},
+  {title:'Restaurant Manager', company:'Spur Corporation', verified:true, location:'Bloemfontein, Free State', employmentType:'FULL_TIME', workType:'On-site', salary:'R220k–R320k', datePosted:'2025-06-19', validThrough:'2025-08-31', description:'Store ops & customer experience.', applyUrl:'https://spurcorporation.com/', industry:'Hospitality', logo:'🍔'},
+  {title:'Account Executive (Media Sales)', company:'Primedia', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R450k–R800k + comm', datePosted:'2025-06-23', validThrough:'2025-09-05', description:'Sell multi-channel media solutions.', applyUrl:'https://primedia.co.za/', industry:'Media', logo:'📻'},
+  {title:'Operations Analyst', company:'Airlink', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'On-site', salary:'R450k–R700k', datePosted:'2025-06-24', validThrough:'2025-09-08', description:'Airline ops analytics, scheduling.', applyUrl:'https://www.flyairlink.com/en/za/careers', industry:'Aviation', logo:'✈️'},
+  {title:'HSE Coordinator', company:'Murray & Roberts', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'On-site', salary:'R500k–R800k', datePosted:'2025-06-22', validThrough:'2025-09-02', description:'Safety programs for projects.', applyUrl:'https://www.murrob.com/careers.asp', industry:'Engineering', logo:'🦺'},
+  {title:'Social Worker', company:'Department of Social Development (ZA)', verified:true, location:'Eastern Cape', employmentType:'FULL_TIME', workType:'On-site', salary:'R280k–R420k', datePosted:'2025-06-21', validThrough:'2025-09-01', description:'Community services and case management.', applyUrl:'https://www.gov.za/', industry:'Public Sector', logo:'🇿🇦'},
+  {title:'QA Automation Engineer', company:'Ninety One', verified:true, location:'Cape Town, Western Cape', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R900k–R1.2m', datePosted:'2025-06-29', validThrough:'2025-09-30', description:'SDET for investment platforms.', applyUrl:'https://www.ninetyone.com/en/south-africa/careers', industry:'Asset Management', logo:'9️⃣'},
+  {title:'Junior Data Capturer', company:'Clicks Group', verified:true, location:'Cape Town, Western Cape', employmentType:'PART_TIME', workType:'Hybrid', salary:'R120k–R160k', datePosted:'2025-06-18', validThrough:'2025-08-31', description:'Accurate data entry & reporting.', applyUrl:'https://careers.clicksgroup.co.za/', industry:'Retail', logo:'💊'},
+  {title:'IT Support Engineer (L2)', company:'Dimension Data (NTT)', verified:true, location:'Johannesburg, Gauteng', employmentType:'FULL_TIME', workType:'Hybrid', salary:'R450k–R700k', datePosted:'2025-06-27', validThrough:'2025-09-25', description:'Troubleshooting, M365, networking.', applyUrl:'https://careers.services.global.ntt/', industry:'IT Services', logo:'🌐'}
+];
 const companies = [
-  {name:"Naspers", city:"Cape Town", website:"https://www.naspers.com", logo:"N"},
-  {name:"Sasol", city:"Johannesburg", website:"https://www.sasol.com", logo:"S"},
-  {name:"MTN South Africa", city:"Johannesburg", website:"https://www.mtn.co.za", logo:"M"},
-  {name:"Vodacom", city:"Midrand", website:"https://www.vodacom.co.za", logo:"V"},
-  {name:"Standard Bank", city:"Johannesburg", website:"https://www.standardbank.co.za", logo:"SB"},
-  {name:"FirstRand (FNB)", city:"Johannesburg", website:"https://www.fnb.co.za", logo:"F"},
-  {name:"Absa Group", city:"Johannesburg", website:"https://www.absa.co.za", logo:"A"},
-  {name:"Nedbank", city:"Sandton", website:"https://www.nedbank.co.za", logo:"N"},
-  {name:"Discovery", city:"Sandton", website:"https://www.discovery.co.za", logo:"D"},
-  {name:"Shoprite", city:"Cape Town", website:"https://www.shoprite.co.za", logo:"Sh"},
-  {name:"Woolworths", city:"Cape Town", website:"https://www.woolworths.co.za", logo:"W"},
-  {name:"Anglo American", city:"Johannesburg", website:"https://www.angloamerican.com", logo:"AA"},
-  {name:"De Beers", city:"Johannesburg", website:"https://www.debeersgroup.com", logo:"DB"},
-  {name:"Sanlam", city:"Cape Town", website:"https://www.sanlam.co.za", logo:"Sa"},
-  {name:"Old Mutual", city:"Cape Town", website:"https://www.oldmutual.co.za", logo:"OM"},
-  {name:"Capitec Bank", city:"Stellenbosch", website:"https://www.capitecbank.co.za", logo:"C"},
-  {name:"Tiger Brands", city:"Bryanston", website:"https://www.tigerbrands.com", logo:"T"},
-  {name:"Bidvest", city:"Johannesburg", website:"https://www.bidvest.co.za", logo:"B"},
-  {name:"Aspen Pharmacare", city:"Durban", website:"https://www.aspenpharma.com", logo:"As"},
-  {name:"Clicks Group", city:"Cape Town", website:"https://www.clicksgroup.co.za", logo:"Cl"},
-  {name:"Takealot", city:"Cape Town", website:"https://www.takealot.com", logo:"Ta"},
-  {name:"Mr Price", city:"Durban", website:"https://www.mrpricegroup.com", logo:"Mr"},
-  {name:"Pick n Pay", city:"Cape Town", website:"https://www.picknpay.co.za", logo:"PnP"},
-  {name:"Transnet", city:"Johannesburg", website:"https://www.transnet.net", logo:"Tr"},
-  {name:"Eskom", city:"Johannesburg", website:"https://www.eskom.co.za", logo:"E"},
-  {name:"Sappi", city:"Johannesburg", website:"https://www.sappi.com", logo:"SaP"},
-  {name:"Mondi", city:"Johannesburg", website:"https://www.mondigroup.com", logo:"Mo"},
-  {name:"MultiChoice", city:"Randburg", website:"https://www.multichoice.com", logo:"MC"},
-  {name:"Dimension Data", city:"Johannesburg", website:"https://www.dimensiondata.com", logo:"DD"},
-  {name:"BCX", city:"Centurion", website:"https://www.bcx.co.za", logo:"BCX"},
+  {name:'Naspers', industry:'Technology', hq:'Cape Town', size:'10,000+', rating:4.4, followers:0, site:'https://www.naspers.com/'},
+  {name:'Discovery', industry:'Insurance', hq:'Sandton', size:'10,000+', rating:4.3, followers:0, site:'https://www.discovery.co.za/'},
+  {name:'MTN South Africa', industry:'Telecoms', hq:'Johannesburg', size:'10,000+', rating:4.2, followers:0, site:'https://www.mtn.co.za/'},
+  {name:'Shoprite Group', industry:'Retail', hq:'Cape Town', size:'10,000+', rating:4.1, followers:0, site:'https://www.shopriteholdings.co.za/'},
+  {name:'Anglo American', industry:'Mining', hq:'Johannesburg', size:'10,000+', rating:4.2, followers:0, site:'https://www.angloamerican.com/'},
+  {name:'Sasol', industry:'Energy', hq:'Johannesburg', size:'10,000+', rating:4.1, followers:0, site:'https://www.sasol.com/'},
+  {name:'Standard Bank', industry:'Banking', hq:'Johannesburg', size:'10,000+', rating:4.2, followers:0, site:'https://www.standardbank.com/'},
+  {name:'Vodacom', industry:'Telecoms', hq:'Midrand', size:'10,000+', rating:4.0, followers:0, site:'https://www.vodacom.com/'},
+  {name:'Woolworths', industry:'Retail', hq:'Cape Town', size:'10,000+', rating:4.0, followers:0, site:'https://www.woolworths.co.za/'},
+  {name:'Capitec Bank', industry:'Banking', hq:'Stellenbosch', size:'10,000+', rating:4.3, followers:0, site:'https://www.capitecbank.co.za/'},
 ];
 
-const roles = [
-  {title:"Software Engineer", industry:"Technology", type:"Full-time", salary:[600000,900000], remote:true},
-  {title:"Data Analyst", industry:"Technology", type:"Full-time", salary:[450000,700000], remote:true},
-  {title:"Product Manager", industry:"Technology", type:"Full-time", salary:[800000,1200000], remote:true},
-  {title:"UI/UX Designer", industry:"Design", type:"Full-time", salary:[500000,800000], remote:true},
-  {title:"Marketing Manager", industry:"Marketing", type:"Full-time", salary:[550000,850000], remote:false},
-  {title:"Finance Manager", industry:"Finance", type:"Full-time", salary:[700000,1100000], remote:false},
-  {title:"Internal Auditor", industry:"Finance", type:"Full-time", salary:[550000,800000], remote:false},
-  {title:"Legal Counsel", industry:"Legal", type:"Full-time", salary:[800000,1200000], remote:true},
-  {title:"HR Business Partner", industry:"HR", type:"Full-time", salary:[600000,900000], remote:false},
-  {title:"Recruiter", industry:"HR", type:"Contract", salary:[360000,600000], remote:true},
-  {title:"Operations Manager", industry:"Operations", type:"Full-time", salary:[650000,950000], remote:false},
-  {title:"Supply Chain Analyst", industry:"Operations", type:"Full-time", salary:[500000,780000], remote:false},
-  {title:"Civil Engineer", industry:"Engineering", type:"Full-time", salary:[700000,1100000], remote:false},
-  {title:"Mechanical Engineer", industry:"Engineering", type:"Full-time", salary:[700000,1100000], remote:false},
-  {title:"Electrical Engineer", industry:"Engineering", type:"Full-time", salary:[700000,1100000], remote:false},
-  {title:"Mining Geologist", industry:"Mining", type:"Full-time", salary:[750000,1150000], remote:false},
-  {title:"Nursing Practitioner", industry:"Healthcare", type:"Full-time", salary:[420000,680000], remote:false},
-  {title:"Pharmacist", industry:"Healthcare", type:"Full-time", salary:[550000,900000], remote:false},
-  {title:"Retail Store Manager", industry:"Retail", type:"Full-time", salary:[350000,500000], remote:false},
-  {title:"E-commerce Operations Lead", industry:"Retail", type:"Full-time", salary:[600000,900000], remote:true},
-  {title:"QA Tester", industry:"Technology", type:"Full-time", salary:[450000,720000], remote:true},
-  {title:"Data Scientist", industry:"Technology", type:"Full-time", salary:[900000,1400000], remote:true},
-  {title:"Cloud Engineer", industry:"Technology", type:"Full-time", salary:[800000,1300000], remote:true},
-  {title:"Customer Success Manager", industry:"Customer Support", type:"Full-time", salary:[480000,780000], remote:true},
-  {title:"Sales Executive", industry:"Sales", type:"Full-time", salary:[400000,900000], remote:true},
-  {title:"Business Analyst", industry:"Business", type:"Full-time", salary:[550000,850000], remote:true},
-  {title:"Project Manager", industry:"Business", type:"Full-time", salary:[650000,1000000], remote:true},
-  {title:"Risk Manager", industry:"Finance", type:"Full-time", salary:[800000,1200000], remote:false},
-  {title:"Compliance Officer", industry:"Legal", type:"Full-time", salary:[650000,950000], remote:false},
-  {title:"Content Strategist", industry:"Marketing", type:"Part-time", salary:[250000,420000], remote:true},
-];
-
-const cities = [
-  {locality:"Johannesburg", region:"Gauteng", postal:"2000", street:"123 Business St"},
-  {locality:"Cape Town", region:"Western Cape", postal:"8000", street:"22 Longmarket Rd"},
-  {locality:"Durban", region:"KwaZulu-Natal", postal:"4001", street:"7 Beach Ave"},
-  {locality:"Pretoria", region:"Gauteng", postal:"0002", street:"45 Union St"},
-  {locality:"Sandton", region:"Gauteng", postal:"2196", street:"10 Rivonia Rd"},
-  {locality:"Stellenbosch", region:"Western Cape", postal:"7600", street:"5 Dorp St"},
-  {locality:"Midrand", region:"Gauteng", postal:"1685", street:"3 New Rd"},
-  {locality:"Randburg", region:"Gauteng", postal:"2194", street:"89 Republic Rd"},
-];
-
-function rand(arr){return arr[Math.floor(Math.random()*arr.length)]}
-function id(){return Math.random().toString(36).slice(2,10)}
-const today = new Date();
-const in60 = new Date(Date.now()+60*24*60*60*1000);
-
-const jobs = Array.from({length:50}).map((_,i)=>{
-  const co = rand(companies); const ro = rand(roles); const city = rand(cities);
-  const remote = ro.remote ? (Math.random()>.4 ? "HYBRID" : "TELECOMMUTE") : "ON_SITE";
-  const job = {
-    id: "JOB-" + id(),
-    title: ro.title,
-    description: `${ro.title} at ${co.name}. Join a high-impact team in ${ro.industry}. Responsibilities include cross-functional collaboration, delivery excellence and stakeholder management.`,
-    datePosted: new Date(Date.now()-Math.floor(Math.random()*10)*24*60*60*1000).toISOString().split("T")[0],
-    validThrough: in60.toISOString().split("T")[0],
-    employmentType: ro.type,
-    companyName: co.name,
-    companyUrl: co.website,
-    logo: co.logo,
-    streetAddress: city.street,
-    addressLocality: city.locality,
-    addressRegion: city.region,
-    postalCode: city.postal,
-    salaryMin: ro.salary[0],
-    salaryMax: ro.salary[1],
-    salaryCurrency: "ZAR",
-    workMode: remote==="TELECOMMUTE"?"Remote":(remote==="HYBRID"?"Hybrid":"On-site"),
-    jobLocationType: remote,
-    city: city.locality,
-    url: "https://jobbyist.africa/jobs/"+encodeURIComponent(ro.title.toLowerCase().replace(/\s+/g,'-'))+"-"+i,
-    industry: ro.industry,
-    remote: remote!=="ON_SITE"
-  };
-  return job;
-});
-
-/* ---------------------- Verified company profiles (10) ------------------ */
-const verifiedCos = [
-  {name:"Naspers", size:"10k+", rating:4.4, hq:"Cape Town", industry:"Technology & Media", about:"Global consumer internet group and one of the largest tech investors.", website:"https://www.naspers.com"},
-  {name:"Sasol", size:"30k+", rating:4.2, hq:"Johannesburg", industry:"Energy & Chemicals", about:"Integrated energy and chemical company.", website:"https://www.sasol.com"},
-  {name:"MTN South Africa", size:"18k+", rating:4.3, hq:"Johannesburg", industry:"Telecommunications", about:"Leading mobile operator across Africa.", website:"https://www.mtn.co.za"},
-  {name:"Vodacom", size:"10k+", rating:4.1, hq:"Midrand", industry:"Telecommunications", about:"Part of the Vodafone Group.", website:"https://www.vodacom.co.za"},
-  {name:"Standard Bank", size:"50k+", rating:4.4, hq:"Johannesburg", industry:"Financial Services", about:"Africa’s largest bank by assets.", website:"https://www.standardbank.co.za"},
-  {name:"Discovery", size:"12k+", rating:4.5, hq:"Sandton", industry:"Financial Services & Health", about:"Shared-value insurance and health innovation leader.", website:"https://www.discovery.co.za"},
-  {name:"Shoprite", size:"140k+", rating:4.0, hq:"Cape Town", industry:"Retail", about:"Africa’s largest fast-moving consumer goods retailer.", website:"https://www.shoprite.co.za"},
-  {name:"Anglo American", size:"90k+", rating:4.2, hq:"Johannesburg", industry:"Mining", about:"Global mining company.", website:"https://www.angloamerican.com"},
-  {name:"Capitec Bank", size:"15k+", rating:4.6, hq:"Stellenbosch", industry:"Banking", about:"Digital-first South African bank.", website:"https://www.capitecbank.co.za"},
-  {name:"Takealot", size:"7k+", rating:4.3, hq:"Cape Town", industry:"E-commerce", about:"South Africa’s leading online retailer.", website:"https://www.takealot.com"}
-];
-
-/* ------------------------------- UI Render ------------------------------ */
-const jobGrid = document.getElementById('jobGrid');
-const kpiJobs = document.getElementById('kpiJobs');
-const kpiCos = document.getElementById('kpiCos');
-const kpiRemote = document.getElementById('kpiRemote');
+/* ===========================================================
+   RENDER JOBS (+ interleaved AdSense placeholders)
+   =========================================================== */
+function readableEmployment(t){return {FULL_TIME:'Full-time',PART_TIME:'Part-time',CONTRACTOR:'Contract',INTERN:'Internship','TEMPORARY':'Temporary'}[t]||'—';}
+function timeAgo(dateStr){const d=new Date(dateStr);const days=Math.max(0,Math.floor((Date.now()-d)/86400000)); return days===0?'today':days===1?'1 day ago':`${days} days ago`; }
 
 function renderJobs(list=jobs){
-  jobGrid.innerHTML = '';
+  const grid=document.getElementById('jobsGrid'); grid.innerHTML='';
   list.forEach((j,idx)=>{
-    const el = document.createElement('div');
-    el.className='card';
-    el.innerHTML = `
-      <div class="job-top">
-        <div class="logo" aria-hidden="true">${j.logo}</div>
-        <div>
-          <div class="title">${j.title}</div>
-          <div class="company">${j.companyName} • ${j.city} • <span class="muted">${j.workMode}</span></div>
-        </div>
+    // Inject an Ad card after every 5 jobs
+    if(idx>0 && idx%5===0){
+      const ad=document.createElement('div'); ad.className='card ad-card';
+      ad.innerHTML='Ad — Google AdSense (in-feed)';
+      grid.appendChild(ad);
+    }
+    const card=document.createElement('div'); card.className='card';
+    card.innerHTML=`
+      <div class="row">
+        <div class="chip">${j.logo||'🏢'}</div>
+        <div><b>${j.title}</b><div class="sub">${j.company}${j.verified?' • ✅ Verified':''}</div></div>
       </div>
-      <div class="meta">
-        <span class="chip">${j.employmentType}</span>
-        <span class="chip">ZAR ${formatNum(j.salaryMin)}–${formatNum(j.salaryMax)}</span>
-        <span class="chip">${j.industry}</span>
-      </div>
-      <p class="muted">${j.description}</p>
+      <div class="sub">${j.location} • ${j.workType||'—'} • ${readableEmployment(j.employmentType)}</div>
+      <div class="sub">${j.salary || 'Market related'}</div>
+      <div class="chip">Posted ${timeAgo(j.datePosted)}</div>
+      <p style="min-height:56px">${j.description}</p>
       <div class="actions">
-        <a class="btn" href="${j.url}" onclick="event.preventDefault();openRegister('view');">View job</a>
-        <button class="btn-icon save" title="Save" onclick="openRegister('save')">★</button>
-        <a class="btn" href="#pro">Go Pro (R99)</a>
-      </div>
-      <small class="muted">Posted ${j.datePosted}</small>
-    `;
-    jobGrid.appendChild(el);
-    // Emit Google Jobs JSON-LD for each listing (compliant)
-    const ld = {
-      "@context":"https://schema.org/",
-      "@type":"JobPosting",
-      "title": j.title,
-      "description": j.description,
-      "datePosted": j.datePosted,
-      "validThrough": j.validThrough,
-      "employmentType": j.employmentType,
-      "directApply": true,
-      "hiringOrganization": {"@type":"Organization","name": j.companyName, "sameAs": j.companyUrl},
-      "jobLocationType": j.jobLocationType,
-      "jobLocation": j.jobLocationType==="TELECOMMUTE" ? undefined : {
-        "@type":"Place",
-        "address":{"@type":"PostalAddress","streetAddress": j.streetAddress,"addressLocality": j.addressLocality,"addressRegion": j.addressRegion,"postalCode": j.postalCode,"addressCountry":"ZA"}
-      },
-      "applicantLocationRequirements": j.jobLocationType==="TELECOMMUTE" ? {"@type":"Country","name":"ZA"} : undefined,
-      "baseSalary":{"@type":"MonetaryAmount","currency": j.salaryCurrency,"value":{"@type":"QuantitativeValue","minValue": j.salaryMin,"maxValue": j.salaryMax,"unitText":"YEAR"}},
-      "industry": j.industry,
-      "identifier":{"@type":"PropertyValue","name":"Jobbyist South Africa","value": j.id},
-      "url": j.url
-    };
-    const s = document.createElement('script');
-    s.type = "application/ld+json";
-    s.textContent = JSON.stringify(ld);
-    document.head.appendChild(s);
+        <button class="btn" onclick="openJob(${idx})">Details</button>
+        <button class="btn" onclick="openCompany('${j.company}')">Company</button>
+        <button class="cta" onclick="handleApply(${idx})">Apply</button>
+        <button class="btn save" onclick="triggerWall('saveJob')">Save</button>
+        <button class="cta secondary" onclick="location.hash='#pro'">Go Pro</button>
+      </div>`;
+    grid.appendChild(card);
+    injectJobSchema(j, idx);
   });
-  kpiJobs.textContent = list.length.toLocaleString('en-ZA');
-  kpiCos.textContent = new Set(list.map(x=>x.companyName)).size.toLocaleString('en-ZA');
-  kpiRemote.textContent = list.filter(x=>x.remote).length.toLocaleString('en-ZA');
+  document.getElementById('jobsCount').textContent=list.length;
 }
-function formatNum(n){return n.toLocaleString('en-ZA')}
-
-/* Search */
-document.getElementById('searchBtn').addEventListener('click',()=>{
-  const q = document.getElementById('q').value.toLowerCase();
-  const loc = document.getElementById('loc').value.toLowerCase();
-  const type = document.getElementById('type').value;
-  const filtered = jobs.filter(j=>
-    (!q || (j.title.toLowerCase().includes(q)||j.companyName.toLowerCase().includes(q)||j.industry.toLowerCase().includes(q))) &&
-    (!loc || j.city.toLowerCase().includes(loc) || (loc.includes('remote') && j.remote)) &&
-    (!type || j.employmentType===type || (type==='Remote' && j.remote))
-  );
-  renderJobs(filtered);
-});
-
-/* View more -> registration wall */
-document.getElementById('viewMore').addEventListener('click',()=>openRegister('viewmore'));
-
-/* Companies grid */
-const companyGrid = document.getElementById('companyGrid');
-function renderCompanies(){
-  companyGrid.innerHTML='';
-  verifiedCos.forEach(c=>{
-    const el = document.createElement('div');
-    el.className='card';
-    el.innerHTML = `
-      <div class="job-top">
-        <div class="logo">${c.name.split(' ').map(w=>w[0]).slice(0,2).join('')}</div>
-        <div>
-          <div class="title">${c.name} <span class="verified">✔</span></div>
-          <div class="muted">${c.industry} • HQ: ${c.hq} • ${c.size} employees</div>
-        </div>
-      </div>
-      <p class="muted">${c.about}</p>
-      <div class="rating">${"★★★★★".split('').map((s,i)=>`<span class="star">${i<Math.round(c.rating)?'★':'☆'}</span>`).join('')} <span class="muted">(${c.rating.toFixed(1)})</span></div>
-      <div class="actions">
-        <button class="btn" onclick="openCompany('${encodeURIComponent(c.name)}')">View profile</button>
-        <button class="btn" onclick="openRegister('follow')">Follow</button>
-      </div>
-    `;
-    companyGrid.appendChild(el);
-  });
+function injectJobSchema(job, idx){
+  const data={"@context":"https://schema.org/","@type":"JobPosting","title":job.title,"description":job.description,"datePosted":job.datePosted,"validThrough":job.validThrough,"employmentType":readableEmployment(job.employmentType),"hiringOrganization":{"@type":"Organization","name":job.company,"sameAs":job.companyWebsite||job.applyUrl},"jobLocation":[{"@type":"Place","address":{"@type":"PostalAddress","addressCountry":"ZA","addressLocality":job.location}}],"applicantLocationRequirements":{"@type":"Country","name":"South Africa"},"directApply":true,"estimatedSalary":{"@type":"MonetaryAmount","currency":"ZAR","value":{"@type":"QuantitativeValue","unitText":"YEAR","value":job.salary||"Market related"}}};
+  const s=document.createElement('script'); s.type='application/ld+json'; s.id='job-jsonld-'+idx; s.textContent=JSON.stringify(data); document.body.appendChild(s);
 }
 
-/* Company modal content */
-function openCompany(nameEnc){
-  const c = verifiedCos.find(v=>encodeURIComponent(v.name)===nameEnc);
-  const body = document.getElementById('companyBody');
-  document.getElementById('companyTitle').textContent = c.name+' — Verified';
-  body.innerHTML = `
-    <p class="muted">${c.about}</p>
-    <p><strong>Industry:</strong> ${c.industry} • <strong>HQ:</strong> ${c.hq} • <strong>Size:</strong> ${c.size}</p>
-    <p><a class="pill" href="${c.website}" target="_blank" rel="noopener">Visit website</a></p>
-    <div style="margin:12px 0">
-      <label>Rate this company:</label>
-      <div class="actions" style="margin-top:6px">${[1,2,3,4,5].map(n=>`<button class="btn" onclick="alert('Thanks for rating ${n} star(s)!')">${'★'.repeat(n)}</button>`).join(' ')}</div>
-    </div>
+/* ===========================================================
+   JOB DETAILS (counts "views" for daily quota)
+   =========================================================== */
+function openJob(idx){
+  if(!canViewMore()){ upsellLimit('views'); return; }
+  tickCount('views');
+  const j=jobs[idx];
+  document.getElementById('jobTitle').textContent=j.title+' — '+j.company;
+  document.getElementById('jobBody').innerHTML=`
+    <div class="sub">${j.location} • ${j.workType||'—'} • ${readableEmployment(j.employmentType)} • ${j.salary||'Market'}</div>
+    <p>${j.description}</p>
     <div class="actions">
-      <button class="cta" onclick="openRegister('follow')">Follow for job updates</button>
-      <button class="btn" onclick="openRegister('review')">Write a review</button>
+      <button class="cta" onclick="handleApply(${idx})">Apply now</button>
+      <button class="btn" onclick="triggerWall('saveJob')">Save</button>
     </div>
-  `;
-  document.getElementById('companyModal').style.display='flex';
+    <div class="card ad-card" style="margin-top:10px">Ad — Google AdSense (mid-content)</div>`;
+  document.getElementById('jobModal').classList.add('open');
 }
-function closeCompany(){document.getElementById('companyModal').style.display='none'}
+function closeModal(sel){ document.querySelector(sel).classList.remove('open'); }
 
-/* Registration wall modal control */
-const regModal = document.getElementById('registerModal');
-function openRegister(source){
-  regModal.dataset.source = source || '';
-  regModal.style.display='flex';
-}
-function closeRegister(){regModal.style.display='none'}
-
-/* Multi-step onboarding */
-let step=0;
-const pages = document.querySelectorAll('#onboardForm .page');
-const bar = document.getElementById('stepBar').children;
-function nextStep(){event.preventDefault(); if(step<pages.length-1){pages[step].classList.remove('active'); bar[step].classList.remove('active'); step++; pages[step].classList.add('active'); bar[step].classList.add('active');}}
-function prevStep(){event.preventDefault(); if(step>0){pages[step].classList.remove('active'); bar[step].classList.remove('active'); step--; pages[step].classList.add('active'); bar[step].classList.add('active');}}
-function finishOnboarding(){
-  alert('Account created! We’ll email you a verification link and add your profile to the Job Seeker Directory for employers to discover.');
-  closeRegister();
+/* ===========================================================
+   APPLY (counts applies for daily quota)
+   =========================================================== */
+function handleApply(idx){
+  const user=getUser();
+  if(!user.signedIn){ openSignup('apply'); return; }
+  if(!user.pro && !canApplyMore()){ upsellLimit('applies'); return; }
+  if(!user.pro) tickCount('applies');
+  const url = jobs[idx].applyUrl || '#';
+  window.open(url,'_blank','noopener');
 }
 
-/* Cookie banner */
-const cookie = document.getElementById('cookie');
-function acceptCookie(){localStorage.setItem('cookieOK','1'); cookie.style.display='none'}
-function dismissCookie(){localStorage.setItem('cookieOK','0'); cookie.style.display='none'}
-
-/* Routing */
-function showPage(id){
-  document.querySelectorAll('#app .page').forEach(p=>p.classList.remove('active'));
-  const el = document.querySelector(id) || document.querySelector('#home');
-  el.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-window.addEventListener('hashchange',()=>showPage(location.hash));
-document.getElementById('year').textContent = new Date().getFullYear();
-
-/* Charts (vanilla Canvas) */
-function drawBar(canvasId, labels, values){
-  const c = document.getElementById(canvasId); const ctx = c.getContext('2d');
-  const w = c.width = c.clientWidth; const h = c.height = 220;
-  const max = Math.max(...values) || 1;
-  const pad = 32; const barW = (w - pad*2) / values.length * .7;
-  ctx.clearRect(0,0,w,h);
-  values.forEach((v,i)=>{
-    const x = pad + i*((w-pad*2)/values.length) + 8;
-    const y = h - pad - (v/max)*(h-pad*2);
-    ctx.fillStyle = '#7c5cff'; ctx.fillRect(x,y,barW,h-pad-y);
-    ctx.fillStyle = '#cfd3e6'; ctx.font='12px Inter'; ctx.textAlign='center';
-    ctx.fillText(labels[i], x+barW/2, h-10);
+/* ===========================================================
+   VERIFIED COMPANIES (Pro-only review/follow)
+   =========================================================== */
+function renderCompanies(){
+  const wrap=document.getElementById('companiesGrid'); wrap.innerHTML='';
+  companies.forEach(c=>{
+    const el=document.createElement('div'); el.className='card';
+    el.innerHTML=`
+      <div><b>${c.name}</b> <span class="chip">✅ Verified</span></div>
+      <div class="sub">${c.industry} • HQ: ${c.hq} • ${c.size}</div>
+      <div>⭐ ${c.rating.toFixed(1)} / 5</div>
+      <div class="actions">
+        <button class="btn" onclick="proOnly(()=>triggerWall('reviewCompany','${c.name}'))">Review</button>
+        <button class="btn follow" onclick="proOnly(()=>triggerWall('followCompany','${c.name}'))">Follow</button>
+        <button class="cta" onclick="openCompany('${c.name}')">View</button>
+      </div>`;
+    wrap.appendChild(el);
   });
 }
-
-/* Init */
-renderJobs(jobs);
-renderCompanies();
-if(!localStorage.getItem('cookieOK')) cookie.style.display='block';
-showPage(location.hash || '#home');
-
-/* JobStats from jobs[] */
-function rebuildStats(){
-  const byCity = {};
-  const byIndustry = {};
-  let remote=0, onsite=0;
-  jobs.forEach(j=>{
-    byCity[j.city]=(byCity[j.city]||0)+1;
-    byIndustry[j.industry]=(byIndustry[j.industry]||0)+1;
-    j.remote ? remote++ : onsite++;
-  });
-  const topCity = Object.entries(byCity).sort((a,b)=>b[1]-a[1]).slice(0,6);
-  const topInd = Object.entries(byIndustry).sort((a,b)=>b[1]-a[1]).slice(0,6);
-  drawBar('chartLocations', topCity.map(x=>x[0]), topCity.map(x=>x[1]));
-  drawBar('chartIndustries', topInd.map(x=>x[0]), topInd.map(x=>x[1]));
-  drawBar('chartRemote', ['Remote/Hybrid','On-site'], [remote, onsite]);
+function openCompany(name){
+  const c=companies.find(x=>x.name===name)||{name:name,site:'#',rating:4.0,followers:0,industry:'—',hq:'—'};
+  document.getElementById('coTitle').textContent=name+' — Company Profile';
+  document.getElementById('coBody').innerHTML=`
+    <div class="grid" style="grid-template-columns:2fr 1fr">
+      <div>
+        <p><b>Industry:</b> ${c.industry}</p>
+        <p><b>HQ:</b> ${c.hq}</p>
+        <p><b>Company size:</b> ${c.size}</p>
+        <p><b>Website:</b> <a href="${c.site}" target="_blank" rel="noopener">${c.site}</a></p>
+        <p><b>Rating:</b> ⭐ ${c.rating.toFixed(1)} / 5</p>
+        <div class="actions">
+          <button class="btn" onclick="proOnly(()=>triggerWall('reviewCompany','${c.name}'))">Write a review</button>
+          <button class="btn follow" onclick="proOnly(()=>triggerWall('followCompany','${c.name}'))">Follow company</button>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Want first dibs on openings?</h3>
+        <p class="sub">Go Pro to follow companies, review them, and unlock unlimited listings.</p>
+        <button class="cta" onclick="location.hash='#pro'">Unlock Pro — R99/mo</button>
+      </div>
+    </div>`;
+  document.getElementById('companyModal').classList.add('open');
 }
-rebuildStats();
+function proOnly(action){
+  const u=getUser();
+  if(!u.signedIn){ openSignup('proGating'); return; }
+  if(!u.pro){ location.hash='#pro'; alert('Pro feature: Follow & Review are for Jobbyist Pro members.'); return; }
+  action();
+}
 
-/* Pro subscribe stub */
-function subscribePro(){ alert('Thanks! Redirecting to secure checkout at R99/month…'); location.hash='#pro'; }
+/* ===========================================================
+   REGISTRATION / ONBOARDING (Formspree-ready)
+   =========================================================== */
+const steps = [
+  {id:'account',title:'Create your account',fields:[
+    {name:'firstName',placeholder:'First name',required:true},
+    {name:'lastName',placeholder:'Last name',required:true},
+    {name:'email',type:'email',placeholder:'Email address',required:true},
+    {name:'password',type:'password',placeholder:'Password',required:true},
+    {name:'location',placeholder:'City/Province',class:'full',required:true},
+  ]},
+  {id:'experience',title:'Experience',fields:[
+    {name:'years',type:'number',placeholder:'Years of experience',required:true},
+    {name:'currentTitle',placeholder:'Current/last job title',required:true},
+    {name:'industry',placeholder:'Industry (e.g., Banking, Tech)',required:true},
+    {name:'workPref',type:'select',options:['Remote','Hybrid','On-site'],placeholder:'Work preference',required:true},
+    {name:'notice',type:'select',options:['Immediate','2 weeks','1 month','3 months'],placeholder:'Notice period',required:true},
+    {name:'salaryExp',placeholder:'Salary expectation (ZAR)',class:'full'}
+  ]},
+  {id:'skills',title:'Skills & Tools',fields:[
+    {name:'skills',placeholder:'Key skills (comma-separated)',class:'full',required:true},
+    {name:'tools',placeholder:'Tools/tech (comma-separated)',class:'full'},
+    {name:'languages',placeholder:'Languages (comma-separated)',class:'full'}
+  ]},
+  {id:'documents',title:'Documents',fields:[
+    {name:'cv',type:'file',placeholder:'Upload CV (PDF/DOCX) — optional',class:'full'},
+    {name:'portfolio',placeholder:'Portfolio URL (https://)',class:'full'}
+  ]},
+  {id:'preferences',title:'Alerts & Privacy',fields:[
+    {name:'alerts',type:'checkbox',placeholder:'Send me new job alerts'},
+    {name:'directory',type:'checkbox',placeholder:'Add me to the job seeker directory (visible to verified recruiters)',checked:true},
+    {name:'terms',type:'checkbox',placeholder:'I agree to the Terms & Privacy',required:true}
+  ]}
+];
+function openSignup(action){ currentStep=0; drawSteps(); drawForm(); document.getElementById('signupModal').classList.add('open'); }
+let currentStep=0;
+function drawSteps(){ const dots=document.getElementById('stepDots'); dots.innerHTML=''; steps.forEach((_,i)=>{const d=document.createElement('div'); d.className='step'+(i===0?' active':''); dots.appendChild(d)}); }
+function drawForm(){
+  const form=document.getElementById('signupFlow'); form.innerHTML='';
+  steps.forEach((s,i)=>{
+    const page=document.createElement('div'); page.dataset.step=i; page.style.display=i===0?'block':'none';
+    page.innerHTML=`<h3>${s.title}</h3><div class="grid" style="grid-template-columns:1fr 1fr;gap:12px">${s.fields.map(f=>fieldHTML(f)).join('')}</div>
+      <div class="actions" style="justify-content:space-between;margin-top:12px">
+        <button class="btn" ${i===0?'disabled':''} data-prev="${i}">Back</button>
+        ${i<steps.length-1?`<button class="btn" data-next="${i}">Next</button>`:`<button class="cta" data-submit>Finish</button>`}
+      </div>`;
+    form.appendChild(page);
+  });
+  form.addEventListener('click', e=>{
+    if(e.target.dataset.next!==undefined){ if(validatePage(+e.target.dataset.next)){swapPage(+e.target.dataset.next,+e.target.dataset.next+1);} }
+    if(e.target.dataset.prev!==undefined){ swapPage(+e.target.dataset.prev,+e.target.dataset.prev-1); }
+    if(e.target.hasAttribute('data-submit')){ submitSignup(form); }
+  }, {once:true});
+}
+function fieldHTML(f){
+  if(f.type==='select'){
+    return `<div class="input ${f.class||''}"><select name="${f.name}" required="${!!f.required}">
+      <option value="" selected disabled>${f.placeholder||'Select'}</option>
+      ${(f.options||[]).map(o=>`<option value="${o}">${o}</option>`).join('')}</select></div>`;
+  }
+  if(f.type==='checkbox'){
+    return `<label class="input ${f.class||''}" style="gap:8px"><input type="checkbox" name="${f.name}" ${f.checked?'checked':''}/> ${f.placeholder||''}</label>`;
+  }
+  if(f.type==='file'){
+    return `<label class="input ${f.class||''}"><input type="file" name="${f.name}"/> ${f.placeholder||''}</label>`;
+  }
+  return `<div class="input ${f.class||''}"><input name="${f.name}" type="${f.type||'text'}" placeholder="${f.placeholder||''}" ${f.required?'required':''}/></div>`;
+}
+function swapPage(from,to){ document.querySelector(`[data-step="${from}"]`).style.display='none'; currentStep=to; document.querySelectorAll('#stepDots .step').forEach((d,i)=>d.classList.toggle('active', i<=currentStep)); document.querySelector(`[data-step="${to}"]`).style.display='block'; }
+function validatePage(i){ const page=document.querySelector(`[data-step="${i}"]`); let ok=true; page.querySelectorAll('input[required],select[required]').forEach(el=>{if(!el.value){el.style.borderColor='#ff8787'; ok=false;} else el.style.borderColor='var(--line)';}); return ok; }
 
-/* Accessibility tweaks */
-document.addEventListener('keydown', e=>{
-  if(e.key==='Escape'){ closeRegister(); closeCompany(); }
+function submitSignup(form){
+  if(!validatePage(currentStep)) return;
+  const fd=new FormData(form);
+  fd.append('_subject','New Jobbyist signup');
+  fetch(FORMSPREE,{method:'POST',body:fd,headers:{'Accept':'application/json'}})
+    .then(()=>{ localStorage.setItem('jobbyist_user','1'); localStorage.setItem('jobbyist_pro','0'); alert('Account created! Check your email.'); closeModal('#signupModal'); })
+    .catch(()=>{ alert('Saved locally. We’ll complete signup soon.'); localStorage.setItem('jobbyist_user','1'); });
+}
+
+/* ===========================================================
+   COOKIE, SEARCH, STATS, CHAT, LANGUAGE
+   =========================================================== */
+function acceptCookies(all){ localStorage.setItem('cookie_ok', all?'all':'essential'); document.getElementById('cookieBanner').classList.remove('open'); }
+if(!localStorage.getItem('cookie_ok')) document.getElementById('cookieBanner').classList.add('open');
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+document.getElementById('searchBtn').onclick=()=>{
+  const t=document.getElementById('qTitle').value.toLowerCase();
+  const l=document.getElementById('qLoc').value.toLowerCase();
+  const filtered=jobs.filter(j=>(!t||(j.title+j.company+j.description).toLowerCase().includes(t))&&(!l||j.location.toLowerCase().includes(l)));
+  renderJobs(filtered);
+};
+function updateJobStats(s){ statOpen.textContent=s.openRoles; statRemote.textContent=s.remoteShare; statSalary.textContent=s.medianSalary; statTTF.textContent=s.timeToFill; statTopInd.textContent=s.topIndustry; statSkill.textContent=s.hotSkill; }
+updateJobStats({openRoles:'8,567',remoteShare:'27%',medianSalary:'R38,000 / mo',timeToFill:'34 days',topIndustry:'Financial Services',hotSkill:'Python'});
+
+document.getElementById('chatFab').onclick=()=>document.getElementById('chatModal').classList.add('open');
+document.getElementById('chatForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const msg=e.target.q.value.trim(); if(!msg) return;
+  addChat('you', msg); e.target.reset();
+  addChat('bot','Thinking…');
+  try{
+    const res=await fetch(CHAT_API_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:msg,user:getUser()})});
+    const data=await res.json(); replaceLastBot(data.reply||'(No response)');
+  }catch{ replaceLastBot('Setup needed. See Worker notes in the code.'); }
 });
+function addChat(who, text){ const box=document.getElementById('chatBox'); const d=document.createElement('div'); d.style.margin='6px 0'; d.innerHTML=`<b>${who==='you'?'You':'Assistant'}:</b> ${text}`; box.appendChild(d); box.scrollTop=box.scrollHeight; }
+function replaceLastBot(text){ const box=document.getElementById('chatBox'); const nodes=[...box.querySelectorAll('div')]; nodes[nodes.length-1].innerHTML=`<b>Assistant:</b> ${text}`; }
+document.getElementById('langSelect').addEventListener('change', (e)=>{ localStorage.setItem('lang',e.target.value); alert('Language selection saved. Localisation coming soon.'); });
+
+/* ===========================================================
+   USER STATE & QUOTAS (free vs Pro)
+   =========================================================== */
+function getUser(){ return { signedIn: localStorage.getItem('jobbyist_user')==='1', pro: localStorage.getItem('jobbyist_pro')==='1' }; }
+function tickCount(kind){
+  const key=`quota_${kind}`, dateKey='quota_date', today=new Date().toISOString().slice(0,10);
+  if(localStorage.getItem(dateKey)!==today){ localStorage.setItem(dateKey,today); localStorage.setItem('quota_views','0'); localStorage.setItem('quota_applies','0'); }
+  const n=parseInt(localStorage.getItem(key)||'0',10)+1; localStorage.setItem(key,String(n));
+}
+function canViewMore(){ const u=getUser(); if(!u.signedIn||u.pro) return true; resetIfNewDay(); const n=parseInt(localStorage.getItem('quota_views')||'0',10); return n<DAILY_LIMITS.views; }
+function canApplyMore(){ const u=getUser(); if(!u.signedIn||u.pro) return true; resetIfNewDay(); const n=parseInt(localStorage.getItem('quota_applies')||'0',10); return n<DAILY_LIMITS.applies; }
+function resetIfNewDay(){ const today=new Date().toISOString().slice(0,10); if(localStorage.getItem('quota_date')!==today){ localStorage.setItem('quota_date',today); localStorage.setItem('quota_views','0'); localStorage.setItem('quota_applies','0'); } }
+function upsellLimit(type){
+  const cap=DAILY_LIMITS[type];
+  alert(`Limit reached: Free accounts can ${type==='views'?'view up to 50 job details':'apply to 5 jobs'} per day.\nUnlock unlimited access with Jobbyist Pro.`);
+  location.hash='#pro';
+}
+
+/* ===========================================================
+   WALL: Save / Follow / Review (Pro-only for follow/review)
+   =========================================================== */
+function triggerWall(action, meta){
+  const u=getUser();
+  if(!u.signedIn){ openSignup(action, meta); return; }
+  if(action==='followCompany' || action==='reviewCompany'){
+    if(!u.pro){ location.hash='#pro'; alert('Pro feature — follow & review companies with Jobbyist Pro.'); return; }
+  }
+  alert(action==='saveJob'?'Saved! We’ll keep this in your dashboard.':
+       action==='followCompany'?'Followed! You’ll get updates by email.':
+       'Thanks!');
+}
+
+/* ===========================================================
+   INITIALISE
+   =========================================================== */
+renderJobs(jobs); renderCompanies();
+
+/* ===========================================================
+   DEV NOTES — GitHub Pages + Automations + GPT-5 mini Chat
+   ===========================================================
+1) Deploy on GitHub Pages
+   - Create a repo, add this file as index.html, enable Pages (root).
+   - For custom domain, add CNAME in repo settings.
+
+2) Google Sheets -> Jobs JSON (no backend)
+   - Keep a public JSON (jobs.json) in the repo generated by GitHub Actions.
+   - Action idea: On “Sheet row added” (Zapier) -> GitHub “Create or Update file” (jobs.json).
+   - In this file, replace `const jobs=[...]` with:
+       fetch('jobs.json').then(r=>r.json()).then(data=>{ window.jobs=data; renderJobs(data); });
+   - Same pattern for companies.json and jobstats.json.
+
+3) Form handling (Formspree)
+   - Every form has an action or POST via fetch to ${FORMSPREE}.
+   - View submissions in Formspree; use Zapier to branch to Google Sheets, MailerLite, etc.
+
+4) OpenAI GPT-5 mini chat on a free Cloudflare Worker (recommended)
+   - You can’t call OpenAI directly from GitHub Pages (no server secrets).
+   - Create a Worker (free tier). Add an env var OPENAI_API_KEY.
+   - Worker (TypeScript/JS) code:
+
+   // ---------- worker.js ----------
+   export default {
+     async fetch(req, env) {
+       if (req.method !== 'POST') return new Response('OK');
+       const { message, user } = await req.json();
+       const reply = await fetch('https://api.openai.com/v1/chat/completions',{
+         method:'POST',
+         headers:{'Authorization':`Bearer ${env.OPENAI_API_KEY}`,'Content-Type':'application/json'},
+         body:JSON.stringify({
+           model:'gpt-5-mini',
+           messages:[
+             {role:'system',content:'You are Jobbyist Assistant for South African jobs.'},
+             {role:'user',content: message}
+           ],
+           temperature:0.3
+         })
+       }).then(r=>r.json());
+       return new Response(JSON.stringify({reply: reply.choices?.[0]?.message?.content||'No reply'}),{headers:{'Content-Type':'application/json','Access-Control-Allow-Origin':'*'}});
+     }
+   }
+   // --------------------------------
+   - Deploy, copy the Worker URL, and set CHAT_API_ENDPOINT above.
+
+5) Dark/Light mode
+   - Default follows system. Users can toggle; setting persists in localStorage.
+
+6) Pro membership switch
+   - When you enable billing later, set `localStorage.setItem('jobbyist_pro','1')`
+     after successful subscription to unlock unlimited listings + follow/review.
+
+7) AdSense
+   - Replace each “Ad — Google AdSense…” block with your script. You now have
+     hero, mid-feed (every 5 cards), job modal mid-content, JobStats, footer.
+
+=========================================================== */
 </script>
+</body>
 </html>
