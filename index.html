@@ -1,2106 +1,1763 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jobbyist - Find the right fit. Remote-friendly.</title>
-    <meta name="description" content="Discover your next career opportunity with Jobbyist - South Africa's premier job discovery platform. Find remote-friendly jobs, connect with top employers, and accelerate your career growth.">
-    
-    <!-- Poppins Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
-
-    <style>
-        :root {
-            /* Light mode colors */
-            --primary-color: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary-color: #8b5cf6;
-            --accent-color: #06b6d4;
-            --background-color: #ffffff;
-            --surface-color: #f8fafc;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --border-color: #e2e8f0;
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --error-color: #ef4444;
-        }
-
-        [data-theme="dark"] {
-            /* Dark mode colors */
-            --background-color: #0f172a;
-            --surface-color: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --border-color: #334155;
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow-lg);
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .flag-icon {
-            font-size: 0.9rem;
-            vertical-align: super;
-            margin-left: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-
-        .theme-toggle {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            padding: 0.5rem;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 1rem;
-        }
-
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            font-weight: 500;
-        }
-
-        .search-container {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            box-shadow: var(--shadow-lg);
-            margin-bottom: 2rem;
-        }
-
-        .search-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr auto;
-            gap: 1rem;
-            align-items: end;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-        }
-
-        .form-group label {
-            color: var(--text-primary);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .form-group input, .form-group select {
-            padding: 0.75rem;
-            border: 2px solid var(--border-color);
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-primary);
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .search-btn {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .search-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 2rem;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .section {
-            padding: 4rem 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Job Filters */
-        .filters {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .filter-group label {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .filter-group select, .filter-group input {
-            padding: 0.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            background-color: var(--surface-color);
-            color: var(--text-primary);
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* Job Grid */
-        .jobs-grid {
-            display: grid;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .job-card {
-            background: var(--surface-color);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            border: 1px solid var(--border-color);
-        }
-
-        .job-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .job-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .company-name {
-            color: var(--primary-color);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .job-meta {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .job-tags {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .tag.remote {
-            background: var(--accent-color);
-        }
-
-        .tag.salary {
-            background: var(--success-color);
-        }
-
-        .job-description {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .job-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: var(--surface-color);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--border-color);
-        }
-
-        /* AdSense Placeholder */
-        .ad-placeholder {
-            background: var(--surface-color);
-            border: 2px dashed var(--border-color);
-            border-radius: 0.5rem;
-            padding: 2rem;
-            text-align: center;
-            margin: 2rem 0;
-            color: var(--text-secondary);
-        }
-
-        .ad-placeholder::before {
-            content: "📢 Advertisement Space";
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        /* Companies Section */
-        .companies-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .company-card {
-            background: var(--surface-color);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s ease;
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-        }
-
-        .company-card:hover {
-            transform: translateY(-2px);
-        }
-
-        .company-logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .company-name-card {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .company-industry {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .company-rating {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .stars {
-            color: #fbbf24;
-        }
-
-        /* Modals */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 10000;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: var(--background-color);
-            border-radius: 1rem;
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-secondary);
-            padding: 0.5rem;
-        }
-
-        .close-modal:hover {
-            color: var(--text-primary);
-        }
-
-        /* Registration Steps */
-        .step {
-            display: none;
-        }
-
-        .step.active {
-            display: block;
-        }
-
-        .step-indicator {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            gap: 0.5rem;
-        }
-
-        .step-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--border-color);
-            transition: background-color 0.3s ease;
-        }
-
-        .step-dot.active {
-            background: var(--primary-color);
-        }
-
-        .step-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-        }
-
-        /* Form Styles */
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .form-group-full {
-            grid-column: 1 / -1;
-        }
-
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            background: var(--surface-color);
-            color: var(--text-primary);
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--text-secondary);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        /* Floating Buttons */
-        .floating-buttons {
-            position: fixed;
-            bottom: 2rem;
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            pointer-events: none;
-            z-index: 1000;
-            padding: 0 2rem;
-        }
-
-        .floating-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 1rem;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: var(--shadow-lg);
-            transition: transform 0.2s ease;
-            pointer-events: all;
-            font-size: 1.2rem;
-        }
-
-        .floating-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .language-selector {
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 2rem;
-            padding: 0.75rem 1rem;
-            color: var(--text-primary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-        }
-
-        /* Cookie Consent */
-        .cookie-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--surface-color);
-            border-top: 1px solid var(--border-color);
-            padding: 1rem 2rem;
-            display: none;
-            z-index: 10000;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .cookie-banner.show {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-
-        .cookie-content {
-            flex: 1;
-        }
-
-        .cookie-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 2rem;
-        }
-
-        .page-btn {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border-color);
-            background: var(--surface-color);
-            color: var(--text-primary);
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .page-btn.active,
-        .page-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        /* Usage Limit Banner */
-        .usage-banner {
-            background: linear-gradient(135deg, var(--warning-color), #f97316);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            border-radius: 0.5rem;
-            display: none;
-        }
-
-        .usage-banner.show {
-            display: block;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .search-form {
-                grid-template-columns: 1fr;
-            }
-
-            .stats {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .filters {
-                flex-direction: column;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .floating-buttons {
-                flex-direction: column;
-                align-items: flex-end;
-                gap: 1rem;
-                right: 2rem;
-                width: auto;
-            }
-
-            .cookie-banner {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-        /* Pro Features Highlight */
-        .pro-feature {
-            position: relative;
-            opacity: 0.7;
-            pointer-events: none;
-        }
-
-        .pro-feature::after {
-            content: "🔒 Pro Only";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--primary-color);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            z-index: 10;
-        }
-
-        /* Animation classes */
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .loading {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        .loading::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--primary-color);
-            border-top: 2px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            transform: translate(-50%, -50%);
-        }
-
-        @keyframes spin {
-            to {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <title>Jobbyist - Find Your Dream Job in Africa | South Africa & Nigeria Jobs</title>
+  <meta name="description" content="Jobbyist is Africa's leading job platform connecting talented professionals with top employers across Nigeria and South Africa. Find your perfect job today with automated matching and company profiles.">
+  <meta name="keywords" content="jobs south africa, jobs nigeria, african jobs, recruitment, careers, jobbyist, johannesburg jobs, lagos jobs, cape town jobs">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Jobbyist - Find Your Dream Job in Africa">
+  <meta property="og:description" content="Connect with top employers across Nigeria and South Africa. Discover opportunities in tech, finance, healthcare, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jobbyist.africa">
+  <meta property="og:image" content="https://jobbyist.africa/images/og-image.jpg">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jobbyist - Find Your Dream Job in Africa">
+  <meta name="twitter:description" content="Connect with top employers across Nigeria and South Africa.">
+  <meta name="twitter:image" content="https://jobbyist.africa/images/twitter-card.jpg">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jobbyist.africa">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link href="https://jobbyist.africa/style.css" rel="stylesheet" type="text/css">
 </head>
-<body data-theme="">
-    <!-- Cookie Consent Banner -->
-    <div class="cookie-banner" id="cookieBanner">
-        <div class="cookie-content">
-            <p><strong>🍪 We value your privacy!</strong> We use cookies to enhance your experience, analyze site traffic, and personalize content. By clicking "Accept All", you consent to our use of cookies.</p>
-        </div>
-        <div class="cookie-actions">
-            <button class="btn btn-secondary" onclick="manageCookies()">Manage Settings</button>
-            <button class="btn btn-primary" onclick="acceptCookies()">Accept All</button>
-        </div>
-    </div>
 
-    <!-- Header -->
-    <header>
-        <nav>
-            <a href="#" class="logo">
-                <i class="fas fa-briefcase"></i>
-                Jobbyist<span class="flag-icon">🇿🇦</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#jobs">Find Jobs</a></li>
-                <li><a href="#companies">Companies</a></li>
-                <li><a href="https://audit.jobbyist.co.za" target="_blank">ResumeAudit</a></li>
-                <li><a href="#pro">Jobbyist Pro</a></li>
-                <li><a href="#recruitment">For Employers</a></li>
-                <li><a href="#stats">JobStats</a></li>
-            </ul>
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-                <i class="fas fa-moon" id="themeIcon"></i>
+<body>
+  <!-- Cookie Consent Banner -->
+  <div class="cookie-banner hidden" id="cookie-banner">
+    <div class="cookie-content">
+      <div class="cookie-text">
+        <h4>We use cookies</h4>
+        <p>We use cookies and similar technologies to enhance your experience, analyze traffic, and personalize content. By continuing to browse, you agree to our use of cookies.</p>
+      </div>
+      <div class="cookie-actions">
+        <button class="btn--secondary" id="cookie-settings">Cookie Settings</button>
+        <button class="btn--primary" id="accept-cookies">Accept All</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container">
+      <div class="navbar-wrapper">
+        <!-- Logo -->
+        <div class="navbar-brand">
+          <div class="logo-container" onclick="jobbyistApp.showPage('homepage')">
+            <div class="logo-icon animated-doodle-icon"></div>
+            <span class="logo-text">Jobbyist</span>
+          </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="navbar-nav" id="navbar-nav">
+          <div class="nav-dropdown">
+            <button class="nav-link dropdown-trigger">
+              For Job Seekers
+              <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8">
+                <path d="M6 8L0 0h12L6 8z"/>
+              </svg>
             </button>
+            <div class="dropdown-menu">
+              <a href="#job-listings" class="dropdown-item">Browse Jobs</a>
+              <a href="#" class="dropdown-item" onclick="jobbyistApp.showPage('candidates')">Find Candidates</a>
+              <a href="#" class="dropdown-item" onclick="jobbyistApp.showPage('pro')">Upgrade To Pro</a>
+              <a href="#" class="dropdown-item" onclick="jobbyistApp.showPage('saved-jobs')">Saved Jobs</a>
+            </div>
+          </div>
+          
+          <div class="nav-dropdown">
+            <button class="nav-link dropdown-trigger">
+              For Employers
+              <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8">
+                <path d="M6 8L0 0h12L6 8z"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu">
+              <a href="#" class="dropdown-item" onclick="jobbyistApp.showPage('claim-page')">Claim Your Page</a>
+              <a href="#" class="dropdown-item" onclick="jobbyistApp.showPage('recruitment-suite')">Recruitment Suite</a>
+              <a href="#" class="dropdown-item" onclick="jobbyistApp.showPage('company-profiles')">Company Directory</a>
+              <a href="#" class="dropdown-item" onclick="jobbyistApp.showPage('analytics-dashboard')">Analytics Dashboard</a>
+            </div>
+          </div>
+
+          <div class="nav-dropdown">
+            <button class="nav-link dropdown-trigger">
+              Resources
+              <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8">
+                <path d="M6 8L0 0h12L6 8z"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu">
+              <a href="#" class="dropdown-item" onclick="jobbyistApp.showPage('community-forum')">Community Forum</a>
+              <a href="#" class="dropdown-item" onclick="jobbyistApp.showPage('success-stories')">Success Stories</a>
+              <a href="#" class="dropdown-item" onclick="jobbyistApp.showPage('career-advice')">Career Advice</a>
+            </div>
+          </div>
+
+          <a href="#" class="nav-link" onclick="jobbyistApp.showPage('contact')">Help Center</a>
         </nav>
-    </header>
 
-    <!-- Usage Limit Banner -->
-    <div class="usage-banner" id="usageBanner">
-        <p><strong>⚡ Power Up Your Job Search!</strong> You've reached your daily limit. Upgrade to <strong>Jobbyist Pro</strong> for unlimited access and exclusive features! <a href="#pro" style="color: white; text-decoration: underline;">Upgrade Now</a></p>
+        <!-- Actions -->
+        <div class="navbar-actions">
+          <!-- Language Selector -->
+          <div class="language-selector">
+            <select id="language-select" class="language-select">
+              <option value="en">English</option>
+              <option value="af">Afrikaans</option>
+              <option value="zu">Zulu</option>
+              <option value="yo">Yoruba</option>
+              <option value="ig">Igbo</option>
+              <option value="ha">Hausa</option>
+            </select>
+          </div>
+          
+          <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Unleash Your Career Potential 🚀</h1>
-            <p class="hero-subtitle">Find the right fit. Remote-friendly. Your dream job awaits in South Africa's most dynamic job marketplace!</p>
-            
+  <!-- Main Content Container -->
+  <main id="main-content">
+    <!-- Homepage Content -->
+    <div id="homepage" class="page active">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-background">
+          <div class="animated-doodle floating-circle"></div>
+          <div class="animated-doodle floating-triangle"></div>
+          <div class="animated-doodle floating-square"></div>
+        </div>
+        
+        <div class="container">
+          <div class="hero-content">
+            <div class="hero-text">
+              <h1 class="hero-title">
+                Find Your Dream Job in
+                <span class="highlight-text">Africa</span>
+                <div class="animated-doodle underline-swoosh"></div>
+              </h1>
+              <p class="hero-subtitle">
+                Connect with top employers across Nigeria and South Africa. 
+                Discover opportunities in tech, finance, healthcare, and more on Africa's leading job platform.
+              </p>
+            </div>
+
+            <!-- Enhanced Search Form -->
             <div class="search-container">
-                <form class="search-form" action="#" method="GET">
-                    <div class="form-group">
-                        <label for="job-title">What's your dream role?</label>
-                        <input type="text" id="job-title" name="job_title" placeholder="e.g., Software Developer, Marketing Manager">
-                    </div>
-                    <div class="form-group">
-                        <label for="location">Where do you want to thrive?</label>
-                        <input type="text" id="location" name="location" placeholder="e.g., Cape Town, Johannesburg, Remote">
-                    </div>
-                    <button type="submit" class="search-btn">
-                        <i class="fas fa-rocket"></i> Launch Search
-                    </button>
-                </form>
+              <form class="search-form" id="hero-search-form">
+                <div class="search-field">
+                  <label for="job-title" class="sr-only">Job Title</label>
+                  <div class="input-wrapper">
+                    <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24">
+                      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input 
+                      type="text" 
+                      id="job-title" 
+                      name="title" 
+                      placeholder="Job title, keyword, or company"
+                      class="search-input"
+                      list="search-suggestions"
+                    />
+                    <datalist id="search-suggestions"></datalist>
+                  </div>
+                </div>
+
+                <div class="search-field">
+                  <label for="job-type" class="sr-only">Job Type</label>
+                  <div class="select-wrapper">
+                    <select id="job-type" name="type" class="search-select">
+                      <option value="">Job Type</option>
+                      <option value="Full-time">Full-time</option>
+                      <option value="Part-time">Part-time</option>
+                      <option value="Contract">Contract</option>
+                      <option value="Internship">Internship</option>
+                      <option value="Remote">Remote</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="search-field">
+                  <label for="location" class="sr-only">Location</label>
+                  <div class="select-wrapper">
+                    <select id="location" name="location" class="search-select">
+                      <option value="">Location</option>
+                      <option value="Nigeria">Nigeria</option>
+                      <option value="South Africa">South Africa</option>
+                      <option value="Remote">Remote</option>
+                      <option value="Lagos">Lagos</option>
+                      <option value="Johannesburg">Johannesburg</option>
+                      <option value="Cape Town">Cape Town</option>
+                      <option value="Abuja">Abuja</option>
+                      <option value="Pretoria">Pretoria</option>
+                      <option value="Durban">Durban</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button type="submit" class="search-btn btn--primary glow-btn">
+                  <span>Search Jobs</span>
+                </button>
+              </form>
             </div>
 
-            <div class="stats">
-                <div class="stat">
-                    <span class="stat-number">24,567</span>
-                    <span class="stat-label">Active Opportunities</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">1,150</span>
-                    <span class="stat-label">Top Companies</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">89%</span>
-                    <span class="stat-label">Success Rate</span>
-                </div>
+            <!-- Statistics -->
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-number" data-target="25000">0</div>
+                <div class="stat-label">Jobs Posted</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number" data-target="5000">0</div>
+                <div class="stat-label">Companies</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number" data-target="75000">0</div>
+                <div class="stat-label">Job Seekers</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number" data-target="92">0</div>
+                <div class="stat-label">Success Rate %</div>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Jobs Section -->
-        <section id="jobs" class="section">
-            <div class="section-header">
-                <h2 class="section-title">🔥 Hottest Opportunities Right Now</h2>
-                <p class="section-subtitle">Don't just find a job - discover your calling! These exclusive opportunities are handpicked for ambitious professionals ready to make their mark.</p>
-            </div>
+      <!-- Trending Searches -->
+      <section class="trending-searches">
+        <div class="container">
+          <h3>Trending Searches</h3>
+          <div class="trending-tags" id="trending-searches-container">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+      </section>
 
-            <!-- AdSense Placeholder -->
-            <div class="ad-placeholder"></div>
+      <!-- Job Listings Section -->
+      <section class="job-listings" id="job-listings">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Latest Opportunities</h2>
+            <p class="section-subtitle">Discover your next career move</p>
+          </div>
 
-            <!-- Job Filters -->
-            <div class="filters">
-                <div class="filter-group">
-                    <label>Category</label>
-                    <select id="categoryFilter">
-                        <option value="">All Categories</option>
-                        <option value="technology">Technology</option>
-                        <option value="finance">Finance</option>
-                        <option value="healthcare">Healthcare</option>
-                        <option value="marketing">Marketing</option>
-                        <option value="sales">Sales</option>
-                        <option value="education">Education</option>
-                        <option value="engineering">Engineering</option>
-                        <option value="hr">Human Resources</option>
-                    </select>
+          <div class="jobs-container" id="jobs-container">
+            <!-- Jobs will be populated by JavaScript -->
+          </div>
+
+          <div class="section-footer">
+            <button class="btn--secondary glow-btn" id="view-all-jobs">
+              <span>View All Jobs</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Company Directory Preview -->
+      <section class="company-preview">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Top Employers</h2>
+            <p class="section-subtitle">Explore verified companies across Africa</p>
+          </div>
+
+          <div class="companies-grid" id="companies-preview-container">
+            <!-- Companies will be populated by JavaScript -->
+          </div>
+
+          <div class="section-footer">
+            <button class="btn--primary glow-btn" onclick="jobbyistApp.showPage('company-profiles')">
+              <span>View All Companies</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Blog Posts Section -->
+      <section class="featured-blog">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Career Insights & Tips</h2>
+            <p class="section-subtitle">Latest articles from industry professionals</p>
+          </div>
+
+          <div class="blog-posts-grid" id="blog-posts-container">
+            <!-- Blog posts will be populated by JavaScript -->
+          </div>
+
+          <div class="section-footer">
+            <button class="btn--primary glow-btn" onclick="jobbyistApp.showPage('community-forum')">
+              <span>Read More Articles</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Success Stories Preview -->
+      <section class="success-stories-preview">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Success Stories</h2>
+            <p class="section-subtitle">Real career transformations from our community</p>
+          </div>
+
+          <div class="success-stories-grid" id="success-stories-container">
+            <!-- Success stories will be populated by JavaScript -->
+          </div>
+
+          <div class="section-footer">
+            <button class="btn--primary glow-btn" onclick="jobbyistApp.showPage('success-stories')">
+              <span>View All Success Stories</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mobile Apps Coming Soon -->
+      <section class="mobile-apps">
+        <div class="container">
+          <div class="mobile-apps-content">
+            <div class="mobile-apps-text">
+              <h2>Coming Soon to Mobile</h2>
+              <p>Take your job search on the go with our upcoming mobile apps. Get instant notifications, apply with one tap, and never miss an opportunity.</p>
+              
+              <div class="app-store-badges">
+                <div class="app-badge coming-soon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                  </svg>
+                  <div>
+                    <span class="badge-text">Coming Soon</span>
+                    <span class="badge-store">App Store</span>
+                  </div>
                 </div>
-                <div class="filter-group">
-                    <label>Location</label>
-                    <select id="locationFilter">
-                        <option value="">All Locations</option>
-                        <option value="cape-town">Cape Town</option>
-                        <option value="johannesburg">Johannesburg</option>
-                        <option value="durban">Durban</option>
-                        <option value="pretoria">Pretoria</option>
-                        <option value="remote">Remote</option>
-                    </select>
+                <div class="app-badge coming-soon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                  </svg>
+                  <div>
+                    <span class="badge-text">Coming Soon</span>
+                    <span class="badge-store">Google Play</span>
+                  </div>
                 </div>
-                <div class="filter-group">
-                    <label>Salary Range</label>
-                    <select id="salaryFilter">
-                        <option value="">Any Salary</option>
-                        <option value="0-30000">R0 - R30,000</option>
-                        <option value="30000-50000">R30,000 - R50,000</option>
-                        <option value="50000-80000">R50,000 - R80,000</option>
-                        <option value="80000+">R80,000+</option>
-                    </select>
+              </div>
+              
+              <form class="notify-form" id="app-notify-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="notify-me">
+                  <input type="email" name="email" placeholder="Enter your email for app launch notifications" class="form-control" required>
+                  <button type="submit" class="btn--primary glow-btn">Notify Me</button>
                 </div>
-                <div class="filter-group">
-                    <label>Employment Type</label>
-                    <select id="typeFilter">
-                        <option value="">All Types</option>
-                        <option value="full-time">Full-time</option>
-                        <option value="part-time">Part-time</option>
-                        <option value="contract">Contract</option>
-                        <option value="internship">Internship</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Remote Work</label>
-                    <input type="checkbox" id="remoteFilter">
-                </div>
-            </div>
-
-            <!-- Jobs Grid -->
-            <div class="jobs-grid" id="jobsContainer">
-                <!-- Jobs will be populated by JavaScript -->
-            </div>
-
-            <!-- AdSense Placeholder -->
-            <div class="ad-placeholder"></div>
-
-            <!-- Pagination -->
-            <div class="pagination" id="pagination">
-                <!-- Pagination will be populated by JavaScript -->
-            </div>
-        </section>
-
-        <!-- Companies Section -->
-        <section id="companies" class="section">
-            <div class="section-header">
-                <h2 class="section-title">🏆 Elite Company Partners</h2>
-                <p class="section-subtitle">Connect with South Africa's most innovative employers. These industry leaders are actively building their dream teams!</p>
-            </div>
-
-            <div class="companies-grid" id="companiesContainer">
-                <!-- Companies will be populated by JavaScript -->
-            </div>
-        </section>
-    </main>
-
-    <!-- Registration Modal -->
-    <div class="modal" id="registrationModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">🚀 Join the Jobbyist Community</h3>
-                <button class="close-modal" onclick="closeModal('registrationModal')">&times;</button>
+              </form>
             </div>
             
-            <div class="step-indicator">
-                <div class="step-dot active"></div>
-                <div class="step-dot"></div>
-                <div class="step-dot"></div>
-                <div class="step-dot"></div>
-                <div class="step-dot"></div>
+            <div class="mobile-apps-visual">
+              <div class="animated-mobile-showcase">
+                <div class="floating-elements">
+                  <div class="floating-icon job-icon">💼</div>
+                  <div class="floating-icon notification-icon">🔔</div>
+                  <div class="floating-icon heart-icon">❤️</div>
+                  <div class="floating-icon rocket-icon">🚀</div>
+                </div>
+                <div class="phone-outline">
+                  <div class="screen-glow"></div>
+                  <div class="phone-content">
+                    <h3>📱 Jobbyist Mobile</h3>
+                    <p>Job search made simple</p>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
+    </div>
 
-            <form id="registrationForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
-                <!-- Step 1: Basic Information -->
-                <div class="step active" data-step="1">
-                    <h4>Let's start with the basics</h4>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <input type="text" name="first_name" placeholder="First Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="last_name" placeholder="Last Name" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="Email Address" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password" placeholder="Create a Strong Password" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" name="phone" placeholder="Phone Number (Optional)">
-                    </div>
-                </div>
+    <!-- Candidates Page -->
+    <div id="candidates" class="page">
+      <section class="candidates-hero">
+        <div class="container">
+          <div class="candidates-header">
+            <h1>Candidate Directory</h1>
+            <p>Discover talented professionals across Nigeria and South Africa. Connect with skilled candidates ready for their next opportunity.</p>
+            <div class="candidates-stats">
+              <span><strong>15,000+</strong> Active Candidates</span>
+              <span><strong>500+</strong> Skills Categories</span>
+              <span><strong>85%</strong> Response Rate</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                <!-- Step 2: Professional Background -->
-                <div class="step" data-step="2">
-                    <h4>Tell us about your professional journey</h4>
-                    <div class="form-group">
-                        <select name="experience_level" required>
-                            <option value="">Years of Experience</option>
-                            <option value="entry">Entry Level (0-2 years)</option>
-                            <option value="mid">Mid Level (3-5 years)</option>
-                            <option value="senior">Senior Level (6-10 years)</option>
-                            <option value="executive">Executive (10+ years)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="current_role" placeholder="Current/Most Recent Job Title">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="current_company" placeholder="Current/Most Recent Company">
-                    </div>
-                    <div class="form-group">
-                        <select name="industry" required>
-                            <option value="">Industry</option>
-                            <option value="technology">Technology</option>
-                            <option value="finance">Finance & Banking</option>
-                            <option value="healthcare">Healthcare</option>
-                            <option value="marketing">Marketing & Advertising</option>
-                            <option value="sales">Sales</option>
-                            <option value="education">Education</option>
-                            <option value="engineering">Engineering</option>
-                            <option value="hr">Human Resources</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Step 3: Job Preferences -->
-                <div class="step" data-step="3">
-                    <h4>What's your dream opportunity?</h4>
-                    <div class="form-group">
-                        <input type="text" name="desired_role" placeholder="Desired Job Title/Role" required>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <input type="number" name="min_salary" placeholder="Minimum Salary (R)" min="0">
-                        </div>
-                        <div class="form-group">
-                            <input type="number" name="max_salary" placeholder="Maximum Salary (R)" min="0">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="preferred_location" placeholder="Preferred Work Location">
-                    </div>
-                    <div class="form-group">
-                        <select name="employment_type">
-                            <option value="">Employment Type Preference</option>
-                            <option value="full-time">Full-time</option>
-                            <option value="part-time">Part-time</option>
-                            <option value="contract">Contract</option>
-                            <option value="freelance">Freelance</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><input type="checkbox" name="remote_work" value="yes"> Open to Remote Work</label>
-                    </div>
-                </div>
-
-                <!-- Step 4: Skills & Education -->
-                <div class="step" data-step="4">
-                    <h4>Showcase your expertise</h4>
-                    <div class="form-group">
-                        <textarea name="skills" placeholder="Key Skills (separated by commas)" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <select name="education_level">
-                            <option value="">Highest Education Level</option>
-                            <option value="high-school">High School</option>
-                            <option value="diploma">Diploma/Certificate</option>
-                            <option value="bachelor">Bachelor's Degree</option>
-                            <option value="master">Master's Degree</option>
-                            <option value="doctorate">Doctorate</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="qualifications" placeholder="Relevant Qualifications/Certifications">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="languages" placeholder="Languages Spoken (e.g., English, Afrikaans, Zulu)">
-                    </div>
-                </div>
-
-                <!-- Step 5: Profile Completion -->
-                <div class="step" data-step="5">
-                    <h4>Complete your professional profile</h4>
-                    <div class="form-group">
-                        <textarea name="bio" placeholder="Professional Bio/Summary" rows="4"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <input type="file" name="cv_upload" accept=".pdf,.doc,.docx" placeholder="Upload Your CV">
-                    </div>
-                    <div class="form-group">
-                        <input type="url" name="linkedin_url" placeholder="LinkedIn Profile URL">
-                    </div>
-                    <div class="form-group">
-                        <input type="url" name="portfolio_url" placeholder="Portfolio/Website URL">
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" name="newsletter" value="yes" checked>
-                            Send me job alerts and career tips
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" name="terms" value="yes" required>
-                            I agree to the Terms of Service and Privacy Policy
-                        </label>
-                    </div>
-                </div>
-
-                <div class="step-navigation">
-                    <button type="button" class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)" style="display: none;">Previous</button>
-                    <button type="button" class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">Next</button>
-                    <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;">🚀 Launch My Career</button>
-                </div>
+      <section class="candidates-content">
+        <div class="container">
+          <div class="candidates-filters">
+            <form class="candidates-filter-form" id="candidates-filter-form">
+              <div class="filter-row">
+                <input type="text" placeholder="Search by name or skills..." name="candidateSearch" class="form-control">
+                <select name="location" class="form-control">
+                  <option value="">All Locations</option>
+                  <option value="Nigeria">Nigeria</option>
+                  <option value="South Africa">South Africa</option>
+                  <option value="Remote">Remote</option>
+                  <option value="Lagos">Lagos</option>
+                  <option value="Johannesburg">Johannesburg</option>
+                  <option value="Cape Town">Cape Town</option>
+                </select>
+                <select name="experience" class="form-control">
+                  <option value="">All Experience Levels</option>
+                  <option value="Entry">Entry Level (0-2 years)</option>
+                  <option value="Mid">Mid Level (3-5 years)</option>
+                  <option value="Senior">Senior Level (5+ years)</option>
+                </select>
+                <select name="industry" class="form-control">
+                  <option value="">All Industries</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Healthcare">Healthcare</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Education">Education</option>
+                </select>
+                <button type="submit" class="btn--primary glow-btn">Filter</button>
+              </div>
+              <div class="filter-row">
+                <select name="availability" class="form-control">
+                  <option value="">All Availability</option>
+                  <option value="Available">Available Immediately</option>
+                  <option value="Open">Open to Opportunities</option>
+                  <option value="2 weeks">2 weeks notice</option>
+                  <option value="1 month">1 month notice</option>
+                </select>
+                <button type="button" class="btn--secondary" onclick="jobbyistApp.clearCandidateFilters()">Clear Filters</button>
+              </div>
             </form>
+          </div>
+
+          <div class="candidates-grid" id="candidates-container">
+            <!-- Candidate profiles will be populated here -->
+          </div>
+
+          <div class="candidates-pagination" id="candidates-pagination">
+            <!-- Pagination will be populated here -->
+          </div>
         </div>
+      </section>
     </div>
 
-    <!-- Company Modal -->
-    <div class="modal" id="companyModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="companyModalTitle">Company Profile</h3>
-                <button class="close-modal" onclick="closeModal('companyModal')">&times;</button>
+    <!-- Saved Jobs Page -->
+    <div id="saved-jobs" class="page">
+      <section class="saved-jobs-content">
+        <div class="container">
+          <div class="saved-jobs-header">
+            <h1>Saved Jobs</h1>
+            <p>Manage your bookmarked job opportunities. Quick apply or remove jobs from your saved list.</p>
+          </div>
+
+          <div class="saved-jobs-filters">
+            <div class="filter-actions">
+              <button class="btn--secondary" onclick="jobbyistApp.clearAllSavedJobs()">Clear All</button>
+              <button class="btn--primary glow-btn" onclick="jobbyistApp.bulkApplyToSavedJobs()">Apply to Selected</button>
             </div>
-            <div id="companyModalContent">
-                <!-- Company details will be populated by JavaScript -->
-            </div>
+          </div>
+
+          <div class="saved-jobs-list" id="saved-jobs-container">
+            <!-- Saved jobs will be populated here -->
+          </div>
         </div>
+      </section>
     </div>
 
-    <!-- Floating Buttons -->
-    <div class="floating-buttons">
-        <select class="language-selector" onchange="changeLanguage(this.value)">
-            <option value="en">🌍 English</option>
-            <option value="af">🌍 Afrikaans</option>
-            <option value="zu">🌍 isiZulu</option>
-            <option value="xh">🌍 isiXhosa</option>
-        </select>
-        <button class="floating-btn" onclick="openLiveChat()" title="Live Chat Support">
-            <i class="fas fa-comments"></i>
-        </button>
+    <!-- Jobbyist Pro Page -->
+    <div id="pro" class="page">
+      <section class="pro-hero">
+        <div class="container">
+          <div class="pro-hero-content">
+            <div class="pro-hero-text">
+              <h1>Accelerate Your Career with <span class="highlight-text">Jobbyist Pro</span></h1>
+              <p class="pro-subtitle">Unlock premium features designed to fast-track your job search success. Get priority access to top employers and exclusive career development tools.</p>
+              <div class="pro-trial">
+                <span class="trial-badge">Free 3-Day Trial</span>
+                <span class="trial-text">No commitment, cancel anytime</span>
+              </div>
+            </div>
+            <div class="pro-pricing-card">
+              <div class="pricing-header">
+                <div class="price">
+                  <span class="currency" id="pro-currency">R</span>
+                  <span class="amount" id="pro-amount">149.99</span>
+                  <span class="period">/month</span>
+                </div>
+                <div class="price-note" id="pro-price-note">ZAR pricing for South Africa</div>
+              </div>
+              <button class="btn--primary pro-subscribe glow-btn" id="start-trial-btn">
+                <span>Start Free Trial</span>
+              </button>
+              <div class="pricing-features">
+                <div class="feature-item">✓ 3-day free trial</div>
+                <div class="feature-item">✓ Cancel anytime</div>
+                <div class="feature-item">✓ All premium features included</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pro-features">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Premium Features</h2>
+            <p class="section-subtitle">Everything you need to land your dream job</p>
+          </div>
+
+          <div class="pro-features-grid" id="pro-features-container">
+            <!-- Pro features will be populated by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Pro Dashboard Preview -->
+      <section class="pro-dashboard-preview">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Your Pro Dashboard</h2>
+            <p class="section-subtitle">Track your progress and optimize your job search</p>
+          </div>
+
+          <div class="dashboard-preview" id="pro-dashboard-preview">
+            <!-- Dashboard preview will be populated here -->
+          </div>
+        </div>
+      </section>
     </div>
 
-    <!-- Google AdSense Script Placeholder -->
-    <script>
-        // TODO: Replace with your actual Google AdSense code
-        // Example:
-        // <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX"></script>
-    </script>
+    <!-- Recruitment Suite Page -->
+    <div id="recruitment-suite" class="page">
+      <section class="recruitment-hero">
+        <div class="container">
+          <div class="recruitment-header">
+            <h1>Recruitment Suite <span class="beta-badge">Early Access</span></h1>
+            <p>Enterprise-grade recruitment tools designed for African businesses. Streamline your hiring process with AI-powered matching and comprehensive analytics.</p>
+            <div class="recruitment-highlights">
+              <div class="highlight-item">🤖 AI-Powered Matching</div>
+              <div class="highlight-item">📊 Advanced Analytics</div>
+              <div class="highlight-item">⚡ Automated Screening</div>
+              <div class="highlight-item">🎯 Team Collaboration</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <script>
-        // Global State Management
-        let currentStep = 1;
-        let jobData = [];
-        let companyData = [];
-        let currentPage = 1;
-        const jobsPerPage = 10;
-        let userLimits = {
-            jobViews: 0,
-            jobApplications: 0,
-            maxJobViews: 50,
-            maxApplications: 5
-        };
-        let isProUser = false; // This would be determined by authentication in a real app
+      <section class="recruitment-features">
+        <div class="container">
+          <div class="features-grid" id="recruitment-features-container">
+            <!-- Features will be populated by JavaScript -->
+          </div>
+        </div>
+      </section>
 
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeTheme();
-            showCookieBanner();
-            loadJobData();
-            loadCompanyData();
-            updateUsageBanner();
-            
-            // Load user limits from localStorage
-            const savedLimits = localStorage.getItem('userLimits');
-            if (savedLimits) {
-                userLimits = { ...userLimits, ...JSON.parse(savedLimits) };
-            }
-            
-            // Reset daily limits if it's a new day
-            resetDailyLimits();
-        });
+      <section class="recruitment-signup">
+        <div class="container">
+          <div class="signup-content">
+            <div class="signup-text">
+              <h2>Join the Early Access Program</h2>
+              <p>Be among the first to experience our revolutionary recruitment platform. Limited spots available for the beta program.</p>
+              <ul class="signup-benefits">
+                <li>✓ Free 6-month trial</li>
+                <li>✓ Priority support</li>
+                <li>✓ Custom onboarding</li>
+                <li>✓ Feature requests priority</li>
+              </ul>
+            </div>
+            <div class="signup-form-container">
+              <form class="recruitment-signup-form" id="recruitment-signup-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <h3>Request Early Access</h3>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Company Name *</label>
+                    <input type="text" name="companyName" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Your Name *</label>
+                    <input type="text" name="contactName" class="form-control" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Work Email *</label>
+                    <input type="email" name="workEmail" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Job Title *</label>
+                    <input type="text" name="jobTitle" class="form-control" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Company Size *</label>
+                    <select name="companySize" class="form-control" required>
+                      <option value="">Select company size</option>
+                      <option value="1-10">1-10 employees</option>
+                      <option value="11-50">11-50 employees</option>
+                      <option value="51-200">51-200 employees</option>
+                      <option value="201-1000">201-1000 employees</option>
+                      <option value="1000+">1000+ employees</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Current Hiring Volume</label>
+                    <select name="hiringVolume" class="form-control">
+                      <option value="">Select hiring volume</option>
+                      <option value="1-5">1-5 hires per month</option>
+                      <option value="6-20">6-20 hires per month</option>
+                      <option value="21-50">21-50 hires per month</option>
+                      <option value="50+">50+ hires per month</option>
+                    </select>
+                  </div>
+                </div>
+                <button type="submit" class="btn--primary glow-btn recruitment-submit-btn">
+                  <span>Request Early Access</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
 
-        // Theme Management
-        function initializeTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
-            if (savedTheme) {
-                document.body.setAttribute('data-theme', savedTheme);
-            } else if (systemPrefersDark) {
-                document.body.setAttribute('data-theme', 'dark');
-            }
-            
-            updateThemeIcon();
-        }
+    <!-- Analytics Dashboard Page -->
+    <div id="analytics-dashboard" class="page">
+      <section class="analytics-hero">
+        <div class="container">
+          <div class="analytics-header">
+            <h1>Analytics & Insights Dashboard</h1>
+            <p>Comprehensive job market analysis and career insights for the African job market.</p>
+          </div>
+        </div>
+      </section>
 
-        function toggleTheme() {
-            const currentTheme = document.body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            document.body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon();
-        }
+      <section class="analytics-content">
+        <div class="container">
+          <div class="analytics-grid">
+            <!-- Market Trends Chart -->
+            <div class="analytics-card full-width">
+              <div class="card-header">
+                <h3>Job Market Trends</h3>
+                <div class="chart-controls">
+                  <select id="trends-period" class="form-control">
+                    <option value="3m">Last 3 Months</option>
+                    <option value="6m" selected>Last 6 Months</option>
+                    <option value="1y">Last Year</option>
+                  </select>
+                </div>
+              </div>
+              <div class="chart-container" style="position: relative; height: 400px;">
+                <canvas id="trends-chart"></canvas>
+              </div>
+            </div>
 
-        function updateThemeIcon() {
-            const themeIcon = document.getElementById('themeIcon');
-            const currentTheme = document.body.getAttribute('data-theme');
-            themeIcon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        }
+            <!-- Salary Insights -->
+            <div class="analytics-card">
+              <div class="card-header">
+                <h3>Salary Insights</h3>
+                <p>Average salaries by location and industry</p>
+              </div>
+              <div class="chart-container" style="position: relative; height: 300px;">
+                <canvas id="salary-chart"></canvas>
+              </div>
+            </div>
 
-        // Cookie Management
-        function showCookieBanner() {
-            const cookieConsent = localStorage.getItem('cookieConsent');
-            if (!cookieConsent) {
-                setTimeout(() => {
-                    document.getElementById('cookieBanner').classList.add('show');
-                }, 2000);
-            }
-        }
+            <!-- Industry Demand -->
+            <div class="analytics-card">
+              <div class="card-header">
+                <h3>Industry Demand</h3>
+                <p>Growing sectors and job opportunities</p>
+              </div>
+              <div class="chart-container" style="position: relative; height: 300px;">
+                <canvas id="industry-chart"></canvas>
+              </div>
+            </div>
 
-        function acceptCookies() {
-            localStorage.setItem('cookieConsent', 'accepted');
-            document.getElementById('cookieBanner').classList.remove('show');
-        }
+            <!-- Skills in Demand -->
+            <div class="analytics-card">
+              <div class="card-header">
+                <h3>Top Skills in Demand</h3>
+                <p>Most requested skills by employers</p>
+              </div>
+              <div class="skills-list" id="skills-demand-list">
+                <!-- Skills will be populated here -->
+              </div>
+            </div>
 
-        function manageCookies() {
-            // In a real implementation, this would open a detailed cookie management modal
-            alert('Cookie management settings would open here. For now, you can accept or decline all cookies.');
-        }
+            <!-- Career Path Recommendations -->
+            <div class="analytics-card">
+              <div class="card-header">
+                <h3>Career Path Recommendations</h3>
+                <p>Suggested career progressions based on market data</p>
+              </div>
+              <div class="career-paths" id="career-paths-container">
+                <!-- Career paths will be populated here -->
+              </div>
+            </div>
 
-        // Usage Limits Management
-        function updateUsageBanner() {
-            const banner = document.getElementById('usageBanner');
-            
-            if (!isProUser && (userLimits.jobViews >= userLimits.maxJobViews || userLimits.jobApplications >= userLimits.maxApplications)) {
-                banner.classList.add('show');
-            } else {
-                banner.classList.remove('show');
-            }
-        }
+            <!-- Popular Searches -->
+            <div class="analytics-card">
+              <div class="card-header">
+                <h3>Popular Job Searches</h3>
+                <p>Trending search terms this week</p>
+              </div>
+              <div class="popular-searches" id="popular-searches-list">
+                <!-- Popular searches will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
 
-        function resetDailyLimits() {
-            const lastReset = localStorage.getItem('lastLimitReset');
-            const today = new Date().toDateString();
-            
-            if (lastReset !== today) {
-                userLimits.jobViews = 0;
-                userLimits.jobApplications = 0;
-                localStorage.setItem('userLimits', JSON.stringify(userLimits));
-                localStorage.setItem('lastLimitReset', today);
-            }
-        }
+    <!-- Company Profiles Page -->
+    <div id="company-profiles" class="page">
+      <section class="company-profiles-hero">
+        <div class="container">
+          <div class="profiles-header">
+            <h1>Company Profiles</h1>
+            <p>Discover top employers across Africa. Explore company cultures, values, career opportunities, and employee reviews.</p>
+            <div class="profiles-stats">
+              <span><strong>5,000+</strong> Companies</span>
+              <span><strong>2,500+</strong> Verified Profiles</span>
+              <span><strong>25,000+</strong> Open Positions</span>
+              <span><strong>15,000+</strong> Company Reviews</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        function checkViewLimit() {
-            if (!isProUser && userLimits.jobViews >= userLimits.maxJobViews) {
-                showModal('registrationModal');
-                return false;
-            }
-            
-            userLimits.jobViews++;
-            localStorage.setItem('userLimits', JSON.stringify(userLimits));
-            updateUsageBanner();
-            return true;
-        }
+      <section class="company-profiles-content">
+        <div class="container">
+          <div class="profiles-search">
+            <form class="profiles-search-form" id="company-search-form">
+              <div class="search-row">
+                <input type="text" placeholder="Search companies..." name="companySearch" class="form-control">
+                <select name="industry" class="form-control">
+                  <option value="">All Industries</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Healthcare">Healthcare</option>
+                  <option value="Manufacturing">Manufacturing</option>
+                  <option value="Education">Education</option>
+                  <option value="Marketing">Marketing</option>
+                </select>
+                <select name="location" class="form-control">
+                  <option value="">All Locations</option>
+                  <option value="South Africa">South Africa</option>
+                  <option value="Nigeria">Nigeria</option>
+                  <option value="Johannesburg">Johannesburg</option>
+                  <option value="Lagos">Lagos</option>
+                  <option value="Cape Town">Cape Town</option>
+                </select>
+                <select name="size" class="form-control">
+                  <option value="">All Sizes</option>
+                  <option value="1-10">1-10 employees</option>
+                  <option value="11-50">11-50 employees</option>
+                  <option value="51-200">51-200 employees</option>
+                  <option value="201-1000">201-1000 employees</option>
+                  <option value="1000+">1000+ employees</option>
+                </select>
+                <button type="submit" class="btn--primary glow-btn">Search</button>
+              </div>
+            </form>
+          </div>
 
-        function checkApplicationLimit() {
-            if (!isProUser && userLimits.jobApplications >= userLimits.maxApplications) {
-                showModal('registrationModal');
-                return false;
-            }
-            
-            userLimits.jobApplications++;
-            localStorage.setItem('userLimits', JSON.stringify(userLimits));
-            updateUsageBanner();
-            return true;
-        }
+          <div class="companies-grid" id="companies-container">
+            <!-- Company profiles will be populated here -->
+          </div>
+        </div>
+      </section>
+    </div>
 
-        // Job Data Management
-        function loadJobData() {
-            // Simulated real job data for South Africa
-            jobData = [
-                {
-                    id: 1,
-                    title: "Senior Software Engineer",
-                    company: "Naspers",
-                    location: "Cape Town",
-                    type: "Full-time",
-                    salary: "R65,000 - R85,000",
-                    category: "technology",
-                    remote: true,
-                    description: "Lead innovative projects in one of Africa's largest technology companies. Drive technical excellence and mentor junior developers.",
-                    requirements: "5+ years experience, React, Node.js, Python",
-                    posted: "2024-01-15",
-                    validUntil: "2024-02-15"
-                },
-                {
-                    id: 2,
-                    title: "Digital Marketing Manager",
-                    company: "Woolworths",
-                    location: "Johannesburg",
-                    type: "Full-time",
-                    salary: "R45,000 - R60,000",
-                    category: "marketing",
-                    remote: false,
-                    description: "Shape the digital future of South Africa's premier retailer. Lead campaigns that reach millions of customers.",
-                    requirements: "Digital marketing experience, Google Ads, Analytics",
-                    posted: "2024-01-14",
-                    validUntil: "2024-02-14"
-                },
-                {
-                    id: 3,
-                    title: "Data Scientist",
-                    company: "Discovery",
-                    location: "Johannesburg",
-                    type: "Full-time",
-                    salary: "R70,000 - R95,000",
-                    category: "technology",
-                    remote: true,
-                    description: "Transform healthcare with cutting-edge data science. Work with massive datasets to improve lives.",
-                    requirements: "Python, R, Machine Learning, Statistics",
-                    posted: "2024-01-13",
-                    validUntil: "2024-02-13"
-                },
-                {
-                    id: 4,
-                    title: "Product Manager",
-                    company: "Takealot",
-                    location: "Cape Town",
-                    type: "Full-time",
-                    salary: "R55,000 - R75,000",
-                    category: "technology",
-                    remote: true,
-                    description: "Drive product strategy for Africa's largest online retailer. Shape the future of e-commerce.",
-                    requirements: "Product management experience, Agile, Analytics",
-                    posted: "2024-01-12",
-                    validUntil: "2024-02-12"
-                },
-                {
-                    id: 5,
-                    title: "Financial Analyst",
-                    company: "Standard Bank",
-                    location: "Johannesburg",
-                    type: "Full-time",
-                    salary: "R40,000 - R55,000",
-                    category: "finance",
-                    remote: false,
-                    description: "Analyze financial markets and drive investment decisions at Africa's largest bank.",
-                    requirements: "Finance degree, Excel, Financial modeling",
-                    posted: "2024-01-11",
-                    validUntil: "2024-02-11"
-                },
-                // Add more jobs to reach 50
-                ...generateMoreJobs()
-            ];
-            
-            renderJobs();
-        }
+    <!-- Claim Your Page -->
+    <div id="claim-page" class="page">
+      <section class="claim-hero">
+        <div class="container">
+          <div class="claim-header">
+            <h1>Claim Your Company Page</h1>
+            <p>Take control of your company's presence on Jobbyist. Verify your business, showcase your culture, and attract top talent with enhanced features.</p>
+            <div class="claim-benefits">
+              <div class="benefit-item">✓ Free company verification</div>
+              <div class="benefit-item">✓ Enhanced company profile with logo upload</div>
+              <div class="benefit-item">✓ Customer reviews and ratings</div>
+              <div class="benefit-item">✓ Priority placement in search results</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        function generateMoreJobs() {
-            const companies = ["MTN", "Vodacom", "Sasol", "Anglo American", "FirstRand", "Shoprite", "Pick n Pay", "Nedbank", "ABSA", "Old Mutual"];
-            const titles = ["Software Developer", "Marketing Specialist", "Sales Representative", "HR Manager", "Business Analyst", "UX Designer", "Project Manager", "Operations Manager", "Content Creator", "Customer Success Manager"];
-            const locations = ["Cape Town", "Johannesburg", "Durban", "Pretoria", "Port Elizabeth"];
-            const categories = ["technology", "marketing", "sales", "hr", "finance"];
-            
-            const moreJobs = [];
-            for (let i = 6; i <= 50; i++) {
-                const company = companies[Math.floor(Math.random() * companies.length)];
-                const title = titles[Math.floor(Math.random() * titles.length)];
-                const location = locations[Math.floor(Math.random() * locations.length)];
-                const category = categories[Math.floor(Math.random() * categories.length)];
-                const minSalary = 25000 + Math.floor(Math.random() * 50000);
-                const maxSalary = minSalary + 15000 + Math.floor(Math.random() * 25000);
+      <section class="claim-content">
+        <div class="container">
+          <div class="claim-form-container">
+            <form class="claim-form" id="claim-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Company Name *</label>
+                  <input type="text" name="companyName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Your Name *</label>
+                  <input type="text" name="contactName" class="form-control" required>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Work Email *</label>
+                  <input type="email" name="workEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Job Title *</label>
+                  <input type="text" name="jobTitle" class="form-control" required>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Company Website</label>
+                  <input type="url" name="website" class="form-control" placeholder="https://yourcompany.com">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone Number</label>
+                  <input type="tel" name="phone" class="form-control" placeholder="+27 or +234">
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Company Size *</label>
+                  <select name="companySize" class="form-control" required>
+                    <option value="">Select company size</option>
+                    <option value="1-10">1-10 employees</option>
+                    <option value="11-50">11-50 employees</option>
+                    <option value="51-200">51-200 employees</option>
+                    <option value="201-1000">201-1000 employees</option>
+                    <option value="1000+">1000+ employees</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Industry *</label>
+                  <select name="industry" class="form-control" required>
+                    <option value="">Select industry</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Manufacturing">Manufacturing</option>
+                    <option value="Education">Education</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Country *</label>
+                  <select name="country" class="form-control" required>
+                    <option value="">Select country</option>
+                    <option value="South Africa">South Africa</option>
+                    <option value="Nigeria">Nigeria</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">City *</label>
+                  <input type="text" name="city" class="form-control" placeholder="e.g., Johannesburg, Lagos" required>
+                </div>
+              </div>
+              
+              <!-- Logo Upload with Drag & Drop -->
+              <div class="form-group">
+                <label class="form-label">Company Logo</label>
+                <div class="file-upload-area" id="logo-upload">
+                  <div class="file-upload-content">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21,15 16,10 5,21"/>
+                    </svg>
+                    <p>Drag & drop your company logo here or <span class="upload-link">browse</span></p>
+                    <small>PNG, JPG, SVG up to 5MB • Recommended: 200x200px</small>
+                  </div>
+                  <input type="file" name="logo" accept=".png,.jpg,.jpeg,.svg" class="file-input">
+                  <div class="file-preview hidden"></div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Company Description *</label>
+                <textarea name="description" rows="4" class="form-control" placeholder="Tell us about your company, culture, and what makes you unique" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">What makes your company special?</label>
+                <textarea name="uniqueValue" rows="3" class="form-control" placeholder="Describe your company culture, benefits, or unique value proposition"></textarea>
+              </div>
+              
+              <div class="verification-note">
+                <h4>🔒 Email Verification Process</h4>
+                <p>After submission, we'll send a magic link to your work email for secure verification. Our team will review your company details and activate your verified profile within 24-48 hours.</p>
+              </div>
+              
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" name="terms" required>
+                  <span class="checkbox-custom"></span>
+                  I confirm that I am authorized to claim this company page and agree to the <a href="#" onclick="jobbyistApp.showPage('terms')" target="_blank">Terms of Service</a> *
+                </label>
+              </div>
+              
+              <button type="submit" class="btn--primary claim-submit-btn glow-btn">
+                <span>Claim Your Page</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Sample Company Profiles Preview -->
+          <div class="sample-companies-section">
+            <h2>Featured Company Profiles</h2>
+            <p>See how top employers showcase their brand on Jobbyist</p>
+            <div class="sample-companies-grid" id="sample-companies-container">
+              <!-- Sample companies will be populated here -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Community Forum Page -->
+    <div id="community-forum" class="page">
+      <section class="forum-access">
+        <div class="container">
+          <div class="forum-access-content">
+            <div class="access-gate" id="forum-access-gate">
+              <div class="gate-header">
+                <h1>Community Forum</h1>
+                <p>Join our community of professionals across Africa. Share insights, ask questions, and connect with like-minded individuals in your field.</p>
+                <div class="forum-stats">
+                  <span><strong>25,000+</strong> Members</span>
+                  <span><strong>500+</strong> Daily Posts</span>
+                  <span><strong>95%</strong> Response Rate</span>
+                </div>
+              </div>
+              
+              <div class="access-form">
+                <h3>🔐 Email Authentication Required</h3>
+                <p>Enter your email address to receive a magic link for secure access to our community forum. No passwords required!</p>
                 
-                moreJobs.push({
-                    id: i,
-                    title: title,
-                    company: company,
-                    location: location,
-                    type: "Full-time",
-                    salary: `R${minSalary.toLocaleString()} - R${maxSalary.toLocaleString()}`,
-                    category: category,
-                    remote: Math.random() > 0.6,
-                    description: `Join ${company} as a ${title} and make a real impact. We're looking for passionate professionals ready to drive innovation and growth.`,
-                    requirements: "Relevant experience and qualifications required",
-                    posted: `2024-01-${String(Math.floor(Math.random() * 15) + 1).padStart(2, '0')}`,
-                    validUntil: `2024-02-${String(Math.floor(Math.random() * 28) + 1).padStart(2, '0')}`
-                });
-            }
-            return moreJobs;
-        }
-
-        // Company Data Management
-        function loadCompanyData() {
-            companyData = [
-                {
-                    id: 1,
-                    name: "Vodacom",
-                    industry: "Telecommunications",
-                    rating: 4.2,
-                    employees: "6,000+",
-                    description: "Leading telecommunications company connecting South Africa",
-                    openJobs: 15,
-                    benefits: ["Medical Aid", "Pension Fund", "Flexible Working"],
-                    culture: "Innovation-driven with focus on diversity and inclusion"
-                },
-                {
-                    id: 2,
-                    name: "HCL Technologies",
-                    industry: "Technology",
-                    rating: 4.1,
-                    employees: "3,500+",
-                    description: "Global technology consulting and digital solutions",
-                    openJobs: 22,
-                    benefits: ["Training Programs", "Career Growth", "Work-Life Balance"],
-                    culture: "Employee-centric with focus on continuous learning"
-                },
-                {
-                    id: 3,
-                    name: "Daimler Truck",
-                    industry: "Automotive",
-                    rating: 4.0,
-                    employees: "2,100+",
-                    description: "Leading commercial vehicle manufacturer",
-                    openJobs: 8,
-                    benefits: ["Performance Bonuses", "Health Benefits", "Skills Development"],
-                    culture: "Engineering excellence with sustainability focus"
-                },
-                {
-                    id: 4,
-                    name: "Heineken",
-                    industry: "Consumer Goods",
-                    rating: 4.3,
-                    employees: "1,800+",
-                    description: "Global brewing company with local South African operations",
-                    openJobs: 12,
-                    benefits: ["Employee Discounts", "Wellness Programs", "Team Events"],
-                    culture: "Collaborative environment promoting creativity and responsibility"
-                },
-                {
-                    id: 5,
-                    name: "Santam",
-                    industry: "Insurance",
-                    rating: 3.9,
-                    employees: "4,200+",
-                    description: "Leading short-term insurance provider in South Africa",
-                    openJobs: 18,
-                    benefits: ["Insurance Coverage", "Retirement Planning", "Professional Development"],
-                    culture: "Customer-focused with emphasis on integrity and excellence"
-                },
-                {
-                    id: 6,
-                    name: "Accenture",
-                    industry: "Consulting",
-                    rating: 4.1,
-                    employees: "2,800+",
-                    description: "Global management consulting and professional services",
-                    openJobs: 25,
-                    benefits: ["Global Opportunities", "Training Investment", "Flexible Career Paths"],
-                    culture: "Innovation and collaboration driving digital transformation"
-                },
-                {
-                    id: 7,
-                    name: "Unilever",
-                    industry: "Consumer Goods",
-                    rating: 4.2,
-                    employees: "1,500+",
-                    description: "Multinational consumer goods company",
-                    openJobs: 10,
-                    benefits: ["Sustainability Programs", "Health & Wellbeing", "Leadership Development"],
-                    culture: "Purpose-driven with focus on sustainable living"
-                },
-                {
-                    id: 8,
-                    name: "Mondelez",
-                    industry: "Food & Beverage",
-                    rating: 4.0,
-                    employees: "1,200+",
-                    description: "Global snacking company with popular brands",
-                    openJobs: 7,
-                    benefits: ["Employee Recognition", "Flexible Benefits", "Career Mobility"],
-                    culture: "Entrepreneurial spirit with focus on growth and innovation"
-                },
-                {
-                    id: 9,
-                    name: "Mercedes-Benz",
-                    industry: "Automotive",
-                    rating: 4.4,
-                    employees: "3,000+",
-                    description: "Luxury automotive manufacturer and mobility solutions",
-                    openJobs: 14,
-                    benefits: ["Premium Healthcare", "Vehicle Programs", "Technical Training"],
-                    culture: "Excellence in engineering with luxury service standards"
-                },
-                {
-                    id: 10,
-                    name: "Sanlam",
-                    industry: "Financial Services",
-                    rating: 3.8,
-                    employees: "5,500+",
-                    description: "Leading financial services group in Africa",
-                    openJobs: 20,
-                    benefits: ["Financial Planning", "Employee Share Scheme", "Learning Academy"],
-                    culture: "Empowerment and transformation driving financial inclusion"
-                }
-            ];
-            
-            renderCompanies();
-        }
-
-        // Rendering Functions
-        function renderJobs() {
-            const container = document.getElementById('jobsContainer');
-            const filteredJobs = filterJobs();
-            const startIndex = (currentPage - 1) * jobsPerPage;
-            const endIndex = startIndex + jobsPerPage;
-            const jobsToShow = filteredJobs.slice(startIndex, endIndex);
-            
-            container.innerHTML = '';
-            
-            jobsToShow.forEach((job, index) => {
-                // Add AdSense placeholder every 3 jobs
-                if (index > 0 && index % 3 === 0) {
-                    const adPlaceholder = document.createElement('div');
-                    adPlaceholder.className = 'ad-placeholder';
-                    container.appendChild(adPlaceholder);
-                }
+                <form class="auth-form" id="forum-auth-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                  <div class="form-group">
+                    <label class="form-label">Email Address *</label>
+                    <input type="email" name="email" placeholder="Enter your email address" class="form-control" required>
+                  </div>
+                  <button type="submit" class="btn--primary glow-btn">
+                    <span>Send Magic Link</span>
+                  </button>
+                </form>
                 
-                const jobCard = createJobCard(job);
-                container.appendChild(jobCard);
-            });
+                <div class="access-note">
+                  <small>We'll send you a secure link to access the community forum. The link expires in 1 hour for security.</small>
+                </div>
+              </div>
+            </div>
             
-            renderPagination(filteredJobs.length);
-            addJobSchema(jobsToShow);
-        }
+            <div class="forum-content hidden" id="forum-content">
+              <div class="forum-header">
+                <h1>Community Forum</h1>
+                <p>Connect with professionals and share insights</p>
+                <div class="forum-actions">
+                  <button class="btn--primary glow-btn" onclick="jobbyistApp.showNotification('Post creation feature coming soon!', 'info')">Create Post</button>
+                  <button class="btn--secondary" onclick="jobbyistApp.logoutForum()">Sign Out</button>
+                </div>
+              </div>
+              
+              <!-- Blog Posts with Disqus Integration Ready -->
+              <div class="forum-posts-grid" id="forum-posts-grid">
+                <!-- Forum posts will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
 
-        function createJobCard(job) {
-            const jobCard = document.createElement('div');
-            jobCard.className = 'job-card fade-in';
-            
-            jobCard.innerHTML = `
-                <div class="job-header">
-                    <div>
-                        <h3 class="job-title">${job.title}</h3>
-                        <div class="company-name">${job.company}</div>
+    <!-- Success Stories Page -->
+    <div id="success-stories" class="page">
+      <section class="success-stories-hero">
+        <div class="container">
+          <div class="success-header">
+            <h1>Success Stories</h1>
+            <p>Real career transformations from our community. Be inspired by professionals who found their dream jobs through Jobbyist.</p>
+            <div class="success-stats">
+              <span><strong>10,000+</strong> Success Stories</span>
+              <span><strong>92%</strong> Success Rate</span>
+              <span><strong>50%</strong> Salary Increase</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="success-stories-content">
+        <div class="container">
+          <div class="success-stories-grid" id="full-success-stories-container">
+            <!-- Success stories will be populated here -->
+          </div>
+
+          <div class="share-story-section">
+            <div class="share-story-card">
+              <h2>Share Your Success Story</h2>
+              <p>Inspire others by sharing your career journey and transformation story.</p>
+              <form class="share-story-form" id="share-story-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Your Name *</label>
+                    <input type="text" name="name" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Current Job Title *</label>
+                    <input type="text" name="jobTitle" class="form-control" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Your Success Story *</label>
+                  <textarea name="story" rows="5" class="form-control" placeholder="Tell us about your journey, challenges overcome, and how Jobbyist helped..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="consent" required>
+                    <span class="checkbox-custom"></span>
+                    I consent to sharing my story on the Jobbyist platform to inspire others *
+                  </label>
+                </div>
+                <button type="submit" class="btn--primary glow-btn">Share My Story</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Notification System Page -->
+    <div id="notifications" class="page">
+      <section class="notifications-content">
+        <div class="container">
+          <div class="notifications-header">
+            <h1>Notification Preferences</h1>
+            <p>Customize how and when you receive updates about job opportunities, applications, and platform news.</p>
+          </div>
+
+          <div class="notifications-settings">
+            <form class="notifications-form" id="notifications-form">
+              <div class="settings-section">
+                <h3>Email Notifications</h3>
+                <div class="notification-item">
+                  <label class="toggle-label">
+                    <input type="checkbox" name="jobAlerts" checked>
+                    <span class="toggle-slider"></span>
+                    <div class="toggle-content">
+                      <strong>Job Alerts</strong>
+                      <p>Receive personalized job recommendations based on your profile</p>
                     </div>
-                    <button class="btn btn-secondary" onclick="saveJob(${job.id})" title="Save Job">
-                        <i class="far fa-bookmark"></i>
-                    </button>
+                  </label>
                 </div>
-                <div class="job-meta">
-                    <div class="meta-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>${job.location}</span>
+                <div class="notification-item">
+                  <label class="toggle-label">
+                    <input type="checkbox" name="applicationUpdates" checked>
+                    <span class="toggle-slider"></span>
+                    <div class="toggle-content">
+                      <strong>Application Updates</strong>
+                      <p>Get notified about status changes on your job applications</p>
                     </div>
-                    <div class="meta-item">
-                        <i class="fas fa-clock"></i>
-                        <span>${job.type}</span>
+                  </label>
+                </div>
+                <div class="notification-item">
+                  <label class="toggle-label">
+                    <input type="checkbox" name="weeklyDigest" checked>
+                    <span class="toggle-slider"></span>
+                    <div class="toggle-content">
+                      <strong>Weekly Job Digest</strong>
+                      <p>Curated job opportunities delivered every Monday</p>
                     </div>
-                    <div class="meta-item">
-                        <i class="fas fa-calendar"></i>
-                        <span>Posted ${formatDate(job.posted)}</span>
+                  </label>
+                </div>
+                <div class="notification-item">
+                  <label class="toggle-label">
+                    <input type="checkbox" name="companyUpdates">
+                    <span class="toggle-slider"></span>
+                    <div class="toggle-content">
+                      <strong>Company Updates</strong>
+                      <p>News and updates from companies you follow</p>
                     </div>
+                  </label>
                 </div>
-                <div class="job-tags">
-                    <span class="tag salary">${job.salary}</span>
-                    <span class="tag">${job.category.charAt(0).toUpperCase() + job.category.slice(1)}</span>
-                    ${job.remote ? '<span class="tag remote">Remote Friendly</span>' : ''}
-                </div>
-                <p class="job-description">${job.description}</p>
-                <div class="job-actions">
-                    <button class="btn btn-primary" onclick="applyToJob(${job.id})">
-                        <i class="fas fa-paper-plane"></i> Apply Now
-                    </button>
-                    <button class="btn btn-secondary" onclick="viewJobDetails(${job.id})">
-                        <i class="fas fa-eye"></i> View Details
-                    </button>
-                </div>
-            `;
-            
-            return jobCard;
-        }
-
-        function renderCompanies() {
-            const container = document.getElementById('companiesContainer');
-            container.innerHTML = '';
-            
-            companyData.forEach(company => {
-                const companyCard = createCompanyCard(company);
-                container.appendChild(companyCard);
-            });
-        }
-
-        function createCompanyCard(company) {
-            const companyCard = document.createElement('div');
-            companyCard.className = 'company-card fade-in';
-            companyCard.onclick = () => viewCompanyDetails(company.id);
-            
-            const initials = company.name.split(' ').map(word => word[0]).join('').substring(0, 2);
-            
-            companyCard.innerHTML = `
-                <div class="company-logo">${initials}</div>
-                <h4 class="company-name-card">${company.name}</h4>
-                <p class="company-industry">${company.industry}</p>
-                <div class="company-rating">
-                    <span class="stars">${'★'.repeat(Math.floor(company.rating))}${'☆'.repeat(5 - Math.floor(company.rating))}</span>
-                    <span>${company.rating}</span>
-                </div>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">${company.openJobs} open positions</p>
-            `;
-            
-            return companyCard;
-        }
-
-        function renderPagination(totalJobs) {
-            const pagination = document.getElementById('pagination');
-            const totalPages = Math.ceil(totalJobs / jobsPerPage);
-            
-            pagination.innerHTML = '';
-            
-            if (totalPages <= 1) return;
-            
-            // Previous button
-            if (currentPage > 1) {
-                const prevBtn = document.createElement('button');
-                prevBtn.className = 'page-btn';
-                prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i> Previous';
-                prevBtn.onclick = () => goToPage(currentPage - 1);
-                pagination.appendChild(prevBtn);
-            }
-            
-            // Page numbers
-            const startPage = Math.max(1, currentPage - 2);
-            const endPage = Math.min(totalPages, currentPage + 2);
-            
-            for (let i = startPage; i <= endPage; i++) {
-                const pageBtn = document.createElement('button');
-                pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
-                pageBtn.textContent = i;
-                pageBtn.onclick = () => goToPage(i);
-                pagination.appendChild(pageBtn);
-            }
-            
-            // Next button
-            if (currentPage < totalPages) {
-                const nextBtn = document.createElement('button');
-                nextBtn.className = 'page-btn';
-                nextBtn.innerHTML = 'Next <i class="fas fa-chevron-right"></i>';
-                nextBtn.onclick = () => goToPage(currentPage + 1);
-                pagination.appendChild(nextBtn);
-            }
-        }
-
-        // Filtering and Search
-        function filterJobs() {
-            const categoryFilter = document.getElementById('categoryFilter').value;
-            const locationFilter = document.getElementById('locationFilter').value;
-            const salaryFilter = document.getElementById('salaryFilter').value;
-            const typeFilter = document.getElementById('typeFilter').value;
-            const remoteFilter = document.getElementById('remoteFilter').checked;
-            
-            return jobData.filter(job => {
-                if (categoryFilter && job.category !== categoryFilter) return false;
-                if (locationFilter && job.location.toLowerCase() !== locationFilter.replace('-', ' ')) return false;
-                if (typeFilter && job.type.toLowerCase() !== typeFilter.replace('-', ' ')) return false;
-                if (remoteFilter && !job.remote) return false;
-                if (salaryFilter) {
-                    const [min, max] = salaryFilter.split('-').map(s => parseInt(s) || Infinity);
-                    const jobSalary = parseInt(job.salary.replace(/[R,\s-]/g, '').split('R')[0]);
-                    if (max && (jobSalary < min || jobSalary > max)) return false;
-                    if (!max && jobSalary < min) return false;
-                }
-                return true;
-            });
-        }
-
-        // Event Handlers
-        function goToPage(page) {
-            currentPage = page;
-            renderJobs();
-            document.getElementById('jobs').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function viewJobDetails(jobId) {
-            if (!checkViewLimit()) return;
-            
-            const job = jobData.find(j => j.id === jobId);
-            if (job) {
-                // In a real app, this would navigate to a detailed job page
-                alert(`Viewing details for: ${job.title} at ${job.company}\n\nRequirements: ${job.requirements}\n\nThis would open a detailed job page in a real application.`);
-            }
-        }
-
-        function applyToJob(jobId) {
-            if (!checkApplicationLimit()) return;
-            
-            const job = jobData.find(j => j.id === jobId);
-            if (job) {
-                // In a real app, this would handle the application process
-                alert(`🎉 Application submitted for ${job.title} at ${job.company}!\n\nYou'll receive a confirmation email shortly. Good luck!`);
-            }
-        }
-
-        function saveJob(jobId) {
-            showModal('registrationModal');
-        }
-
-        function viewCompanyDetails(companyId) {
-            const company = companyData.find(c => c.id === companyId);
-            if (!company) return;
-            
-            const modal = document.getElementById('companyModal');
-            const title = document.getElementById('companyModalTitle');
-            const content = document.getElementById('companyModalContent');
-            
-            title.textContent = company.name;
-            
-            const followButtonClass = isProUser ? '' : 'pro-feature';
-            const reviewButtonClass = isProUser ? '' : 'pro-feature';
-            
-            content.innerHTML = `
-                <div style="text-align: center; margin-bottom: 2rem;">
-                    <div class="company-logo" style="margin: 0 auto 1rem;">${company.name.split(' ').map(word => word[0]).join('').substring(0, 2)}</div>
-                    <h3>${company.name}</h3>
-                    <p style="color: var(--text-secondary);">${company.industry}</p>
-                    <div class="company-rating">
-                        <span class="stars">${'★'.repeat(Math.floor(company.rating))}${'☆'.repeat(5 - Math.floor(company.rating))}</span>
-                        <span>${company.rating}/5</span>
+                <div class="notification-item">
+                  <label class="toggle-label">
+                    <input type="checkbox" name="careerTips">
+                    <span class="toggle-slider"></span>
+                    <div class="toggle-content">
+                      <strong>Career Tips & Insights</strong>
+                      <p>Professional development content and industry insights</p>
                     </div>
+                  </label>
                 </div>
-                
-                <div style="margin-bottom: 2rem;">
-                    <h4>About ${company.name}</h4>
-                    <p>${company.description}</p>
-                </div>
-                
-                <div style="margin-bottom: 2rem;">
-                    <h4>Company Culture</h4>
-                    <p>${company.culture}</p>
-                </div>
-                
-                <div style="margin-bottom: 2rem;">
-                    <h4>Benefits & Perks</h4>
-                    <ul>
-                        ${company.benefits.map(benefit => `<li>${benefit}</li>`).join('')}
-                    </ul>
-                </div>
-                
-                <div style="margin-bottom: 2rem;">
-                    <h4>Quick Stats</h4>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                        <div>
-                            <strong>Employees:</strong> ${company.employees}
-                        </div>
-                        <div>
-                            <strong>Open Positions:</strong> ${company.openJobs}
-                        </div>
+              </div>
+
+              <div class="settings-section">
+                <h3>Push Notifications (Web)</h3>
+                <div class="notification-item">
+                  <label class="toggle-label">
+                    <input type="checkbox" name="instantAlerts">
+                    <span class="toggle-slider"></span>
+                    <div class="toggle-content">
+                      <strong>Instant Job Alerts</strong>
+                      <p>Immediate notifications for jobs matching your criteria</p>
                     </div>
+                  </label>
+                </div>
+                <div class="notification-item">
+                  <label class="toggle-label">
+                    <input type="checkbox" name="messagingNotifications">
+                    <span class="toggle-slider"></span>
+                    <div class="toggle-content">
+                      <strong>Messages & Responses</strong>
+                      <p>Notifications for forum replies and direct messages</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <h3>SMS Notifications</h3>
+                <div class="form-group">
+                  <label class="form-label">Phone Number</label>
+                  <input type="tel" name="phoneNumber" class="form-control" placeholder="+27 or +234">
+                </div>
+                <div class="notification-item">
+                  <label class="toggle-label">
+                    <input type="checkbox" name="smsAlerts">
+                    <span class="toggle-slider"></span>
+                    <div class="toggle-content">
+                      <strong>Priority Job Alerts</strong>
+                      <p>SMS alerts for high-priority job matches (max 3 per week)</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="settings-actions">
+                <button type="button" class="btn--secondary" onclick="jobbyistApp.resetNotificationSettings()">Reset to Default</button>
+                <button type="submit" class="btn--primary glow-btn">Save Preferences</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Legal Pages -->
+    <div id="terms" class="page">
+      <section class="legal-content">
+        <div class="container">
+          <div class="legal-header">
+            <h1>Terms of Service</h1>
+            <p class="last-updated">Last updated: February 2, 2025</p>
+          </div>
+          <div class="legal-body">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing and using Jobbyist, you accept and agree to be bound by the terms and provision of this agreement.</p>
+            
+            <h2>2. Service Description</h2>
+            <p>Jobbyist is a job platform connecting job seekers with employers across Africa, specifically in South Africa and Nigeria.</p>
+            
+            <h2>3. User Accounts</h2>
+            <p>You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account.</p>
+            
+            <h2>4. Privacy and Data Protection</h2>
+            <p>Your privacy is important to us. Please review our Privacy Policy to understand how we collect and use your information.</p>
+            
+            <p>For questions about these Terms of Service, please contact us at legal@jobbyist.africa</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="privacy" class="page">
+      <section class="legal-content">
+        <div class="container">
+          <div class="legal-header">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated">Last updated: February 2, 2025</p>
+          </div>
+          <div class="legal-body">
+            <h2>1. Information We Collect</h2>
+            <p>We collect information you provide directly, such as when you create an account, upload a resume, or contact us.</p>
+            
+            <h2>2. How We Use Your Information</h2>
+            <ul>
+              <li>To provide and improve our services</li>
+              <li>To match you with relevant job opportunities</li>
+              <li>To communicate with you about our services</li>
+              <li>To analyze usage patterns and improve user experience</li>
+            </ul>
+            
+            <h2>3. Information Sharing</h2>
+            <p>We do not sell your personal information. We may share your data with employers when you apply for jobs or with service providers who help us operate our platform.</p>
+            
+            <h2>4. Data Security</h2>
+            <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+            
+            <p>Contact us at privacy@jobbyist.africa for assistance.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="cookies" class="page">
+      <section class="legal-content">
+        <div class="container">
+          <div class="legal-header">
+            <h1>Cookie Settings</h1>
+            <p>Manage your cookie preferences and privacy settings</p>
+          </div>
+          <div class="cookie-settings-body">
+            <div class="cookie-category">
+              <div class="category-header">
+                <h3>Essential Cookies</h3>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked disabled>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <p>These cookies are necessary for the website to function and cannot be switched off.</p>
+            </div>
+            
+            <div class="cookie-category">
+              <div class="category-header">
+                <h3>Analytics Cookies</h3>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="analytics-cookies">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <p>These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site.</p>
+            </div>
+            
+            <div class="cookie-category">
+              <div class="category-header">
+                <h3>Marketing Cookies</h3>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="marketing-cookies">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <p>These cookies may be set through our site by our advertising partners to build a profile of your interests.</p>
+            </div>
+            
+            <div class="cookie-actions">
+              <button class="btn--secondary" onclick="jobbyistApp.resetCookieSettings()">Reset to Default</button>
+              <button class="btn--primary glow-btn" onclick="jobbyistApp.saveCookieSettings()">Save Preferences</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="contact" class="page">
+      <section class="contact-content">
+        <div class="container">
+          <div class="contact-header">
+            <h1>Contact Us</h1>
+            <p>Get in touch with our team. We're here to help you succeed.</p>
+          </div>
+          
+          <div class="contact-grid">
+            <div class="contact-info">
+              <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <div>
+                  <h3>Office Address</h3>
+                  <p>297 Lucky Bean Crescent<br>Pretoria, GP, 1619<br>South Africa</p>
+                </div>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">📞</div>
+                <div>
+                  <h3>Phone</h3>
+                  <p>+27-12-884-5125</p>
+                </div>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">📧</div>
+                <div>
+                  <h3>Email</h3>
+                  <p>info@jobbyist.africa</p>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-icon">💬</div>
+                <div>
+                  <h3>Live Chat</h3>
+                  <p>Available 24/7 via our chatbot</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="contact-form-container">
+              <form class="contact-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Name *</label>
+                    <input type="text" name="name" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" name="email" class="form-control" required>
+                  </div>
                 </div>
                 
-                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                    <button class="btn btn-primary ${followButtonClass}" onclick="followCompany(${company.id})">
-                        <i class="fas fa-plus"></i> Follow Company
-                    </button>
-                    <button class="btn btn-secondary ${reviewButtonClass}" onclick="reviewCompany(${company.id})">
-                        <i class="fas fa-star"></i> Write Review
-                    </button>
-                    <button class="btn btn-secondary" onclick="viewCompanyJobs(${company.id})">
-                        <i class="fas fa-briefcase"></i> View Jobs (${company.openJobs})
-                    </button>
+                <div class="form-group">
+                  <label class="form-label">Subject *</label>
+                  <select name="subject" class="form-control" required>
+                    <option value="">Select a topic</option>
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Technical Support">Technical Support</option>
+                    <option value="Account Issues">Account Issues</option>
+                    <option value="Partnership">Partnership Opportunities</option>
+                    <option value="Feedback">Feedback & Suggestions</option>
+                    <option value="Bug Report">Bug Report</option>
+                  </select>
                 </div>
-            `;
-            
-            showModal('companyModal');
-        }
-
-        function followCompany(companyId) {
-            if (!isProUser) {
-                alert('🔒 Following companies is a Jobbyist Pro feature! Upgrade to get instant notifications about new job postings from your favorite companies.');
-                return;
-            }
-            
-            const company = companyData.find(c => c.id === companyId);
-            alert(`✅ You're now following ${company.name}! You'll receive email updates when they post new jobs.`);
-        }
-
-        function reviewCompany(companyId) {
-            if (!isProUser) {
-                alert('🔒 Writing company reviews is a Jobbyist Pro feature! Upgrade to share your insights and help other job seekers make informed decisions.');
-                return;
-            }
-            
-            const company = companyData.find(c => c.id === companyId);
-            // In a real app, this would open a review form
-            alert(`📝 Write a review for ${company.name}. This would open a review form in a real application.`);
-        }
-
-        function viewCompanyJobs(companyId) {
-            const company = companyData.find(c => c.id === companyId);
-            closeModal('companyModal');
-            
-            // Filter jobs by company
-            const companyJobs = jobData.filter(job => job.company === company.name);
-            currentPage = 1;
-            
-            // Update the jobs display
-            renderJobs();
-            document.getElementById('jobs').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Modal Management
-        function showModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Registration Steps
-        function changeStep(direction) {
-            const currentStepElement = document.querySelector('.step.active');
-            const nextStep = currentStep + direction;
-            
-            if (nextStep < 1 || nextStep > 5) return;
-            
-            // Validate current step before proceeding
-            if (direction > 0 && !validateStep(currentStep)) {
-                return;
-            }
-            
-            currentStepElement.classList.remove('active');
-            document.querySelector(`.step[data-step="${nextStep}"]`).classList.add('active');
-            
-            // Update step indicators
-            document.querySelectorAll('.step-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index < nextStep);
-            });
-            
-            currentStep = nextStep;
-            
-            // Update navigation buttons
-            updateStepNavigation();
-        }
-
-        function updateStepNavigation() {
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const submitBtn = document.getElementById('submitBtn');
-            
-            prevBtn.style.display = currentStep > 1 ? 'block' : 'none';
-            nextBtn.style.display = currentStep < 5 ? 'block' : 'none';
-            submitBtn.style.display = currentStep === 5 ? 'block' : 'none';
-        }
-
-        function validateStep(step) {
-            const stepElement = document.querySelector(`.step[data-step="${step}"]`);
-            const requiredFields = stepElement.querySelectorAll('[required]');
-            
-            for (let field of requiredFields) {
-                if (!field.value.trim()) {
-                    field.focus();
-                    alert('Please fill in all required fields before continuing.');
-                    return false;
-                }
-            }
-            
-            return true;
-        }
-
-        // Language Support
-        function changeLanguage(lang) {
-            // In a real implementation, this would change the interface language
-            const languages = {
-                'en': 'English',
-                'af': 'Afrikaans',
-                'zu': 'isiZulu',
-                'xh': 'isiXhosa'
-            };
-            
-            alert(`Language changed to ${languages[lang]}. In a full implementation, the entire interface would be translated.`);
-        }
-
-        // Live Chat Integration
-        function openLiveChat() {
-            alert(`🤖 Live Chat Feature\n\nTo implement the OpenAI GPT-5 mini chatbot:\n\n1. Sign up for OpenAI API access\n2. Create a new assistant with GPT-5 mini model\n3. Configure it with Jobbyist knowledge base\n4. Integrate using OpenAI's Chat Completions API\n5. Add the API key to your environment variables\n6. Replace this alert with the actual chat widget\n\nWould you like me to provide the implementation code?`);
-        }
-
-        // Utility Functions
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const now = new Date();
-            const diffTime = Math.abs(now - date);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            
-            if (diffDays === 1) return 'yesterday';
-            if (diffDays < 7) return `${diffDays} days ago`;
-            if (diffDays < 30) return `${Math.ceil(diffDays / 7)} weeks ago`;
-            return `${Math.ceil(diffDays / 30)} months ago`;
-        }
-
-        // Google Jobs Schema
-        function addJobSchema(jobs) {
-            // Remove existing job schemas
-            const existingSchemas = document.querySelectorAll('script[type="application/ld+json"]');
-            existingSchemas.forEach(schema => {
-                if (schema.textContent.includes('"@type": "JobPosting"')) {
-                    schema.remove();
-                }
-            });
-            
-            // Add new schemas
-            jobs.forEach(job => {
-                const script = document.createElement('script');
-                script.type = 'application/ld+json';
-                script.textContent = JSON.stringify({
-                    "@context": "https://schema.org",
-                    "@type": "JobPosting",
-                    "title": job.title,
-                    "description": job.description,
-                    "identifier": {
-                        "@type": "PropertyValue",
-                        "name": job.company,
-                        "value": job.id
-                    },
-                    "datePosted": job.posted,
-                    "validThrough": job.validUntil,
-                    "employmentType": job.type.replace('-', '_').toUpperCase(),
-                    "hiringOrganization": {
-                        "@type": "Organization",
-                        "name": job.company,
-                        "sameAs": `https://jobbyist.co.za/companies/${job.company.toLowerCase().replace(/\s+/g, '-')}`
-                    },
-                    "jobLocation": job.remote ? {
-                        "@type": "Place",
-                        "address": {
-                            "@type": "PostalAddress",
-                            "addressCountry": "ZA"
-                        },
-                        "jobLocationType": "TELECOMMUTE"
-                    } : {
-                        "@type": "Place",
-                        "address": {
-                            "@type": "PostalAddress",
-                            "addressLocality": job.location,
-                            "addressCountry": "ZA"
-                        }
-                    },
-                    "baseSalary": {
-                        "@type": "MonetaryAmount",
-                        "currency": "ZAR",
-                        "value": {
-                            "@type": "QuantitativeValue",
-                            "minValue": parseInt(job.salary.split(' - ')[0].replace(/[R,]/g, '')),
-                            "maxValue": parseInt(job.salary.split(' - ')[1].replace(/[R,]/g, '')),
-                            "unitText": "MONTH"
-                        }
-                    },
-                    "workHours": job.type === "Part-time" ? "20-30" : "40",
-                    "url": `https://jobbyist.co.za/jobs/${job.id}`
-                });
-                document.head.appendChild(script);
-            });
-        }
-
-        // Event Listeners
-        document.addEventListener('click', function(e) {
-            // Close modals when clicking outside
-            if (e.target.classList.contains('modal')) {
-                closeModal(e.target.id);
-            }
-        });
-
-        // Filter change listeners
-        document.addEventListener('change', function(e) {
-            if (e.target.matches('#categoryFilter, #locationFilter, #salaryFilter, #typeFilter, #remoteFilter')) {
-                currentPage = 1;
-                renderJobs();
-            }
-        });
-
-        // Form submission
-        document.getElementById('registrationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Show loading state
-            const submitBtn = document.getElementById('submitBtn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Your Profile...';
-            submitBtn.disabled = true;
-            
-            // Simulate form submission delay
-            setTimeout(() => {
-                alert('🎉 Welcome to Jobbyist! Your profile has been created successfully. You can now access unlimited job opportunities and exclusive features!');
-                closeModal('registrationModal');
                 
-                // Reset form and step
-                currentStep = 1;
-                document.querySelector('.step.active').classList.remove('active');
-                document.querySelector('.step[data-step="1"]').classList.add('active');
-                document.querySelectorAll('.step-dot').forEach((dot, index) => {
-                    dot.classList.toggle('active', index === 0);
-                });
-                updateStepNavigation();
+                <div class="form-group">
+                  <label class="form-label">Message *</label>
+                  <textarea name="message" rows="5" class="form-control" placeholder="How can we help you?" required></textarea>
+                </div>
                 
-                // Reset button
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                
-                // In a real app, you would make an actual API call to Formspree here
-                // The form action is already set to https://formspree.io/f/YOUR_FORMSPREE_ID
-            }, 2000);
-        });
+                <button type="submit" class="btn--primary glow-btn">
+                  <span>Send Message</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
 
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                const activeModal = document.querySelector('.modal.active');
-                if (activeModal) {
-                    closeModal(activeModal.id);
-                }
-            }
-        });
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <div class="logo-container" onclick="jobbyistApp.showPage('homepage')">
+              <div class="logo-icon animated-doodle-icon"></div>
+              <span class="logo-text">Jobbyist</span>
+            </div>
+          </div>
+          <p class="footer-description">Africa's leading job platform connecting talent with opportunity across South Africa and Nigeria.</p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="LinkedIn" target="_blank">
+              <svg width="20" height="20" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter" target="_blank">
+              <svg width="20" height="20" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="WhatsApp" target="_blank">
+              <svg width="20" height="20" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.531 3.488"/>
+              </svg>
+            </a>
+          </div>
+        </div>
 
-        // Search form submission
-        document.querySelector('.search-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const jobTitle = document.getElementById('job-title').value;
-            const location = document.getElementById('location').value;
+        <div class="footer-section">
+          <h4 class="footer-title">For Job Seekers</h4>
+          <ul class="footer-links">
+            <li><a href="#job-listings">Browse Jobs</a></li>
+            <li><a href="#" onclick="jobbyistApp.showPage('candidates')">Candidate Profiles</a></li>
+            <li><a href="#" onclick="jobbyistApp.showPage('pro')">Upgrade To Pro</a></li>
+            <li><a href="#" onclick="jobbyistApp.showPage('saved-jobs')">Saved Jobs</a></li>
+            <li><a href="#" onclick="jobbyistApp.showPage('notifications')">Notification Settings</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-title">For Employers</h4>
+          <ul class="footer-links">
+            <li><a href="#" onclick="jobbyistApp.showPage('claim-page')">Claim Your Page</a></li>
+            <li><a href="#" onclick="jobbyistApp.showPage('recruitment-suite')">Recruitment Suite</a></li>
+            <li><a href="#" onclick="jobbyistApp.showPage('company-profiles')">Company Directory</a></li>
+            <li><a href="#" onclick="jobbyistApp.showPage('analytics-dashboard')">Analytics Dashboard</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-title">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="#" onclick="jobbyistApp.showPage('community-forum')">Community Forum</a></li>
+            <li><a href="#" onclick="jobbyistApp.showPage('success-stories')">Success Stories</a></li>
+            <li><a href="#" onclick="jobbyistApp.showPage('contact')">Help Center</a></li>
+            <li><a href="https://partners.jobbyist.africa" target="_blank">Partner Program</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#" onclick="jobbyistApp.showPage('privacy')">Privacy Policy</a></li>
+            <li><a href="#" onclick="jobbyistApp.showPage('terms')">Terms of Service</a></li>
+            <li><a href="#" onclick="jobbyistApp.showPage('cookies')">Cookie Settings</a></li>
+            <li><a href="#" onclick="jobbyistApp.showPage('contact')">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Jobbyist. All rights reserved. | Africa's leading job platform | Made with ❤️ for African professionals</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Registration Modal -->
+  <div class="modal registration-modal hidden" id="registration-modal">
+    <div class="modal-backdrop" onclick="jobbyistApp.closeRegistrationModal()"></div>
+    <div class="modal-content registration-content">
+      <div class="modal-header">
+        <h3>Create Your Job Seeker Account</h3>
+        <button class="modal-close" onclick="jobbyistApp.closeRegistrationModal()">&times;</button>
+      </div>
+      
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="progress-steps">
+          <span class="step active" data-step="1">1</span>
+          <span class="step" data-step="2">2</span>
+          <span class="step" data-step="3">3</span>
+          <span class="step" data-step="4">4</span>
+        </div>
+      </div>
+
+      <form id="registration-form" class="registration-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+        <!-- Step 1: Personal Information -->
+        <div class="form-step active" data-step="1">
+          <h4 class="step-title">Personal Information</h4>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" name="fullName" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" name="email" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Phone Number *</label>
+              <input type="tel" name="phone" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Location *</label>
+              <select name="location" class="form-control" required>
+                <option value="">Select location</option>
+                <option value="Lagos">Lagos</option>
+                <option value="Johannesburg">Johannesburg</option>
+                <option value="Cape Town">Cape Town</option>
+                <option value="Abuja">Abuja</option>
+                <option value="Pretoria">Pretoria</option>
+                <option value="Durban">Durban</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Resume/CV *</label>
+            <div class="file-upload-area" id="resume-upload">
+              <div class="file-upload-content">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14,2 14,8 20,8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10,9 9,9 8,9"/>
+                </svg>
+                <p>Drag & drop your resume here or <span class="upload-link">browse</span></p>
+                <small>PDF, DOC, DOCX up to 10MB</small>
+              </div>
+              <input type="file" name="resume" accept=".pdf,.doc,.docx" class="file-input" required>
+              <div class="file-preview hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Professional Details -->
+        <div class="form-step" data-step="2">
+          <h4 class="step-title">Professional Details</h4>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Current Job Title</label>
+              <input type="text" name="currentJobTitle" class="form-control" placeholder="e.g. Software Developer">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Years of Experience *</label>
+              <select name="experience" class="form-control" required>
+                <option value="">Select experience</option>
+                <option value="Entry">Entry Level (0-2 years)</option>
+                <option value="Mid">Mid Level (3-5 years)</option>
+                <option value="Senior">Senior Level (5+ years)</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Skills (comma separated)</label>
+              <input type="text" name="skills" class="form-control" placeholder="e.g. JavaScript, React, Node.js">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Industry</label>
+              <select name="industry" class="form-control">
+                <option value="">Select industry</option>
+                <option value="Technology">Technology</option>
+                <option value="Finance">Finance</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Education">Education</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Expected Salary Range</label>
+            <div class="salary-range">
+              <select name="salaryCurrency" class="form-control">
+                <option value="ZAR">ZAR (South Africa)</option>
+                <option value="NGN">NGN (Nigeria)</option>
+                <option value="USD">USD (Remote)</option>
+              </select>
+              <input type="number" name="salaryMin" class="form-control" placeholder="Min">
+              <input type="number" name="salaryMax" class="form-control" placeholder="Max">
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Background & Education -->
+        <div class="form-step" data-step="3">
+          <h4 class="step-title">Background & Education</h4>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Highest Education Level *</label>
+              <select name="education" class="form-control" required>
+                <option value="">Select education level</option>
+                <option value="High School">High School</option>
+                <option value="Diploma/Certificate">Diploma/Certificate</option>
+                <option value="Bachelor's Degree">Bachelor's Degree</option>
+                <option value="Master's Degree">Master's Degree</option>
+                <option value="PhD/Doctorate">PhD/Doctorate</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Availability</label>
+              <select name="availability" class="form-control">
+                <option value="Available">Available Immediately</option>
+                <option value="Open">Open to Opportunities</option>
+                <option value="2 weeks">2 weeks notice</option>
+                <option value="1 month">1 month notice</option>
+                <option value="Not Looking">Not actively looking</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Professional Summary</label>
+            <textarea name="summary" rows="4" class="form-control" placeholder="Brief description of your professional background and career goals"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Languages Spoken</label>
+            <input type="text" name="languages" class="form-control" placeholder="e.g., English, Afrikaans, Zulu, Yoruba">
+          </div>
+        </div>
+
+        <!-- Step 4: Preferences & Completion -->
+        <div class="form-step" data-step="4">
+          <h4 class="step-title">Complete Your Registration</h4>
+          
+          <div class="preferences-section">
+            <h5>Job Preferences</h5>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Preferred Job Types</label>
+                <div class="checkbox-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="jobTypes" value="Full-time">
+                    <span class="checkbox-custom"></span>
+                    Full-time
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="jobTypes" value="Part-time">
+                    <span class="checkbox-custom"></span>
+                    Part-time
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="jobTypes" value="Contract">
+                    <span class="checkbox-custom"></span>
+                    Contract
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="jobTypes" value="Remote">
+                    <span class="checkbox-custom"></span>
+                    Remote
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="terms-section">
+            <label class="checkbox-label">
+              <input type="checkbox" name="privacyAgreement" required>
+              <span class="checkbox-custom"></span>
+              I agree to the <a href="#" onclick="jobbyistApp.showPage('privacy')" target="_blank">Privacy Policy</a> and <a href="#" onclick="jobbyistApp.showPage('terms')" target="_blank">Terms of Service</a> *
+            </label>
             
-            // In a real app, this would filter the jobs based on the search
-            alert(`🔍 Searching for "${jobTitle}" jobs in "${location}". In a full implementation, this would filter the job listings below.`);
+            <label class="checkbox-label">
+              <input type="checkbox" name="jobAlerts" checked>
+              <span class="checkbox-custom"></span>
+              Send me email notifications about relevant job opportunities
+            </label>
             
-            // Scroll to jobs section
-            document.getElementById('jobs').scrollIntoView({ behavior: 'smooth' });
-        });
-    </script>
+            <label class="checkbox-label">
+              <input type="checkbox" name="marketing">
+              <span class="checkbox-custom"></span>
+              I'd like to receive career tips and industry insights via email
+            </label>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="form-navigation">
+          <button type="button" class="btn--secondary" id="prev-step" style="display: none;">Previous</button>
+          <button type="button" class="btn--primary glow-btn" id="next-step">
+            <span>Next</span>
+          </button>
+          <button type="submit" class="btn--primary glow-btn" id="submit-registration" style="display: none;">
+            <span>Create Account</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Success State -->
+      <div class="registration-success hidden" id="registration-success">
+        <div class="success-content">
+          <div class="success-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22,4 12,14.01 9,11.01"/>
+            </svg>
+          </div>
+          <h3>Welcome to Jobbyist!</h3>
+          <p>Your profile has been created successfully. You can now apply to jobs and employers can discover you.</p>
+          <button class="btn--primary glow-btn" id="apply-to-job">
+            <span id="apply-job-text">Explore Jobs Now</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Chatbot Button -->
+  <div class="chatbot-container">
+    <button class="chatbot-btn" id="chatbot-btn" onclick="jobbyistApp.toggleChatbot()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      <span class="chatbot-pulse"></span>
+    </button>
+    
+    <div class="chatbot-widget hidden" id="chatbot-widget">
+      <div class="chat-header">
+        <h4>Jobbyist Assistant</h4>
+        <button class="chat-close" onclick="jobbyistApp.toggleChatbot()">&times;</button>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-message bot">
+          <div class="message-content">
+            <p>👋 Hi! I'm your Jobbyist assistant. How can I help you today?</p>
+            <div class="quick-actions">
+              <button class="quick-btn" onclick="jobbyistApp.chatbotAction('find-jobs')">Find Jobs</button>
+              <button class="quick-btn" onclick="jobbyistApp.chatbotAction('upload-cv')">Upload CV</button>
+              <button class="quick-btn" onclick="jobbyistApp.chatbotAction('get-help')">Get Help</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chat-input">
+        <input type="text" placeholder="Type your message..." id="chat-input" onkeypress="if(event.key==='Enter') jobbyistApp.sendChatMessage()">
+        <button onclick="jobbyistApp.sendChatMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart.js for Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Main Application Script -->
+  <script src="https://jobbyist.africa/app.js"></script>
+
+ <!-- Conditional AdSense injection -->
+  <script>
+    (function() {
+      const excluded = ['terms', 'privacy-policy', 'cookie-settings', 'contact'];
+      function getCurrentPage() {
+        if (window.jobbyistApp && window.jobbyistApp.currentPage) return window.jobbyistApp.currentPage;
+        return document.documentElement.getAttribute('data-page') || '';
+      }
+      const page = getCurrentPage();
+      if (!excluded.includes(page)) {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1237323355260727";
+        script.crossOrigin = "anonymous";
+        document.head.appendChild(script);
+      }
+    })();
+  </script>
+  
 </body>
 </html>
